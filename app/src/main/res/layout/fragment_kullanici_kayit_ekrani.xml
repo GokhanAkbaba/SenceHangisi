@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/arka_plan_giris"
+    tools:context="projem.sencehangisi.KullaniciKayitEkrani">
+
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="128dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:src="@mipmap/kullanici_kaydi_foto_ekleme_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="144dp"
+        android:drawableLeft="@drawable/profile"
+        android:drawablePadding="12dp"
+        android:ems="6"
+        android:hint="Ad - Soyad"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="20dp"
+        android:textColorHint="#fff"
+        android:textColorLink="@android:color/holo_blue_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:drawableLeft="@drawable/kullanici_adi"
+        android:drawablePadding="12dp"
+        android:ems="6"
+        android:hint="Kullanıcı Adı"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="20dp"
+        android:textColorHint="#fff"
+        android:textColorLink="@android:color/holo_blue_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="256dp"
+        android:drawableLeft="@drawable/mail"
+        android:drawablePadding="12dp"
+        android:ems="6"
+        android:hint="E-Posta"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="20dp"
+        android:textColorHint="#fff"
+        android:textColorLink="@android:color/holo_blue_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="312dp"
+        android:drawableLeft="@drawable/lock"
+        android:drawablePadding="12dp"
+        android:ems="6"
+        android:hint="Şifre"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:padding="20dp"
+        android:textColorHint="#fff"
+        android:textColorLink="@color/cardview_light_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="368dp"
+        android:drawableLeft="@drawable/lock"
+        android:drawablePadding="12dp"
+        android:ems="6"
+        android:hint="Şifre Tekrar"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:padding="20dp"
+        android:textColorHint="#fff"
+        android:textColorLink="@color/cardview_light_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="311dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="488dp"
+        android:background="@drawable/arka_plan_giris_buton"
+        android:clickable="true"
+        android:padding="10dp"
+        android:text="Giriş Yap"
+        android:textAllCaps="false"
+        android:textColor="#4DA597"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

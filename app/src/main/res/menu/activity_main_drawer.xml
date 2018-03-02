@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <item android:title="">
+        <menu>
+        </menu>
+    </item>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/profile"
+            android:title="Profil" />
+        <item
+            android:id="@+id/nav_populerler"
+            android:icon="@drawable/populerler"
+            android:title="Popülerler" />
+        <item
+            android:id="@+id/nav_arkadasBul"
+            android:icon="@drawable/user"
+            android:title="Arkadaşını Bul" />
+        <item
+            android:id="@+id/nav_bildirim"
+            android:icon="@drawable/ring"
+            android:title="Bildirimler" />
+        <item
+            android:id="@+id/nav_ayarlar"
+            android:icon="@drawable/settings"
+            android:title="Ayarlar" />
+    </group>
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_cikis"
+                android:icon="@drawable/logout"
+                android:title="Çıkış" />
+        </menu>
+    </item>
+</menu>

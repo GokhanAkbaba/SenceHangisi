@@ -1,11 +1,13 @@
 package projem.sencehangisi;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 /**
@@ -53,17 +55,28 @@ public class KullaniciGirisEkrani extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        /*if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        }*/
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_kullanici_giris_ekrani, container, false);
+        View view= inflater.inflate(R.layout.fragment_kullanici_giris_ekrani, container, false);
+        Button girisYap=(Button)view.findViewById(R.id.GirisYap);
+        girisYap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent anaSayfaGec=new Intent(getActivity(),MainActivity.class);
+                startActivity(anaSayfaGec);
+            }
+        });
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -72,15 +85,6 @@ public class KullaniciGirisEkrani extends Fragment{
             mListener.onFragmentInteraction(uri);
         }
     }
-   /* public void kullanici_kayit_action(View view)
-    {
-
-        KullaniciKayitEkrani kullaniciKayitEkrani=new KullaniciKayitEkrani();
-       FragmentManager fragmentManager=getFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.k_islemleri,kullaniciKayitEkrani).commit();
-    }*/
-
    /* @Override
     public void onAttach(Context context) {
         super.onAttach(context);

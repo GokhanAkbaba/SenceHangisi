@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         toolbar.setNavigationIcon(R.mipmap.navigation_profil_foto);
+
     }
 
    @Override
@@ -55,12 +56,6 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-    /*public void renkDegisimi(View view)
-    {
-        Button btn=(Button) view;
-
-        btn.setBackgroundColor(R.drawable.);
-    }*/
     /*@Override
     Sağ Üst Köşedeki 3 nokta
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -84,6 +79,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -103,8 +99,6 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_populerler) {
         }else if (id == R.id.nav_cikis) {
-            intent.setClass(getApplicationContext(),KullaniciIslemleriActivity.class);
-            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

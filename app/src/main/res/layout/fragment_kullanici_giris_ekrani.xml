@@ -57,6 +57,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/GirisYap"
         android:layout_width="311dp"
         android:layout_height="52dp"
         android:layout_marginEnd="8dp"

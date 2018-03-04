@@ -25,7 +25,7 @@ public class KullaniciIslemleriActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.k_islemleri,kullaniciGirisEkrani).commit();
 
     }
-    public void KullaniciKaydiAction(View view)
+    public void KullaniciKayitAction(View view)
     {
 
         KullaniciKayitEkrani kullaniciKayitEkrani=new KullaniciKayitEkrani();

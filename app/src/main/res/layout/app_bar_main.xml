@@ -8,7 +8,7 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="113dp"
+        android:layout_height="105dp"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
@@ -37,44 +37,61 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="64dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.265"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
                 android:id="@+id/AnaSayfa"
-                android:layout_width="160dp"
+                android:layout_width="0dp"
                 android:layout_height="27dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="17dp"
-                android:layout_marginStart="17dp"
-                android:background="@drawable/arka_plan_giris_buton"
+                android:layout_centerVertical="true"
+                android:layout_weight=".70"
+                android:background="@drawable/menu_ana_sayfa_buton_beyaz"
                 android:text="Ana Sayfa"
                 android:textAllCaps="false" />
 
             <Button
                 android:id="@+id/EnPopuler"
-                android:layout_width="160dp"
+                android:layout_width="0dp"
                 android:layout_height="27dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginEnd="26dp"
-                android:layout_marginRight="26dp"
-                android:layout_weight="1"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/AnaSayfa"
+                android:layout_toRightOf="@+id/AnaSayfa"
+                android:layout_weight=".70"
                 android:background="@drawable/menu_enpopuler_buton_mavi"
                 android:text="En Popüler"
                 android:textAllCaps="false" />
-
         </LinearLayout>
 
+        <ImageView
+            android:layout_width="29dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:src="@mipmap/arama_ikonu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.822"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="31dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:src="@mipmap/bildirim_ikonu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.974"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 

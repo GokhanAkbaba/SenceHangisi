@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="projem.sencehangisi.SifremiUnuttum"
-    android:background="@drawable/arka_plan_giris">
+    android:background="@drawable/arka_plan">
 
     <ImageView
         android:layout_width="167dp"

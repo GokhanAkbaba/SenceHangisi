@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="-22dp"
         android:layout_marginLeft="33dp"
-        android:text="Takip edilen"
+        android:text="@string/text_takip_edilen"
         android:textColor="@android:color/darker_gray"
         android:textSize="16sp"
        />
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="-22dp"
         android:layout_marginLeft="170dp"
-        android:text="Takipçi"
+        android:text="@string/text_takipci"
         android:textColor="@android:color/darker_gray"
         android:textSize="16sp"
         />

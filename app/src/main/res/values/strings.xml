@@ -23,5 +23,13 @@
     <string name="kAdi_buton">Kullanıcı Adını Güncelle</string>
     <string name="mevcut_kullaniciadi">Mevcut kullanıcı adı</string>
     <string name="yeni_kullanıcıadi">Yeni kullanıcı adı</string>
+    <string name="title_profil">Profil</string>
+    <string name="title_populerler">Popülerler</string>
+    <string name="title_arkadasinibul">Arkadaşını Bul</string>
+    <string name="title_bildirimler">Bildirimler</string>
+    <string name="title_ayarlar">Ayarlar</string>
+    <string name="title_cikis">Çıkış</string>
+    <string name="text_takip_edilen">Takip Edilen</string>
+    <string name="text_takipci">Takipçi</string>
 
 </resources>

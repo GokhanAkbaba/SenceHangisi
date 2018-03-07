@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +8,7 @@
     android:id="@+id/k_giris_ekrani"
     tools:context="projem.sencehangisi.KullaniciGirisEkrani"
     android:background="@drawable/arka_plan">
+
     <ImageView
         android:layout_width="164dp"
         android:layout_height="186dp"
@@ -31,7 +32,6 @@
         android:maxLines="1"
         android:padding="20dp"
         android:textColorHint="#fff"
-        android:textColorLink="@android:color/holo_blue_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

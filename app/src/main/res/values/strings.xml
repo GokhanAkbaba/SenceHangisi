@@ -8,5 +8,20 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="simdiki_sifre">Şimdiki Şifre</string>
+    <string name="yeni_sifre">Yeni şifre</string>
+    <string name="yeni_sifre_hint">En az 6 karakter</string>
+    <string name="sifreyi_dogrula">Şifreyi doğrula</string>
     <string name="sifre_sıfırlama_sonuc">Şifrenizi sıfırlamak için e-posta adresinize bağlantı gönderilmiştir.</string>
+    <string name="sifre_degistir_buton">ŞİFRENİ DEĞİŞTİR</string>
+    <string name="sifreni_mi_unuttun">Şifreni mi unuttun?</string>
+    <string name="suanki">Şu anki</string>
+    <string name="eposta">E-posta adresi</string>
+    <string name="yeni_eposta">Yeni E-posta Adresi</string>
+    <string name="yeni_eposta_buton">E-postayı Güncelle</string>
+    <string name="eposta_label">E-postayı güncelle</string>
+    <string name="kAdi_buton">Kullanıcı Adını Güncelle</string>
+    <string name="mevcut_kullaniciadi">Mevcut kullanıcı adı</string>
+    <string name="yeni_kullanıcıadi">Yeni kullanıcı adı</string>
+
 </resources>

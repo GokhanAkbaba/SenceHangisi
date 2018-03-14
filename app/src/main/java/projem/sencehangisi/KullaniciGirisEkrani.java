@@ -1,48 +1,62 @@
 package projem.sencehangisi;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link KullaniciGirisEkrani.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link KullaniciGirisEkrani#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class KullaniciGirisEkrani extends Fragment{
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+    Unbinder unbinder;
+
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
+    //Temel sınıfın basit adını getirir.
+    private static final String TAG=KullaniciGirisEkrani.class.getSimpleName();
+    private final static String Email="EMAİL MESAJI";
+    private ProgressDialog PD;
+    private OturumYonetimi session;
+
+    @BindView(R.id.epostaGirisText) EditText epostaGirisTxt;
+    @BindView(R.id.sifreGirisText) EditText sifreGirisTxt;
+    @BindView(R.id.sifreUnuttumText) TextView sifreUnuttumTxt;
+    @BindView(R.id.kayitOlText) TextView kayitOlTxt;
+
     public KullaniciGirisEkrani() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment KullaniciGirisEkrani.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static KullaniciGirisEkrani newInstance(String param1, String param2) {
         KullaniciGirisEkrani fragment = new KullaniciGirisEkrani();
         Bundle args = new Bundle();
@@ -55,10 +69,9 @@ public class KullaniciGirisEkrani extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }*/
+
+
+
 
     }
 
@@ -76,25 +89,98 @@ public class KullaniciGirisEkrani extends Fragment{
                 startActivity(anaSayfaGec);
             }
         });
+
+        unbinder= ButterKnife.bind(this,view );
+        PD=new ProgressDialog(getActivity());
+        PD.setCancelable(false);
+
+        session=new OturumYonetimi(getActivity());
+        girisYap.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                String eposta=epostaGirisTxt.getText().toString().trim();
+                String sifre=sifreGirisTxt.getText().toString();
+
+                if(!eposta.isEmpty() && !sifre.isEmpty())
+                {
+                  girisYap(eposta,sifre);
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"Lütfen bilgilerinizi girin", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+    private void girisYap(final String kullaniciAdi, final String sifre)
+    {
+        String tag_string_req="req_login";
+        Log.d("MESAJJJJ","ÇALIŞTI");
+        PD.setMessage("Giriş..");
+        showDialog();
+        StringRequest strReq=new StringRequest(Request.Method.POST, WebServisLinkleri.GIRIS_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG,"Giriş Mesajı"+response.toString());
+                hideDialog();
+                try {
+                    JSONObject jObj =new JSONObject(response);
+                    boolean hata= jObj.getBoolean("hata");
+
+                    if(!hata)
+                    {
+                        session.setLogin(true);
+
+                        Intent intent =new Intent(getActivity(),MainActivity.class);
+                        intent.putExtra(Email,kullaniciAdi);
+                        startActivity(intent);
+                        getActivity().finish();
+                        getActivity().overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
+                    }
+                    else
+                    {
+                        String hataMsg=jObj.getString("hata_msg");
+                        Toast.makeText(getActivity(),hataMsg, Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), "JSON HATASI"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        },new Response.ErrorListener(){
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG,"Giriş Hatası: "+error.getMessage());
+                Toast.makeText(getActivity(),error.getMessage(),Toast.LENGTH_LONG).show();
+                hideDialog();
+            }
+        }){
+            protected Map<String,String> getParams()
+            {
+                Map<String,String> params=new HashMap<String,String>();
+                params.put("kul_adi",kullaniciAdi);
+                params.put("sifre",sifre);
+
+                return params;
+            }
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq,tag_string_req);
+    }
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
-   /* @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }*/
 
     @Override
     public void onDetach() {
@@ -102,18 +188,23 @@ public class KullaniciGirisEkrani extends Fragment{
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void showDialog()
+    {
+        if(!PD.isShowing())
+        {
+            PD.show();
+        }
+    }
+    private void hideDialog()
+    {
+        if(!PD.isShowing())
+        {
+            PD.dismiss();
+        }
     }
 }

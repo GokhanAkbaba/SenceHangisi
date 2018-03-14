@@ -7,16 +7,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 public class AyarlarActivity extends AppCompatActivity {
-    Intent intent=new Intent();
+
+    Intent intent= new Intent();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ayarlar);
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-
     }
-
     public void KullaniciAdiDegistir(View view)
     {
         intent.setClass(getApplicationContext(),AyarlarKullaniciAdi.class);

@@ -3,12 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/k_giris_ekrani"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/k_giris_ekrani"
-    tools:context="projem.sencehangisi.KullaniciGirisEkrani"
-    android:background="@drawable/arka_plan">
-
+    android:background="@drawable/arka_plan_gradient"
+    tools:context="projem.sencehangisi.KullaniciGirisEkrani">
     <ImageView
         android:layout_width="164dp"
         android:layout_height="186dp"
@@ -21,9 +20,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:layout_width="328dp"
+        android:id="@+id/epostaGirisText"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="248dp"
+        android:layout_weight="0.70"
         android:drawableLeft="@drawable/profile"
         android:drawablePadding="12dp"
         android:ems="6"
@@ -38,11 +41,13 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:layout_width="328dp"
+        android:id="@+id/sifreGirisText"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="312dp"
+        android:layout_weight="0.70"
         android:drawableLeft="@drawable/lock"
         android:drawablePadding="12dp"
         android:ems="6"
@@ -58,11 +63,12 @@
 
     <Button
         android:id="@+id/GirisYap"
-        android:layout_width="311dp"
-        android:layout_height="52dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="440dp"
+        android:layout_weight="0.70"
         android:background="@drawable/arka_plan_giris_buton"
         android:clickable="true"
         android:padding="10dp"
@@ -76,13 +82,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/sifreUnuttumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="564dp"
-        android:text="Şifremi Unuttum?"
         android:onClick="SifremiUnuttumAction"
+        android:text="Şifremi Unuttum?"
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.215"
@@ -91,13 +98,14 @@
         tools:ignore="MissingConstraints,OnClick" />
 
     <TextView
+        android:id="@+id/kayitOlText"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="564dp"
-        android:text="Hesap Oluştur"
         android:onClick="KullaniciKayitAction"
+        android:text="Hesap Oluştur"
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.812"
@@ -105,3 +113,4 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="OnClick" />
 </android.support.constraint.ConstraintLayout>
+

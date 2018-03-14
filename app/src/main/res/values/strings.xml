@@ -20,6 +20,12 @@
     <string name="yeni_eposta">Yeni E-posta Adresi</string>
     <string name="yeni_eposta_buton">E-postayı Güncelle</string>
     <string name="eposta_label">E-postayı güncelle</string>
+    <string name="bildirimler_label">Bildirimler</string>
+    <string name="text_titresim">Titreşim</string>
+    <string name="text_bildirim_sesi">Bildirim Sesi</string>
+    <string name="text_bildirim_aciklama">Anlık bildirimleri aç/kapat</string>
+    <string name="text_bildirim_titret">Gelen bildirimlerde titret</string>
+    <string name="text_bildirim_zil_sesi">Bildirim zil sesini ayarla</string>
     <string name="kAdi_buton">Kullanıcı Adını Güncelle</string>
     <string name="mevcut_kullaniciadi">Mevcut kullanıcı adı</string>
     <string name="yeni_kullanıcıadi">Yeni kullanıcı adı</string>

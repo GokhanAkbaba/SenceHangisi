@@ -8,6 +8,7 @@
     tools:context="projem.sencehangisi.KullaniciKayitEkrani">
 
     <ImageView
+        android:id="@+id/kullaniciKayitFoto"
         android:layout_width="130dp"
         android:layout_height="128dp"
         android:layout_marginEnd="8dp"
@@ -20,6 +21,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
+        android:id="@+id/kayitAdSoyadText"
         android:layout_width="328dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="144dp"
@@ -38,6 +40,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
+        android:id="@+id/kayitKullaniciAdiText"
         android:layout_width="328dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
@@ -56,6 +59,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
+        android:id="@+id/kayitEpostaText"
         android:layout_width="328dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="256dp"
@@ -74,6 +78,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
+        android:id="@+id/kayitSifreText"
         android:layout_width="328dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -92,6 +97,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <EditText
+        android:id="@+id/kayitSifreTekrarText"
         android:layout_width="328dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -111,6 +117,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/kayitButton"
         android:layout_width="311dp"
         android:layout_height="52dp"
         android:layout_marginEnd="8dp"

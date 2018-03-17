@@ -1,8 +1,10 @@
-package projem.sencehangisi;
+package projem.sencehangisi.Activitys;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import projem.sencehangisi.R;
 
 public class AyarlarSifre extends AppCompatActivity {
 

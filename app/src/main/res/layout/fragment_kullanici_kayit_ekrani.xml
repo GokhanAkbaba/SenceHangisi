@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/arka_plan"
     android:id="@+id/kullaniciKayitEkraniFragment"
-    tools:context="projem.sencehangisi.KullaniciKayitEkrani">
+    tools:context="projem.sencehangisi.fragments.KullaniciKayitEkrani">
 
     <ImageView
         android:id="@+id/kullaniciKayitFoto"

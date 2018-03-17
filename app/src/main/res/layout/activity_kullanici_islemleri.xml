@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/k_islemleri"
-    tools:context="projem.sencehangisi.KullaniciIslemleriActivity">
+    tools:context="projem.sencehangisi.Activitys.KullaniciIslemleriActivity">
 
 </android.support.constraint.ConstraintLayout>

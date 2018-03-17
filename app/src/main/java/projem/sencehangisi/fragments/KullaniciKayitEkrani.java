@@ -1,4 +1,4 @@
-package projem.sencehangisi;
+package projem.sencehangisi.fragments;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -39,6 +39,10 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import projem.sencehangisi.Controls.AppController;
+import projem.sencehangisi.Controls.Utility;
+import projem.sencehangisi.Controls.WebServisLinkleri;
+import projem.sencehangisi.R;
 
 public class KullaniciKayitEkrani extends Fragment {
     private static final String TAG = KullaniciKayitEkrani.class.getSimpleName();

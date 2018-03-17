@@ -1,9 +1,14 @@
-package projem.sencehangisi;
+package projem.sencehangisi.Activitys;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import projem.sencehangisi.R;
+import projem.sencehangisi.fragments.KullaniciGirisEkrani;
+import projem.sencehangisi.fragments.KullaniciKayitEkrani;
+import projem.sencehangisi.fragments.SifremiUnuttum;
 
 public class KullaniciIslemleriActivity extends AppCompatActivity {
 

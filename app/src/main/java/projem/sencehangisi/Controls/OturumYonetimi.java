@@ -1,4 +1,4 @@
-package projem.sencehangisi;
+package projem.sencehangisi.Controls;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,4 +1,4 @@
-package projem.sencehangisi;
+package projem.sencehangisi.Activitys;
 
 
 import android.content.Intent;
@@ -13,6 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+
+import projem.sencehangisi.Controls.OturumYonetimi;
+import projem.sencehangisi.R;
+import projem.sencehangisi.fragments.KullaniciProfiliActivity;
 
 
 public class MainActivity extends AppCompatActivity

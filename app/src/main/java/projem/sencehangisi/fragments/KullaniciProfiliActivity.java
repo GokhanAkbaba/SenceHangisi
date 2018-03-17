@@ -1,15 +1,19 @@
-package projem.sencehangisi;
+package projem.sencehangisi.fragments;
 
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.Window;
 
-public class AyarlarEposta extends AppCompatActivity {
+import projem.sencehangisi.R;
+
+public class KullaniciProfiliActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ayarlar_eposta);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_kullanici_profili);
 
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);

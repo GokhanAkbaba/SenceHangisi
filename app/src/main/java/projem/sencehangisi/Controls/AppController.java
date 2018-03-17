@@ -1,4 +1,4 @@
-package projem.sencehangisi;
+package projem.sencehangisi.Controls;
 
 import android.app.Application;
 import android.text.TextUtils;

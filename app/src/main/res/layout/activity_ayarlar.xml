@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/AyarlarLayout"
-    tools:context="projem.sencehangisi.AyarlarActivity">
+    tools:context="projem.sencehangisi.Activitys.AyarlarActivity">
 
 
     <LinearLayout

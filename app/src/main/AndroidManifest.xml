@@ -8,14 +8,14 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".AppController"
+        android:name=".Controls.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".KullaniciIslemleriActivity">
+        <activity android:name=".Activitys.KullaniciIslemleriActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,48 +23,48 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Activitys.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".KullaniciProfiliActivity"
+            android:name=".fragments.KullaniciProfiliActivity"
             android:alpha="0.25"
             android:label=""
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".Activitys.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".Activitys.MainActivity" />
         </activity>
         <activity
-            android:name=".AyarlarActivity"
+            android:name=".Activitys.AyarlarActivity"
             android:label="Ayarlar"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".Activitys.MainActivity" />
         <activity
-            android:name=".AyarlarKullaniciAdi"
+            android:name=".Activitys.AyarlarKullaniciAdi"
             android:label="Kullanıcı adını degiştir">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AyarlarActivity" />
+                android:value=".Activitys.AyarlarActivity" />
         </activity>
         <activity
-            android:name=".AyarlarSifre"
+            android:name=".Activitys.AyarlarSifre"
             android:label="Şifreni değiştir">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AyarlarActivity" />
+                android:value=".Activitys.AyarlarActivity" />
         </activity>
         <activity
-            android:name=".AyarlarEposta"
+            android:name=".Activitys.AyarlarEposta"
             android:label="@string/eposta_label">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AyarlarActivity" />
+                android:value=".Activitys.AyarlarActivity" />
         </activity>
         <activity
-            android:name=".BildirimlerActivity"
+            android:name=".Activitys.BildirimlerActivity"
             android:label="@string/bildirimler_label">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".Activitys.MainActivity" />
         </activity>
     </application>
 

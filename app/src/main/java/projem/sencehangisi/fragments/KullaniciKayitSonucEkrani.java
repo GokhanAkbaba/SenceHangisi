@@ -1,4 +1,4 @@
-package projem.sencehangisi;
+package projem.sencehangisi.fragments;
 
 
 import android.os.Bundle;
@@ -7,14 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import projem.sencehangisi.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class KullaniciSifreSonucEkrani extends Fragment {
+public class KullaniciKayitSonucEkrani extends Fragment {
 
 
-    public KullaniciSifreSonucEkrani() {
+    public KullaniciKayitSonucEkrani() {
         // Required empty public constructor
     }
 
@@ -23,7 +25,7 @@ public class KullaniciSifreSonucEkrani extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_kullanici_sifre_sonuc_ekrani, container, false);
+        return inflater.inflate(R.layout.fragment_kullanici_kayit_sonuc_ekrani, container, false);
     }
 
 }

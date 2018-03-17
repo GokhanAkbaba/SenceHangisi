@@ -1,19 +1,19 @@
-package projem.sencehangisi;
+package projem.sencehangisi.Activitys;
 
-import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Window;
+import android.os.Bundle;
 
-public class KullaniciProfiliActivity extends AppCompatActivity {
+import projem.sencehangisi.R;
+
+public class BildirimlerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_kullanici_profili);
-
+        setContentView(R.layout.activity_bildirimler);
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
+
 }

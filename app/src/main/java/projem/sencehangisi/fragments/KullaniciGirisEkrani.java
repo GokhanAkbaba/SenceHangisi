@@ -1,4 +1,4 @@
-package projem.sencehangisi;
+package projem.sencehangisi.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -28,6 +28,11 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import projem.sencehangisi.Controls.AppController;
+import projem.sencehangisi.Controls.OturumYonetimi;
+import projem.sencehangisi.Controls.WebServisLinkleri;
+import projem.sencehangisi.Activitys.MainActivity;
+import projem.sencehangisi.R;
 
 
 public class KullaniciGirisEkrani extends Fragment{

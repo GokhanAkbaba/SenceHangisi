@@ -1,4 +1,4 @@
-package projem.sencehangisi;
+package projem.sencehangisi.Controls;
 
 /**
  * Created by cannet on 12.03.2018.

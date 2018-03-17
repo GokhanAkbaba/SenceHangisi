@@ -17,7 +17,7 @@
         android:src="@mipmap/giris_ekrani_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" android:contentDescription="TODO"/>
 
     <EditText
         android:id="@+id/epostaGirisText"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="248dp"
+        android:layout_marginTop="208dp"
         android:layout_weight="0.70"
         android:drawableLeft="@drawable/profile"
         android:drawablePadding="12dp"
@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints" android:drawableStart="@drawable/profile"/>
 
     <EditText
         android:id="@+id/sifreGirisText"
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="312dp"
+        android:layout_marginTop="292dp"
         android:layout_weight="0.70"
         android:drawableLeft="@drawable/lock"
         android:drawablePadding="12dp"
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="440dp"
+        android:layout_marginTop="380dp"
         android:layout_weight="0.70"
         android:background="@drawable/arka_plan_giris_buton"
         android:clickable="true"
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="564dp"
+        android:layout_marginTop="450dp"
         android:onClick="SifremiUnuttumAction"
         android:text="Şifremi Unuttum?"
         android:textColor="#fff"
@@ -103,7 +103,7 @@
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="564dp"
+        android:layout_marginTop="450dp"
         android:onClick="KullaniciKayitAction"
         android:text="Hesap Oluştur"
         android:textColor="#fff"

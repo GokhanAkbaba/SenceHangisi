@@ -15,12 +15,6 @@ public class KullaniciIslemleriActivity extends AppCompatActivity {
         actionBar.hide();
         setContentView(R.layout.activity_kullanici_islemleri);
 
-       /* KullaniciKayitEkrani kullaniciKayitEkrani=new KullaniciKayitEkrani();
-        getSupportFragmentManager().beginTransaction().replace(R.id.k_islemleri,kullaniciKayitEkrani).commit();*/
-
-       /* SifremiUnuttum sifremiUnuttum=new SifremiUnuttum();
-        getSupportFragmentManager().beginTransaction().replace(R.id.k_islemleri,sifremiUnuttum).commit();*/
-
         KullaniciGirisEkrani kullaniciGirisEkrani=new KullaniciGirisEkrani();
         getSupportFragmentManager().beginTransaction().replace(R.id.k_islemleri,kullaniciGirisEkrani).commit();
 

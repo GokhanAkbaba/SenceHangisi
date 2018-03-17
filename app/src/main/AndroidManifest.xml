@@ -15,9 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".KullaniciIslemleriActivity"
-            android:label="@string/app_name">
+        <activity android:name=".KullaniciIslemleriActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

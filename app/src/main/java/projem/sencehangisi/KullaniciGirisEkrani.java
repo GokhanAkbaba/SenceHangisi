@@ -112,12 +112,9 @@ public class KullaniciGirisEkrani extends Fragment{
                 }
             }
         });
-
-
         return view;
     }
-
-    private void girisYap(final String kullaniciAdi, final String sifre)
+    private void girisYap(final String email, final String sifre)
     {
         String tag_string_req="req_login";
         Log.d("MESAJJJJ","ÇALIŞTI");
@@ -137,7 +134,7 @@ public class KullaniciGirisEkrani extends Fragment{
                         session.setLogin(true);
 
                         Intent intent =new Intent(getActivity(),MainActivity.class);
-                        intent.putExtra(Email,kullaniciAdi);
+                        intent.putExtra(Email,email);
                         startActivity(intent);
                         getActivity().finish();
                         getActivity().overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
@@ -166,7 +163,7 @@ public class KullaniciGirisEkrani extends Fragment{
             protected Map<String,String> getParams()
             {
                 Map<String,String> params=new HashMap<String,String>();
-                params.put("kul_adi",kullaniciAdi);
+                params.put("email",email);
                 params.put("sifre",sifre);
 
                 return params;
@@ -202,9 +199,10 @@ public class KullaniciGirisEkrani extends Fragment{
     }
     private void hideDialog()
     {
-        if(!PD.isShowing())
+        if(PD.isShowing())
         {
             PD.dismiss();
         }
     }
+
 }

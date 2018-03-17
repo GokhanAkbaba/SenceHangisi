@@ -18,6 +18,7 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private OturumYonetimi oturum;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +44,17 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         toolbar.setNavigationIcon(R.mipmap.navigation_profil_foto);
 
-    }
+        oturum=new OturumYonetimi(getApplicationContext());
 
+    }
+    private void kullaniciCikis()
+    {
+        oturum.setLogin(false);
+        Intent intent=new Intent(MainActivity.this,KullaniciIslemleriActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
+    }
    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -95,13 +105,20 @@ public class MainActivity extends AppCompatActivity
             intent.setClass(getApplicationContext(),BildirimlerActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_profile) {
+        }
+        else if (id == R.id.nav_profile)
+        {
             intent.setClass(getApplicationContext(),KullaniciProfiliActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_populerler) {
-        }else if (id == R.id.nav_cikis) {
         }
+        else if (id == R.id.nav_populerler)
+        {
+        }
+        else if (id == R.id.nav_cikis)
+        {
 
+            kullaniciCikis();
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

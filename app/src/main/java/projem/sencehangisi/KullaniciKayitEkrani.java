@@ -1,8 +1,5 @@
 package projem.sencehangisi;
-
-
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -38,13 +35,9 @@ public class KullaniciKayitEkrani extends Fragment {
     @BindView(R.id.kayitSifreText) EditText kayitSifreTxt;
     @BindView(R.id.kayitSifreTekrarText) EditText kayitSifreTekrariTxt;
     @BindView(R.id.kayitButton) Button kayitBtn;
-
     private ProgressDialog PD;
       public KullaniciKayitEkrani() {
-
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,7 +45,6 @@ public class KullaniciKayitEkrani extends Fragment {
         ButterKnife.bind(this,view);
         PD=new ProgressDialog(getActivity());
         PD.setCancelable(false);
-
         kayitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,7 +53,6 @@ public class KullaniciKayitEkrani extends Fragment {
                 String kayitsifre=kayitSifreTxt.getText().toString();
                 String kayitsifretekrari=kayitSifreTekrariTxt.getText().toString();
                 String kayiteposta=kayitEpostaTxt.getText().toString();
-
                 if(!kayitkullaniciadsoyad.isEmpty() && !kayitkullaniciadi.isEmpty() && !kayiteposta.isEmpty() && !kayitsifre.isEmpty() && !kayitsifretekrari.isEmpty())
                 {
                     if(kayiteposta.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(kayiteposta).matches())
@@ -72,7 +63,7 @@ public class KullaniciKayitEkrani extends Fragment {
                     {
                         if(kayitsifre.equals(kayitsifretekrari))
                         {
-                            kullaniciKayidi(kayitkullaniciadsoyad,kayitkullaniciadi,kayiteposta,kayitsifre,kayitsifretekrari);
+                            kullaniciKayidi(kayitkullaniciadi,kayiteposta,kayitkullaniciadsoyad,kayitsifre,kayitsifretekrari);
                         }
                         else
                         {
@@ -86,38 +77,33 @@ public class KullaniciKayitEkrani extends Fragment {
                 }
             }
         });
-
         return view;
-
-
     }
-    private void kullaniciKayidi(final String ad_soyad,final String kul_adi, final String email,final String sifre, final String sifre_tekrar)
+    private void kullaniciKayidi(final String kul_adi, final String email,final String ad_soyad,final String sifre, final String sifre_tekrar)
     {
         String tag_string_req="req_register";
-
         PD.setMessage("Kayıt Olunuyor.");
         showDialog();
         StringRequest istek =new StringRequest(Request.Method.POST, WebServisLinkleri.KAYIT_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 Log.d(TAG, "Kayıt Sonucu" + response.toString());
                 hideDialog();
                 try {
-                    JSONObject jObj = new JSONObject(response);
+                    JSONObject jObj = new JSONObject(response.toString());
                     boolean hata = jObj.getBoolean("hata");
                     if (!hata) {
+                        KullaniciGirisEkrani kullaniciGirisEkrani=new KullaniciGirisEkrani();
+                        android.support.v4.app.FragmentManager fragmentManager=getFragmentManager();
+                        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.kullaniciKayitEkraniFragment, kullaniciGirisEkrani);
+                        fragmentTransaction.commit();
                         Toast.makeText(getActivity(), "Kullanıcı Başarı ile Kayıt Oldu", Toast.LENGTH_LONG).show();
-
-                        Intent intent = new Intent(getActivity(), KullaniciGirisEkrani.class);
-                        startActivity(intent);
-                        getActivity().finish();
                        getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                     } else {
-                        String hataMesaji = jObj.getString("sdf");
+                        String hataMesaji = jObj.getString("hata_msg");
                         Toast.makeText(getActivity(), hataMesaji, Toast.LENGTH_LONG).show();
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -125,7 +111,7 @@ public class KullaniciKayitEkrani extends Fragment {
         }, new Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG,"Kayıt Olurken Hata Oluştu"+error.getMessage());
+                Log.e(TAG," Kayıt Olurken Hata Oluştu "+error.getMessage());
                 Toast.makeText(getActivity(),error.getMessage(),Toast.LENGTH_LONG).show();
                 hideDialog();
             }
@@ -139,12 +125,9 @@ public class KullaniciKayitEkrani extends Fragment {
             params.put("sifre_tekrar",sifre_tekrar);
             return params;
         }
-
         };
-
         AppController.getInstance().addToRequestQueue(istek,tag_string_req);
     }
-
     private void showDialog()
     {
         if(!PD.isShowing())
@@ -152,13 +135,11 @@ public class KullaniciKayitEkrani extends Fragment {
             PD.show();
         }
     }
-
     private void hideDialog()
     {
-        if(!PD.isShowing())
+        if(PD.isShowing())
         {
             PD.dismiss();
         }
     }
-
 }

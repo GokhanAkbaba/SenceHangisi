@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
+    android:id="@+id/nav_header_profilBilgileri"
 
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
@@ -18,6 +19,7 @@
         android:src="@drawable/man"></de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView
+        android:id="@+id/nav_header_adSoyadTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
@@ -27,6 +29,7 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/nav_header_kulAdiTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
@@ -36,6 +39,7 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/nav_header_takipEdilenTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
@@ -45,6 +49,7 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/nav_header_takipciTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="-22dp"

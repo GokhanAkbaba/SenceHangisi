@@ -1,9 +1,11 @@
 package projem.sencehangisi.fragments;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -63,6 +65,7 @@ public class KullaniciKayitEkrani extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
           View view=inflater.inflate(R.layout.fragment_kullanici_kayit_ekrani, container, false);
+          getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ButterKnife.bind(this,view);
         PD=new ProgressDialog(getActivity());
         PD.setCancelable(false);

@@ -9,22 +9,18 @@ import android.view.ViewGroup;
 
 import projem.sencehangisi.R;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class KullaniciKayitSonucEkrani extends Fragment {
 
 
     public KullaniciKayitSonucEkrani() {
-        // Required empty public constructor
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_kullanici_kayit_sonuc_ekrani, container, false);
     }
 

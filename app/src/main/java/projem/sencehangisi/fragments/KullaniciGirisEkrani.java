@@ -2,6 +2,7 @@ package projem.sencehangisi.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,10 +29,10 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import projem.sencehangisi.Activitys.MainActivity;
 import projem.sencehangisi.Controls.AppController;
 import projem.sencehangisi.Controls.OturumYonetimi;
 import projem.sencehangisi.Controls.WebServisLinkleri;
-import projem.sencehangisi.Activitys.MainActivity;
 import projem.sencehangisi.R;
 
 
@@ -74,7 +75,7 @@ public class KullaniciGirisEkrani extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
 
@@ -109,7 +110,7 @@ public class KullaniciGirisEkrani extends Fragment{
 
                 if(!eposta.isEmpty() && !sifre.isEmpty())
                 {
-                  girisYap(eposta,sifre);
+                    girisYap(eposta,sifre);
                 }
                 else
                 {
@@ -128,16 +129,14 @@ public class KullaniciGirisEkrani extends Fragment{
         StringRequest strReq=new StringRequest(Request.Method.POST, WebServisLinkleri.GIRIS_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG,"Giriş Mesajı"+response.toString());
+                Log.d(TAG,"Giriş Mesajı "+response.toString());
                 hideDialog();
                 try {
-                    JSONObject jObj =new JSONObject(response);
-                    boolean hata= jObj.getBoolean("hata");
-
+                    JSONObject jObj =new JSONObject(response.toString());
+                    boolean hata = jObj.getBoolean("hata");
                     if(!hata)
                     {
                         session.setLogin(true);
-
                         Intent intent =new Intent(getActivity(),MainActivity.class);
                         intent.putExtra(Email,email);
                         startActivity(intent);
@@ -153,7 +152,7 @@ public class KullaniciGirisEkrani extends Fragment{
                 catch (JSONException e)
                 {
                     e.printStackTrace();
-                    Toast.makeText(getActivity(), "JSON HATASI"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "JSON HATASI "+e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         },new Response.ErrorListener(){
@@ -209,5 +208,6 @@ public class KullaniciGirisEkrani extends Fragment{
             PD.dismiss();
         }
     }
+
 
 }

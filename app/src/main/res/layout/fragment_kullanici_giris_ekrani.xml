@@ -7,47 +7,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/arka_plan_gradient"
+
     tools:context="projem.sencehangisi.fragments.KullaniciGirisEkrani">
+
     <ImageView
         android:layout_width="164dp"
-        android:layout_height="186dp"
+        android:layout_height="161dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="48dp"
+
+        android:contentDescription="TODO"
         android:src="@mipmap/giris_ekrani_icon"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" android:contentDescription="TODO"/>
+        app:layout_constraintTop_toTopOf="@+id/resim" />
 
     <EditText
         android:id="@+id/epostaGirisText"
-        android:layout_width="0dp"
+        android:layout_width="305dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="208dp"
-        android:layout_weight="0.70"
         android:drawableLeft="@drawable/profile"
         android:drawablePadding="12dp"
+        android:drawableStart="@drawable/profile"
         android:ems="6"
-        android:hint="Kulanıcı Adı"
+        android:hint="E-Posta"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:padding="20dp"
         android:textColorHint="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" android:drawableStart="@drawable/profile"/>
+        app:layout_constraintTop_toTopOf="@+id/eposta"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/sifreGirisText"
-        android:layout_width="0dp"
+        android:layout_width="305dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="292dp"
-        android:layout_weight="0.70"
         android:drawableLeft="@drawable/lock"
         android:drawablePadding="12dp"
         android:ems="6"
@@ -59,16 +60,14 @@
         android:textColorLink="@color/cardview_light_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/sifre" />
 
     <Button
         android:id="@+id/GirisYap"
-        android:layout_width="0dp"
+        android:layout_width="305dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="380dp"
-        android:layout_weight="0.70"
         android:background="@drawable/arka_plan_giris_buton"
         android:clickable="true"
         android:padding="10dp"
@@ -77,40 +76,72 @@
         android:textColor="#4DA597"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/button" />
 
     <TextView
         android:id="@+id/sifreUnuttumText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="450dp"
         android:onClick="SifremiUnuttumAction"
         android:text="Şifremi Unuttum?"
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.215"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
         tools:ignore="MissingConstraints,OnClick" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.90" />
+    <android.support.constraint.Guideline
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.73" />
+    <android.support.constraint.Guideline
+        android:id="@+id/resim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.03" />
+    <android.support.constraint.Guideline
+        android:id="@+id/eposta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/sifre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.52" />
 
     <TextView
         android:id="@+id/kayitOlText"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        app:layout_constraintHorizontal_weight="1"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="0dp"
         android:onClick="KullaniciKayitAction"
         android:text="Hesap Oluştur"
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.812"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
         tools:ignore="OnClick" />
 </android.support.constraint.ConstraintLayout>
 

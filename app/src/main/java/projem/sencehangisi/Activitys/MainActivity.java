@@ -19,7 +19,7 @@ import projem.sencehangisi.R;
 import projem.sencehangisi.fragments.KullaniciProfiliActivity;
 
 
-public class MainActivity extends AppCompatActivity
+public class  MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private OturumYonetimi oturum;

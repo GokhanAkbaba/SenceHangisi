@@ -9,4 +9,5 @@ public class WebServisLinkleri
     public static String GIRIS_URL="http://oftekfakitiraf.com/senceHangisi/login.php";
 
     public static String KAYIT_URL="http://oftekfakitiraf.com/senceHangisi/register.php";
+    public static String GETDATA_URL="http://oftekfakitiraf.com/senceHangisi/veri.php";
 }

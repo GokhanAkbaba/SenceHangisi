@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import projem.sencehangisi.Controls.OturumYonetimi;
+import projem.sencehangisi.Controls.UserInfo;
 import projem.sencehangisi.R;
 import projem.sencehangisi.fragments.KullaniciProfiliActivity;
 
@@ -23,6 +24,7 @@ public class  MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private OturumYonetimi oturum;
+    private UserInfo userInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,11 +51,12 @@ public class  MainActivity extends AppCompatActivity
         toolbar.setNavigationIcon(R.mipmap.navigation_profil_foto);
 
         oturum=new OturumYonetimi(getApplicationContext());
-
+        userInfo=new UserInfo(getApplicationContext());
     }
     private void kullaniciCikis()
     {
         oturum.setLogin(false);
+        userInfo.clearUserInfo();
         Intent intent=new Intent(MainActivity.this,KullaniciIslemleriActivity.class);
         startActivity(intent);
         finish();

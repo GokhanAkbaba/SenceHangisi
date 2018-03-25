@@ -8,6 +8,10 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -55,17 +59,22 @@ public class KullaniciKayitEkrani extends Fragment {
     @BindView(R.id.kayitSifreText) EditText kayitSifreTxt;
     @BindView(R.id.kayitSifreTekrarText) EditText kayitSifreTekrariTxt;
     @BindView(R.id.kayitButton) Button kayitBtn;
+
     private ProgressDialog PD;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     private String userChoosenTask;
     Bitmap bitmap;
-      public KullaniciKayitEkrani() {
+    Bitmap defaults;
+    public KullaniciKayitEkrani() {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
           View view=inflater.inflate(R.layout.fragment_kullanici_kayit_ekrani, container, false);
           getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        defaults = BitmapFactory.decodeResource(getResources(),R.drawable.ic_menu_camera);
+
         ButterKnife.bind(this,view);
         PD=new ProgressDialog(getActivity());
         PD.setCancelable(false);
@@ -227,8 +236,7 @@ public class KullaniciKayitEkrani extends Fragment {
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
     }
-    private void kullaniciKayidi(final String kul_adi, final String email,final String ad_soyad,final String sifre,
-                                 final String sifre_tekrar)
+    private void kullaniciKayidi(final String kul_adi, final String email,final String ad_soyad,final String sifre, final String sifre_tekrar)
     {
         String tag_string_req="req_register";
         PD.setMessage("Kayıt Olunuyor.");
@@ -273,7 +281,12 @@ public class KullaniciKayitEkrani extends Fragment {
             params.put("ad_soyad",ad_soyad);
             params.put("sifre",sifre);
             params.put("sifre_tekrar",sifre_tekrar);
-            params.put("image_path",getStringImage(bitmap));
+            if (bitmap==null){
+                params.put("image_path",getStringImage(defaults));
+            }
+            else{
+                params.put("image_path",getStringImage(bitmap));
+            }
             return params;
         }
         };

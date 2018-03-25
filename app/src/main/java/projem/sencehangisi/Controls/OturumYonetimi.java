@@ -15,16 +15,15 @@ public class OturumYonetimi {
 
     Context _context;
 
-    int PRIVATE_MODE=0;
 
-    private static final String PREF_NAME="DemoLogin";
+    private static final String PREF_NAME="Login";
 
     private static final String KEY_IS_LOGGEDIN="isLoggedIn";
 
     public OturumYonetimi(Context context)
     {
         this._context=context;
-        pref=_context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
+        pref=_context.getSharedPreferences(PREF_NAME, _context.MODE_PRIVATE);
         editor=pref.edit();
     }
 

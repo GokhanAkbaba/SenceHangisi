@@ -32,6 +32,7 @@ import butterknife.Unbinder;
 import projem.sencehangisi.Activitys.MainActivity;
 import projem.sencehangisi.Controls.AppController;
 import projem.sencehangisi.Controls.OturumYonetimi;
+import projem.sencehangisi.Controls.UserInfo;
 import projem.sencehangisi.Controls.WebServisLinkleri;
 import projem.sencehangisi.R;
 
@@ -52,6 +53,7 @@ public class KullaniciGirisEkrani extends Fragment{
     private final static String Email="EMAİL MESAJI";
     private ProgressDialog PD;
     private OturumYonetimi session;
+    private UserInfo userInfo;
 
     @BindView(R.id.epostaGirisText) EditText epostaGirisTxt;
     @BindView(R.id.sifreGirisText) EditText sifreGirisTxt;
@@ -99,8 +101,14 @@ public class KullaniciGirisEkrani extends Fragment{
         unbinder= ButterKnife.bind(this,view );
         PD=new ProgressDialog(getActivity());
         PD.setCancelable(false);
+        userInfo= new UserInfo(getActivity());
 
         session=new OturumYonetimi(getActivity());
+        if(session.girisYapildi()){
+            startActivity(new Intent(getActivity(), MainActivity.class));
+           getActivity().finish();
+        }
+
         girisYap.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -136,6 +144,11 @@ public class KullaniciGirisEkrani extends Fragment{
                     boolean hata = jObj.getBoolean("hata");
                     if(!hata)
                     {
+                        JSONObject user = jObj.getJSONObject("user");
+                        String uName = user.getString("username");
+                        String email = user.getString("email");
+                        userInfo.setEmail(email);
+                        userInfo.setUsername(uName);
                         session.setLogin(true);
                         Intent intent =new Intent(getActivity(),MainActivity.class);
                         intent.putExtra(Email,email);

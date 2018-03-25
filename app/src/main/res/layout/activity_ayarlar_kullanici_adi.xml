@@ -12,6 +12,7 @@
     tools:context="projem.sencehangisi.Activitys.AyarlarKullaniciAdi">
 
     <TextView
+        android:id="@+id/dene"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -26,6 +27,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:id="@+id/getUsername"
         android:layout_width="344dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -57,6 +59,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:id="@+id/newUsername"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"

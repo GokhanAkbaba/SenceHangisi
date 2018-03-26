@@ -38,10 +38,8 @@ import projem.sencehangisi.fragments.KullaniciGirisEkrani;
 
 public class AyarlarKullaniciAdi extends AppCompatActivity {
     @BindView(R.id.getUsername) EditText getUsernameTxt;
-    TextView deenem;
-    private static final String TAG = AyarlarKullaniciAdi.class.getSimpleName();
     private UserInfo userInfo;
-private OturumYonetimi userSession;
+    private OturumYonetimi userSession;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,39 +53,7 @@ private OturumYonetimi userSession;
             startActivity(new Intent(this, KullaniciGirisEkrani.class));
             finish();
         }
-        deenem=(TextView)findViewById(R.id.dene);
         String username = userInfo.getKeyUsername();
-        String email    = userInfo.getKeyEmail();
-        deenem.setText(email+" "+username);
-        getData();
+        getUsernameTxt.setText(username);
     }
-   public void getData(){
-
-
-       JsonObjectRequest istek=new JsonObjectRequest(Request.Method.GET, WebServisLinkleri.GETDATA_URL,null,
-               new Response.Listener<JSONObject>() {
-                   @Override
-                   public void onResponse(JSONObject response) {
-                       try {
-                           JSONArray jsonArray=response.getJSONArray("users");
-                           for (int i=0;i<jsonArray.length();i++){
-                               JSONObject users=jsonArray.getJSONObject(i);
-                               String usernama=users.getString("kul_adi");
-                               getUsernameTxt.setText(usernama);
-                           }
-
-
-                       } catch (JSONException e) {
-                           e.printStackTrace();
-                       }
-                   }
-               }, new Response.ErrorListener() {
-           @Override
-           public void onErrorResponse(VolleyError error) {
-               error.printStackTrace();
-
-           }
-       });
-       AppController.getInstance().addToRequestQueue(istek,TAG);
-   }
 }

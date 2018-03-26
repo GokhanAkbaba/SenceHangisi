@@ -2,6 +2,7 @@ package projem.sencehangisi.Activitys;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -13,17 +14,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+
+import butterknife.BindView;
+import de.hdodenhof.circleimageview.CircleImageView;
+import projem.sencehangisi.Controls.AppController;
 import projem.sencehangisi.Controls.OturumYonetimi;
 import projem.sencehangisi.Controls.UserInfo;
 import projem.sencehangisi.R;
+import projem.sencehangisi.fragments.KullaniciGirisEkrani;
 import projem.sencehangisi.fragments.KullaniciProfiliActivity;
 
 
 public class  MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    private OturumYonetimi oturum;
+    @BindView(R.id.nav_header_kulAdiTxt) TextView getUsernameTxt;
+    @BindView(R.id.nav_header_adSoyadTxt) TextView getNameTxt;
+    @BindView(R.id.nav_header_getImage) CircleImageView mImageView;
+    private OturumYonetimi userSession;
     private UserInfo userInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +63,38 @@ public class  MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         toolbar.setNavigationIcon(R.mipmap.navigation_profil_foto);
 
-        oturum=new OturumYonetimi(getApplicationContext());
-        userInfo=new UserInfo(getApplicationContext());
+        userInfo = new UserInfo(this);
+        userSession=new  OturumYonetimi(this);
+        if(!userSession.girisYapildi()){
+            startActivity(new Intent(this, KullaniciGirisEkrani.class));
+            finish();
+        }
+        String username = userInfo.getKeyUsername();
+        String name = userInfo.getKeyNAME();
+        String image=userInfo.getKeyRESIM();
+        //getNameTxt.setText(name);
+       // getUsernameTxt.setText(username);
+       // getImage(image);
+    }
+    public  void getImage(final String url){
+        String image_req="req_image";
+        ImageRequest request = new ImageRequest(url,
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap bitmap) {
+                        mImageView.setImageBitmap(bitmap);
+                    }
+                }, 0, 0, null,
+                new Response.ErrorListener() {
+                    public void onErrorResponse(VolleyError error) {
+                        mImageView.setImageResource(R.drawable.arka_plan);
+                    }
+                });
+        AppController.getInstance().addToRequestQueue(request,image_req);
     }
     private void kullaniciCikis()
     {
-        oturum.setLogin(false);
+        userSession.setLogin(false);
         userInfo.clearUserInfo();
         Intent intent=new Intent(MainActivity.this,KullaniciIslemleriActivity.class);
         startActivity(intent);

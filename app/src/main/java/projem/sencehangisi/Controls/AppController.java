@@ -10,7 +10,6 @@ import com.android.volley.toolbox.Volley;
 /**
  * Created by cannet on 14.03.2018.
  */
-
 public class AppController extends Application {
 
     public static final String TAG = AppController.class.getSimpleName();

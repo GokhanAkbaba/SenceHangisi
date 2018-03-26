@@ -46,6 +46,8 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import projem.sencehangisi.Controls.AppController;
+import projem.sencehangisi.Controls.OturumYonetimi;
+import projem.sencehangisi.Controls.UserInfo;
 import projem.sencehangisi.Controls.Utility;
 import projem.sencehangisi.Controls.WebServisLinkleri;
 import projem.sencehangisi.R;
@@ -65,6 +67,8 @@ public class KullaniciKayitEkrani extends Fragment {
     private String userChoosenTask;
     Bitmap bitmap;
     Bitmap defaults;
+    private UserInfo userInfo;
+    private OturumYonetimi session;
     public KullaniciKayitEkrani() {
     }
     @Override
@@ -78,6 +82,8 @@ public class KullaniciKayitEkrani extends Fragment {
         ButterKnife.bind(this,view);
         PD=new ProgressDialog(getActivity());
         PD.setCancelable(false);
+        userInfo = new UserInfo(getActivity());
+        session=new OturumYonetimi(getActivity());
         kullaniciKayitFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -236,74 +242,103 @@ public class KullaniciKayitEkrani extends Fragment {
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
     }
-    private void kullaniciKayidi(final String kul_adi, final String email,final String ad_soyad,final String sifre, final String sifre_tekrar)
-    {
-        String tag_string_req="req_register";
-        PD.setMessage("Kayıt Olunuyor.");
+    private void kullaniciKayidi(final String kul_adi, final String email,final String ad_soyad,final String sifre,
+                                 final String sifre_tekrar) {
+        String tag_string_req = "req_signup";
+        PD.setMessage("Kayıt olunuyor ...");
         showDialog();
-        StringRequest istek =new StringRequest(Request.Method.POST, WebServisLinkleri.KAYIT_URL, new Response.Listener<String>() {
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                WebServisLinkleri.KAYIT_URL, new Response.Listener<String>() {
+
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Kayıt Sonucu" + response.toString());
+                Log.d(TAG, "Register Response: " + response.toString());
                 hideDialog();
                 try {
-                    JSONObject jObj = new JSONObject(response.toString());
-                    boolean hata = jObj.getBoolean("hata");
-                    if (!hata) {
-                        KullaniciGirisEkrani kullaniciGirisEkrani=new KullaniciGirisEkrani();
-                        android.support.v4.app.FragmentManager fragmentManager=getFragmentManager();
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+
+
+                    if (!error) {
+                        JSONObject user = jObj.getJSONObject("user");
+                        String uId = user.getString("kul_id");
+                        String uName = user.getString("username");
+                        String email = user.getString("email");
+                        String sifre = user.getString("sifre");
+                        String resim = user.getString("resim");
+                        String ad_soyad = user.getString("ad_soyad");
+                        userInfo.setSifre(sifre);
+                        userInfo.setResim(resim);
+                        userInfo.setEmail(email);
+                        userInfo.setUsername(uName);
+                        userInfo.setName(ad_soyad);
+                        userInfo.setId(uId);
+                        session.setLogin(true);
+
+                        KullaniciGirisEkrani kullaniciGirisEkrani = new KullaniciGirisEkrani();
+                        android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
                         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.kullaniciKayitEkraniFragment, kullaniciGirisEkrani);
                         fragmentTransaction.commit();
                         Toast.makeText(getActivity(), "Kullanıcı Başarı ile Kayıt Oldu", Toast.LENGTH_LONG).show();
-                       getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                        getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                     } else {
-                        String hataMesaji = jObj.getString("hata_msg");
-                        Toast.makeText(getActivity(), hataMesaji, Toast.LENGTH_LONG).show();
+                        // Error in login. Get the error message
+                        String errorMsg = jObj.getString("error_msg");
+                        toast(errorMsg);
                     }
                 } catch (JSONException e) {
+                    // JSON error
                     e.printStackTrace();
+                    toast("Json error: " + e.getMessage());
                 }
+
             }
-        }, new Response.ErrorListener(){
+        }, new Response.ErrorListener() {
+
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG," Kayıt Olurken Hata Oluştu "+error.getMessage());
-                Toast.makeText(getActivity(),error.getMessage(),Toast.LENGTH_LONG).show();
+                Log.e(TAG, "Login Error: " + error.getMessage());
+                toast("Unknown Error occurred");
                 hideDialog();
             }
-        }){ @Override
-            protected Map<String, String> getParams(){
-            Map<String,String> params=new HashMap<String,String>();
+        }) {
 
-            params.put("kul_adi",kul_adi);
-            params.put("email",email);
-            params.put("ad_soyad",ad_soyad);
-            params.put("sifre",sifre);
-            params.put("sifre_tekrar",sifre_tekrar);
-            if (bitmap==null){
-                params.put("image_path",getStringImage(defaults));
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("kul_adi", kul_adi);
+                params.put("email", email);
+                params.put("ad_soyad", ad_soyad);
+                params.put("sifre", sifre);
+                params.put("sifre_tekrar", sifre_tekrar);
+                if (bitmap == null) {
+                    params.put("image_path", getStringImage(defaults));
+                } else {
+                    params.put("image_path", getStringImage(bitmap));
+                }
+                return params;
             }
-            else{
-                params.put("image_path",getStringImage(bitmap));
-            }
-            return params;
-        }
+
         };
-        AppController.getInstance().addToRequestQueue(istek,tag_string_req);
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+
     }
-    private void showDialog()
-    {
-        if(!PD.isShowing())
-        {
-            PD.show();
+        // Adding request to request queue
+        private void showDialog() {
+            if (!PD.isShowing())
+                PD.show();
         }
-    }
-    private void hideDialog()
-    {
-        if(PD.isShowing())
-        {
+
+    private void hideDialog() {
+        if (PD.isShowing())
             PD.dismiss();
-        }
     }
+    private void toast(String x){
+        Toast.makeText(getActivity(), x, Toast.LENGTH_SHORT).show();
+    }
+
 }

@@ -128,66 +128,85 @@ public class KullaniciGirisEkrani extends Fragment{
         });
         return view;
     }
-    private void girisYap(final String email, final String sifre)
-    {
+    private void girisYap(final String email, final String sifre){
+        // Tag used to cancel the request
         String tag_string_req="req_login";
-        Log.d("MESAJJJJ","ÇALIŞTI");
         PD.setMessage("Giriş..");
         showDialog();
-        StringRequest strReq=new StringRequest(Request.Method.POST, WebServisLinkleri.GIRIS_URL, new Response.Listener<String>() {
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                WebServisLinkleri.GIRIS_URL, new Response.Listener<String>() {
+
             @Override
             public void onResponse(String response) {
-                Log.d(TAG,"Giriş Mesajı "+response.toString());
-                hideDialog();
+                Log.d(TAG, "Login Response: " + response.toString());
+
                 try {
-                    JSONObject jObj =new JSONObject(response.toString());
-                    boolean hata = jObj.getBoolean("hata");
-                    if(!hata)
-                    {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    hideDialog();
+                    // Check for error node in json
+                    if (!error) {
+                        // Now store the user in SQLite
                         JSONObject user = jObj.getJSONObject("user");
+                        String uId = user.getString("kul_id");
                         String uName = user.getString("username");
                         String email = user.getString("email");
+                        String sifre = user.getString("sifre");
+                        String resim = user.getString("resim");
+                        String ad_soyad = user.getString("ad_soyad");
+                        userInfo.setSifre(sifre);
+                        userInfo.setResim(resim);
                         userInfo.setEmail(email);
                         userInfo.setUsername(uName);
+                        userInfo.setName(ad_soyad);
+                        userInfo.setId(uId);
                         session.setLogin(true);
+
                         Intent intent =new Intent(getActivity(),MainActivity.class);
-                        intent.putExtra(Email,email);
                         startActivity(intent);
                         getActivity().finish();
                         getActivity().overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
+                    } else {
+                        // Error in login. Get the error message
+                        String errorMsg = jObj.getString("error_msg");
+                        toast(errorMsg);
                     }
-                    else
-                    {
-                        String hataMsg=jObj.getString("hata_msg");
-                        Toast.makeText(getActivity(),hataMsg, Toast.LENGTH_SHORT).show();
-                    }
-                }
-                catch (JSONException e)
-                {
+                } catch (JSONException e) {
+                    // JSON error
                     e.printStackTrace();
-                    Toast.makeText(getActivity(), "JSON HATASI "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    toast("Json error: " + e.getMessage());
                 }
+
             }
-        },new Response.ErrorListener(){
+        }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d(TAG,"Giriş Hatası: "+error.getMessage());
-                Toast.makeText(getActivity(),error.getMessage(),Toast.LENGTH_LONG).show();
+                Log.e(TAG, "Giriş Hatası: " + error.getMessage());
+                toast("Bilinmeyen hata oluştu");
                 hideDialog();
             }
-        }){
-            protected Map<String,String> getParams()
-            {
-                Map<String,String> params=new HashMap<String,String>();
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
                 params.put("email",email);
                 params.put("sifre",sifre);
 
                 return params;
             }
+
         };
 
-        AppController.getInstance().addToRequestQueue(strReq,tag_string_req);
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    private void toast(String x){
+        Toast.makeText(getActivity(), x, Toast.LENGTH_SHORT).show();
     }
 
     public void onButtonPressed(Uri uri) {

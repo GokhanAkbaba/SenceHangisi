@@ -33,6 +33,7 @@ import projem.sencehangisi.fragments.KullaniciGirisEkrani;
 
 public class AyarlarEposta extends AppCompatActivity {
     @BindView(R.id.eposta) EditText getEpostaTxt;
+    @BindView(R.id.newEposta) EditText newpsotaTxt;
     @BindView(R.id.epostaBtnUpdate) Button updateBtn;
     private static final String TAG=AyarlarEposta.class.getSimpleName();
     private ProgressDialog PD;
@@ -57,17 +58,17 @@ public class AyarlarEposta extends AppCompatActivity {
         final String eposta=userInfo.getKeyEmail();
         final String Id=userInfo.getKeyId();
         getEpostaTxt.setText(eposta);
-
+        final String newemail=newpsotaTxt.getText().toString().trim();
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                epostaUpdateFunc(eposta,Id);
+                epostaUpdateFunc(newemail,Id);
             }
         });
     }
 // güncelleme işlemleri hatalı onlar düzeltilecek
     private void epostaUpdateFunc(final  String email,final  String id) {
-        String tag_string_req="req_login";
+        String tag_string_req="req_update";
         PD.setMessage("Güncelleniyor..");
         showDialog();
 

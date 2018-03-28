@@ -37,5 +37,7 @@
     <string name="title_cikis">Çıkış</string>
     <string name="text_takip_edilen">Takip Edilen</string>
     <string name="text_takipci">Takipçi</string>
+    <string name="title_activity_anket_olustur">Anket Oluştur</string>
+
 
 </resources>

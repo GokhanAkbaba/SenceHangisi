@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +34,7 @@ import projem.sencehangisi.fragments.KullaniciGirisEkrani;
 
 public class AyarlarEposta extends AppCompatActivity {
     @BindView(R.id.eposta) EditText getEpostaTxt;
+    @BindView(R.id.newEpostam) EditText neweposta;
     @BindView(R.id.epostaBtnUpdate) Button updateBtn;
     private static final String TAG=AyarlarEposta.class.getSimpleName();
     private ProgressDialog PD;
@@ -61,7 +63,21 @@ public class AyarlarEposta extends AppCompatActivity {
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                epostaUpdateFunc(eposta,Id);
+                final String posta=neweposta.getText().toString();
+                if(!posta.isEmpty())
+                {
+                    if(posta.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(posta).matches()) {
+                        neweposta.setError("Geçerli bir e-posta adresi giriniz");
+                    }
+                    else {
+                        epostaUpdateFunc(posta,Id);
+                    }
+                }
+                else
+                {
+                    Toast.makeText(AyarlarEposta.this,"Lütfen Bigileri Tamamlayınız!", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
     }
@@ -72,21 +88,20 @@ public class AyarlarEposta extends AppCompatActivity {
         showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                WebServisLinkleri.GUNCELLE_URL, new Response.Listener<String>() { @Override
+                WebServisLinkleri.Ueposta_URL, new Response.Listener<String>() { @Override
         public void onResponse(String response) {
-            Log.d(TAG, "Guncelle Response: " + response.toString());
-
+           Log.d(TAG, "Guncelle Response: " + response.toString());
+            hideDialog();
             try {
                 JSONObject jObj = new JSONObject(response);
                 boolean error = jObj.getBoolean("error");
-                hideDialog();
-                // Check for error node in json
                 if (!error) {
 
-                    AyarlarEposta.this.finish();
+                    userSession.setLogin(true);
+                    toast("Eposta güncellendi!");
+                   AyarlarEposta.this.finish();
                    AyarlarEposta.this.overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
                 } else {
-                    // Error in login. Get the error message
                     String errorMsg = jObj.getString("error_msg");
                     toast(errorMsg);
                 }

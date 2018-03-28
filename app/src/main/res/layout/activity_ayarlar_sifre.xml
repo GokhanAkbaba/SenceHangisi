@@ -49,6 +49,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
+        android:id="@+id/newPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -75,6 +76,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:id="@+id/newPasswordAgain"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -88,6 +90,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
+        android:id="@+id/UpdatePasswordBtn"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_weight=".70"

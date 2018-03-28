@@ -49,6 +49,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
+        android:id="@+id/newEpostam"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"

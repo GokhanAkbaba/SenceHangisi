@@ -7,7 +7,8 @@ package projem.sencehangisi.Controls;
 public class WebServisLinkleri
 {
     public static String GIRIS_URL="http://oftekfakitiraf.com/senceHangisi/login.php";
-
     public static String KAYIT_URL="http://oftekfakitiraf.com/senceHangisi/register.php";
-    public static String GUNCELLE_URL="http://oftekfakitiraf.com/senceHangisi/update.php";
+    public static String Ueposta_URL="http://oftekfakitiraf.com/senceHangisi/epostaU.php";
+    public static String Uusername_URL="http://oftekfakitiraf.com/senceHangisi/usernameU.php";
+    public static String Upassword_URL="http://oftekfakitiraf.com/senceHangisi/passwordU.php";
 }

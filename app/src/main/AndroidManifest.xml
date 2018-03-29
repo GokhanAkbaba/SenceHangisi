@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
+
     <application
         android:name=".Controls.AppController"
         android:allowBackup="true"
@@ -67,6 +68,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activitys.MainActivity" />
         </activity>
+        <activity
+            android:name=".Activitys.AnketOlustur"
+            android:label=""
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

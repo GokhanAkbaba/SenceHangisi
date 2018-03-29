@@ -59,7 +59,7 @@ public class AyarlarEposta extends AppCompatActivity {
         final String eposta=userInfo.getKeyEmail();
         final String Id=userInfo.getKeyId();
         getEpostaTxt.setText(eposta);
-
+        final String newemail=neweposta.getText().toString().trim();
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,12 +78,13 @@ public class AyarlarEposta extends AppCompatActivity {
                     Toast.makeText(AyarlarEposta.this,"Lütfen Bigileri Tamamlayınız!", Toast.LENGTH_LONG).show();
                 }
 
+                epostaUpdateFunc(newemail,Id);
             }
         });
     }
 // güncelleme işlemleri hatalı onlar düzeltilecek
     private void epostaUpdateFunc(final  String email,final  String id) {
-        String tag_string_req="req_login";
+        String tag_string_req="req_update";
         PD.setMessage("Güncelleniyor..");
         showDialog();
 

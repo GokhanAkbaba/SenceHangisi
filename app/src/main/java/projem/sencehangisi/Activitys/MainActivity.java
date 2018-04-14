@@ -13,14 +13,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 
-import butterknife.BindView;
-import de.hdodenhof.circleimageview.CircleImageView;
 import projem.sencehangisi.Controls.AppController;
 import projem.sencehangisi.Controls.OturumYonetimi;
 import projem.sencehangisi.Controls.UserInfo;
@@ -31,16 +30,15 @@ import projem.sencehangisi.fragments.KullaniciProfiliActivity;
 
 public class  MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    @BindView(R.id.nav_header_kulAdiTxt) TextView getUsernameTxt;
-    @BindView(R.id.nav_header_adSoyadTxt) TextView getNameTxt;
-    @BindView(R.id.nav_header_getImage) CircleImageView mImageView;
+    ImageView mImageView;
+    Toolbar toolbar;
     private OturumYonetimi userSession;
     private UserInfo userInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.anketOlusturBtn);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +59,10 @@ public class  MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        toolbar.setNavigationIcon(R.mipmap.navigation_profil_foto);
+        View headerView = navigationView.getHeaderView(0);
+        TextView getUsernameTxt=(TextView) headerView.findViewById(R.id.nav_header_kulAdiTxt);
+        TextView getNameTxt=(TextView) headerView.findViewById(R.id.nav_header_adSoyadTxt);
+        mImageView=(ImageView) headerView.findViewById(R.id.nav_header_getImage) ;
 
         userInfo = new UserInfo(this);
         userSession=new  OturumYonetimi(this);
@@ -72,9 +73,9 @@ public class  MainActivity extends AppCompatActivity
         String username = userInfo.getKeyUsername();
         String name = userInfo.getKeyNAME();
         String image=userInfo.getKeyRESIM();
-        //getNameTxt.setText(name);
-       // getUsernameTxt.setText(username);
-       // getImage(image);
+        getNameTxt.setText(name);
+       getUsernameTxt.setText(username);
+       getImage(image);
     }
     public  void getImage(final String url){
         String image_req="req_image";
@@ -83,6 +84,7 @@ public class  MainActivity extends AppCompatActivity
                     @Override
                     public void onResponse(Bitmap bitmap) {
                         mImageView.setImageBitmap(bitmap);
+
                     }
                 }, 0, 0, null,
                 new Response.ErrorListener() {
@@ -110,19 +112,9 @@ public class  MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-    /*@Override
-    Sağ Üst Köşedeki 3 nokta
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -141,6 +133,9 @@ public class  MainActivity extends AppCompatActivity
         Intent intent=new Intent();
         int id = item.getItemId();
         if (id == R.id.nav_arkadasBul) {
+
+            intent.setClass(getApplicationContext(),ArkadasiniBulActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_ayarlar) {
 
             intent.setClass(getApplicationContext(),AyarlarActivity.class);

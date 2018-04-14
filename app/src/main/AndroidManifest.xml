@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
-
     <application
         android:name=".Controls.AppController"
         android:allowBackup="true"
@@ -29,7 +28,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".fragments.KullaniciProfiliActivity"
-            android:alpha="0.25"
             android:label=""
             android:parentActivityName=".Activitys.MainActivity">
             <meta-data
@@ -71,8 +69,16 @@
         <activity
             android:name=".Activitys.AnketOlustur"
             android:label=""
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activitys.ArkadasiniBulActivity"
+            android:label="@string/title_arkadaslarini_bul"
+            android:parentActivityName=".Activitys.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activitys.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

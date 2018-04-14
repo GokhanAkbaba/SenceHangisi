@@ -2,13 +2,13 @@ package projem.sencehangisi.fragments;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
-import android.widget.EditText;
-import android.widget.ImageButton;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -18,7 +18,6 @@ import com.android.volley.toolbox.ImageRequest;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
-import projem.sencehangisi.Activitys.MainActivity;
 import projem.sencehangisi.Controls.AppController;
 import projem.sencehangisi.Controls.OturumYonetimi;
 import projem.sencehangisi.Controls.UserInfo;
@@ -36,8 +35,12 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_kullanici_profili);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
         ButterKnife.bind(this);
         userInfo = new UserInfo(this);
         userSession=new  OturumYonetimi(this);

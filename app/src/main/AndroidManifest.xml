@@ -70,7 +70,7 @@
             android:name=".Activitys.AnketOlustur"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize" />
+             />
         <activity
             android:name=".Activitys.ArkadasiniBulActivity"
             android:label="@string/title_arkadaslarini_bul"

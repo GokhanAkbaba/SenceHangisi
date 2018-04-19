@@ -31,7 +31,7 @@
     <string name="yeni_kullanıcıadi">Yeni kullanıcı adı</string>
     <string name="title_profil">Profil</string>
     <string name="title_populerler">Popülerler</string>
-    <string name="title_arkadasinibul">Arama</string>
+    <string name="title_arkadasinibul">Arkadaşlarını Bul</string>
     <string name="title_bildirimler">Bildirimler</string>
     <string name="title_ayarlar">Ayarlar</string>
     <string name="title_cikis">Çıkış</string>
@@ -40,4 +40,6 @@
     <string name="title_activity_anket_olustur">Anket Oluştur</string>
     <string name="title_arkadaslarini_bul">Sence Hangisi\'inde Bul</string>
     <string name="bul_label">Sence Hangisi\'inde Ara</string>
+    <string name="title_activity_takipciler">Takipçiler</string>
+    <string name="title_activity_takip_edilen">Takip Edilen</string>
 </resources>

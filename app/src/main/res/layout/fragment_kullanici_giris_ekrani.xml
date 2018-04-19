@@ -38,6 +38,7 @@
         android:maxLines="1"
         android:padding="20dp"
         android:textColorHint="#fff"
+        android:textCursorDrawable="@drawable/cursor_style_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/eposta"
@@ -57,7 +58,7 @@
         android:maxLines="1"
         android:padding="20dp"
         android:textColorHint="#fff"
-        android:textColorLink="@color/cardview_light_background"
+        android:textCursorDrawable="@drawable/cursor_style_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/sifre" />

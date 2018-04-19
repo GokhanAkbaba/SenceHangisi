@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -18,6 +19,8 @@ import com.android.volley.toolbox.ImageRequest;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
+import projem.sencehangisi.Activitys.TakipEdilenActivity;
+import projem.sencehangisi.Activitys.TakipcilerActivity;
 import projem.sencehangisi.Controls.AppController;
 import projem.sencehangisi.Controls.OturumYonetimi;
 import projem.sencehangisi.Controls.UserInfo;
@@ -70,5 +73,16 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                     }
                 });
         AppController.getInstance().addToRequestQueue(request,image_req);
+    }
+
+    public void TakipciGoster(View view)
+    {
+        Intent intent=new Intent(getApplicationContext(), TakipcilerActivity.class);
+        startActivity(intent);
+    }
+    public void TakipEdileniGoster(View view)
+    {
+        Intent intent=new Intent(getApplicationContext(), TakipEdilenActivity.class);
+        startActivity(intent);
     }
 }

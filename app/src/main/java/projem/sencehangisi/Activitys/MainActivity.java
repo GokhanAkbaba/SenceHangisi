@@ -1,6 +1,7 @@
 package projem.sencehangisi.Activitys;
 
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -76,6 +77,9 @@ public class  MainActivity extends AppCompatActivity
         getNameTxt.setText(name);
        getUsernameTxt.setText(username);
        getImage(image);
+
+        final ActionBar actionBar = getActionBar();
+
     }
     public  void getImage(final String url){
         String image_req="req_image";

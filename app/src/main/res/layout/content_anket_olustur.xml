@@ -16,13 +16,13 @@
         android:layout_marginTop="70dp"
         android:background="#fff"
         android:gravity="left"
+        android:hint="Sence Hangisi"
         android:paddingLeft="8dp"
         android:paddingTop="5dp"
-        android:hint="Sence Hangisi"
+        android:textCursorDrawable="@drawable/cursor_style"
         app:layout_heightPercent="15%"
         app:layout_marginLeftPercent="2%"
-        app:layout_marginRightPercent="2%"
-         />
+        app:layout_marginRightPercent="2%" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -72,8 +72,4 @@
         app:layout_marginLeftPercent="16%"
         app:layout_marginTopPercent="62%"
         />
-
-
-
-
 </android.support.percent.PercentRelativeLayout>

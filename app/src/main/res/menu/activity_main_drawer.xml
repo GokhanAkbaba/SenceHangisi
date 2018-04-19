@@ -17,7 +17,7 @@
             android:title="@string/title_populerler" />
         <item
             android:id="@+id/nav_arkadasBul"
-            android:icon="@mipmap/arama_ikonu"
+            android:icon="@drawable/user"
             android:title="@string/title_arkadasinibul" />
         <item
             android:id="@+id/nav_bildirim"

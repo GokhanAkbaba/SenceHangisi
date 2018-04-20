@@ -42,4 +42,6 @@
     <string name="bul_label">Sence Hangisi\'inde Ara</string>
     <string name="title_activity_takipciler">Takipçiler</string>
     <string name="title_activity_takip_edilen">Takip Edilen</string>
+    <string name="title_tablayout_anaSayfa">Ana Sayfa</string>
+    <string name="title_tablayout_enPopuler">En Popüler</string>
 </resources>

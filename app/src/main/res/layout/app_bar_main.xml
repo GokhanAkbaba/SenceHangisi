@@ -7,7 +7,7 @@
     tools:context="projem.sencehangisi.Activitys.MainActivity">
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="105dp"
+        android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
@@ -17,6 +17,26 @@
             android:background="?attr/colorPrimary"
             android:icon="@drawable/profile"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cardview_light_background"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabSelectedTextColor="@color/cardview_dark_background"
+            app:tabTextColor="@color/cardview_dark_background">
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_tablayout_anaSayfa" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_tablayout_enPopuler" />
+        </android.support.design.widget.TabLayout>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -28,60 +48,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@drawable/chat" />
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="64dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.265"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <Button
-                android:id="@+id/AnaSayfa"
-                android:layout_width="0dp"
-                android:layout_height="27dp"
-                android:layout_centerVertical="true"
-                android:layout_weight=".70"
-                android:background="@drawable/menu_ana_sayfa_buton_beyaz"
-                android:text="Ana Sayfa"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/EnPopuler"
-                android:layout_width="0dp"
-                android:layout_height="27dp"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/AnaSayfa"
-                android:layout_toRightOf="@+id/AnaSayfa"
-                android:layout_weight=".70"
-                android:background="@drawable/menu_enpopuler_buton_mavi"
-                android:text="En Popüler"
-                android:textAllCaps="false" />
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="31dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:src="@mipmap/bildirim_ikonu"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.974"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </android.support.constraint.ConstraintLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

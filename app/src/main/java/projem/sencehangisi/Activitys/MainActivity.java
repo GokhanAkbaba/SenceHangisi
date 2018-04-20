@@ -1,17 +1,19 @@
 package projem.sencehangisi.Activitys;
 
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -34,6 +36,7 @@ public class  MainActivity extends AppCompatActivity
     ImageView mImageView;
     Toolbar toolbar;
     private OturumYonetimi userSession;
+    private TabLayout tabLayout;
     private UserInfo userInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,13 @@ public class  MainActivity extends AppCompatActivity
 
             }
         });
+
+        tabLayout= (TabLayout) findViewById(R.id.tab);
+        ViewPager viewPager=(ViewPager)findViewById(R.id.viewPager);
+        tabLayout.setupWithViewPager(viewPager);
+
+        TabPagerAdapter tabPagerAdapter=new TabPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(tabPagerAdapter);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -78,7 +88,6 @@ public class  MainActivity extends AppCompatActivity
        getUsernameTxt.setText(username);
        getImage(image);
 
-        final ActionBar actionBar = getActionBar();
 
     }
     public  void getImage(final String url){
@@ -117,7 +126,7 @@ public class  MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
+   /* @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
@@ -127,9 +136,13 @@ public class  MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }*/
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
-
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -168,4 +181,5 @@ public class  MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

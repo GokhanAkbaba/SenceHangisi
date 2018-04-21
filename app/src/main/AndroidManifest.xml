@@ -12,8 +12,8 @@
         android:name=".Controls.AppController"
         android:allowBackup="true"
         android:label="Sence Hangisi"
-        android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/question"
+        android:roundIcon="@drawable/question"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activitys.KullaniciIslemleriActivity">
@@ -29,6 +29,7 @@
         <activity
             android:name=".fragments.KullaniciProfiliActivity"
             android:label=""
+            android:screenOrientation="portrait"
             android:parentActivityName=".Activitys.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

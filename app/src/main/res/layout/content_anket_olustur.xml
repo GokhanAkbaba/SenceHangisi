@@ -26,50 +26,31 @@
 
     <ImageView
         android:id="@+id/anketSecenekFoto1"
-        app:layout_marginTopPercent="33%"
-        android:background="@color/girisveguvenlik"
+        app:layout_marginTopPercent="4%"
+        android:src="@drawable/anket_ekle_icon1"
         app:layout_heightPercent="50%"
+        android:layout_below="@+id/anketSorusuTxt"
+        android:onClick="anketResimSec"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center"
         app:layout_marginLeftPercent="2%"
-        app:layout_widthPercent="45%" />
-    <ImageView
-        android:id="@+id/anketSecenekFoto2"
-        app:layout_marginTopPercent="50%"
-        android:background="@drawable/anket_ekle"
-        app:layout_heightPercent="12%"
-        app:layout_marginLeftPercent="20%"
-        app:layout_widthPercent="12%" />
+        app:layout_widthPercent="47%" />
+
 
     <ImageView
+        android:id="@+id/anketSecenekFoto2"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        app:layout_marginTopPercent="33%"
+        app:layout_marginTopPercent="4%"
+        android:scaleType="centerCrop"
+        android:layout_below="@+id/anketSorusuTxt"
         app:layout_marginRightPercent="2%"
-        android:background="@color/girisveguvenlik"
+        android:src="@drawable/anket_ekle_icon2"
         app:layout_heightPercent="50%"
         app:layout_marginLeftPercent="20%"
-        app:layout_widthPercent="45%"
-        android:id="@+id/imageView5" />
-    <ImageView
-        android:id="@+id/imageView6"
-        app:layout_marginTopPercent="50%"
-        android:background="@drawable/anket_ekle"
-        app:layout_heightPercent="12%"
-        app:layout_marginLeftPercent="70%"
-        app:layout_widthPercent="12%" />
-    <TextView
-        android:text="Seçenek 2"
-        android:autoSizeTextType="uniform"
-        app:layout_widthPercent="23%"
-        app:layout_heightPercent="5%"
-        app:layout_marginLeftPercent="66%"
-        app:layout_marginTopPercent="62%"
-        />
-    <TextView
-        android:text="Seçenek 1"
-        android:autoSizeTextType="uniform"
-        app:layout_widthPercent="23%"
-        app:layout_heightPercent="5%"
-        app:layout_marginLeftPercent="16%"
-        app:layout_marginTopPercent="62%"
-        />
+        app:layout_widthPercent="47%"
+         />
+
+
 </android.support.percent.PercentRelativeLayout>

@@ -6,5 +6,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="girisveguvenlik">#E0E0E0</color>
     <color name="textColor">#000000</color>
-    <color name="profilCubukRenk">#59000000</color>
+    <color name="textColorLine">#000000</color>
+    <color name="beyaz">#fff</color>
 </resources>

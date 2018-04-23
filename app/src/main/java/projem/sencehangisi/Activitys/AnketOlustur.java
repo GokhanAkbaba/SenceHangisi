@@ -1,9 +1,11 @@
 package projem.sencehangisi.Activitys;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,21 +29,25 @@ import java.util.Calendar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import projem.sencehangisi.Controls.BackgroundTask;
+import projem.sencehangisi.Controls.OturumYonetimi;
+import projem.sencehangisi.Controls.UserInfo;
 import projem.sencehangisi.R;
-import projem.sencehangisi.fragments.KullaniciKayitEkrani;
 
 public class AnketOlustur extends AppCompatActivity  {
 
-    private static final String TAG = KullaniciKayitEkrani.class.getSimpleName();
+    private static final String TAG = AnketOlustur.class.getSimpleName();
     @BindView(R.id.anketSorusuTxt) MultiAutoCompleteTextView anketSorusuTxt;
     @BindView(R.id.anketSecenekFoto1) ImageView anketSecenekFoto1;
     @BindView(R.id.anketSecenekFoto2) ImageView anketSecenekFoto2;
     @BindView(R.id.anketGonderBtn) ImageView anketGonderBtn;
-    private Bitmap bitmap;
+    private Bitmap bitmap,defaults;
+    private ProgressDialog PD;
+    private UserInfo userInfo;
     private static final String IMAGE_DIRECTORY = "/Sence Hangisi";
     private int GALLERY = 1, CAMERA = 2;
-
     Unbinder unbinder;
+    private OturumYonetimi session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -48,8 +55,48 @@ public class AnketOlustur extends AppCompatActivity  {
         setContentView(R.layout.activity_anket_olustur);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        defaults = BitmapFactory.decodeResource(getResources(),R.drawable.ic_menu_camera);
         ButterKnife.bind(this);
+        anketGonderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String anketSorusu=anketSorusuTxt.getText().toString().trim();
+                if(!anketSorusu.isEmpty())
+                {
+                    anketKayit(this);
+                }
+                else
+                {
+                    Toast.makeText(AnketOlustur.this,"Lütfen Bigileri Tamamlayınız!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
+    }
+
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+    public void anketKayit(View.OnClickListener view)
+    {
+        userInfo=new UserInfo(this);
+        String soru,anketFoto1,kullanici_id;
+        if (bitmap == null) {
+            anketFoto1=getStringImage(defaults);
+        } else {
+            anketFoto1=getStringImage(bitmap);
+        }
+
+        soru=anketSorusuTxt.getText().toString();
+        kullanici_id=userInfo.getKeyId();
+        String method="register";
+        BackgroundTask backgroundTask=new BackgroundTask(this);
+        backgroundTask.execute(method,soru,anketFoto1,kullanici_id);
+        finish();
     }
     public void anketResimSec(View v)
     {
@@ -100,7 +147,7 @@ public class AnketOlustur extends AppCompatActivity  {
             if (data != null) {
                 Uri contentURI = data.getData();
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
                     anketSecenekFoto1.setImageBitmap(bitmap);
 
                 } catch (IOException e) {
@@ -110,9 +157,9 @@ public class AnketOlustur extends AppCompatActivity  {
             }
 
         } else if (requestCode == CAMERA) {
-            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-            anketSecenekFoto1.setImageBitmap(thumbnail);
-           saveImage(thumbnail);
+            bitmap = (Bitmap) data.getExtras().get("data");
+            anketSecenekFoto1.setImageBitmap(bitmap);
+           saveImage(bitmap);
             Toast.makeText(this, "Fotoğraf Kaydedildi.", Toast.LENGTH_SHORT).show();
         }
     }
@@ -144,7 +191,9 @@ public class AnketOlustur extends AppCompatActivity  {
         }
         return "";
     }
-
+    private void toast(String x){
+        Toast.makeText(AnketOlustur.this, x, Toast.LENGTH_SHORT).show();
+    }
     public void anketOlusturKpt(View v)
     {
         finish();

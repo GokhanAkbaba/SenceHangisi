@@ -235,8 +235,6 @@ public class KullaniciKayitEkrani extends Fragment {
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
-
-
                     if (!error) {
                         JSONObject user = jObj.getJSONObject("user");
                         String uId = user.getString("kul_id");

@@ -20,19 +20,32 @@ import android.widget.ImageView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import projem.sencehangisi.Controls.BackgroundTask;
+import projem.sencehangisi.Controls.AnketInfo;
+import projem.sencehangisi.Controls.AppController;
 import projem.sencehangisi.Controls.OturumYonetimi;
 import projem.sencehangisi.Controls.UserInfo;
+import projem.sencehangisi.Controls.WebServisLinkleri;
 import projem.sencehangisi.R;
+import projem.sencehangisi.fragments.KullaniciGirisEkrani;
 
 public class AnketOlustur extends AppCompatActivity  {
 
@@ -57,13 +70,20 @@ public class AnketOlustur extends AppCompatActivity  {
         setSupportActionBar(toolbar);
         defaults = BitmapFactory.decodeResource(getResources(),R.drawable.ic_menu_camera);
         ButterKnife.bind(this);
+        PD=new ProgressDialog(this);
+        PD.setCancelable(false);
+        userInfo = new UserInfo(this);
+        session=new OturumYonetimi(AnketOlustur.this);
+
+
         anketGonderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String anketSorusu=anketSorusuTxt.getText().toString().trim();
+                String user=userInfo.getKeyId();
                 if(!anketSorusu.isEmpty())
                 {
-                    anketKayit(this);
+                    anketKayit(user,anketSorusu);
                 }
                 else
                 {
@@ -73,6 +93,83 @@ public class AnketOlustur extends AppCompatActivity  {
         });
 
     }
+    public void anketKayit(final String userID,final String anketSoru)
+    {
+        String tag_string_req = "Anket_req";
+        PD.setMessage("Kayıt olunuyor ...");
+        showDialog();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                WebServisLinkleri.AnketOlustur, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+             //   Log.d(TAG, "Anket  Response: " + response.toString());
+                hideDialog();
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+
+                        Intent intent = new Intent(
+                                AnketOlustur.this,
+                                MainActivity.class);
+                        startActivity(intent);
+                        toast("Anket Oluşturuldu");
+                        finish();
+                        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                    } else {
+                        // Error in login. Get the error message
+                        String errorMsg = jObj.getString("error_msg");
+                        toast(errorMsg);
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    toast("Json error: " + e.getMessage());
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Anket Error: " + error.getMessage());
+                toast("Unknown Error occurred");
+                hideDialog();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("kullanici_id", userID);
+                params.put("soru", anketSoru);
+
+                if (bitmap == null) {
+                    params.put("resim1", getStringImage(defaults));
+                    params.put("resim2",getStringImage(defaults));
+                } else {
+                    params.put("resim1", getStringImage(bitmap));
+                    params.put("resim2", getStringImage(bitmap));
+                }
+                return params;
+            }
+
+        };
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+    private void showDialog() {
+        if (!PD.isShowing())
+            PD.show();
+    }
+
+    private void hideDialog() {
+        if (PD.isShowing())
+            PD.dismiss();
+    }
 
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -81,23 +178,7 @@ public class AnketOlustur extends AppCompatActivity  {
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
     }
-    public void anketKayit(View.OnClickListener view)
-    {
-        userInfo=new UserInfo(this);
-        String soru,anketFoto1,kullanici_id;
-        if (bitmap == null) {
-            anketFoto1=getStringImage(defaults);
-        } else {
-            anketFoto1=getStringImage(bitmap);
-        }
 
-        soru=anketSorusuTxt.getText().toString();
-        kullanici_id=userInfo.getKeyId();
-        String method="register";
-        BackgroundTask backgroundTask=new BackgroundTask(this);
-        backgroundTask.execute(method,soru,anketFoto1,kullanici_id);
-        finish();
-    }
     public void anketResimSec(View v)
     {
         showPictureDialog();

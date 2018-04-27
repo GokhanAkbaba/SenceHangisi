@@ -1,18 +1,23 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="projem.sencehangisi.fragments.AnaSayfa">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp">
+
+    <android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-<<<<<<< HEAD
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_margin="16dp"
+
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/images"
+            android:id="@+id/user_image"
             android:src="@drawable/man"
             app:layout_heightPercent="14%"
             app:layout_marginLeftPercent="2%"
@@ -22,8 +27,9 @@
         <TextView
             android:id="@+id/getuser"
             android:layout_width="fill_parent"
+            android:layout_alignLeft="@+id/user_image"
+            android:layout_alignStart="@+id/user_image"
             android:layout_below="@+id/getName"
-            android:layout_marginTop="-5dp"
             android:autoSizeTextType="uniform"
             android:text="\@gokhanakbaba"
             android:textColor="@android:color/darker_gray"
@@ -42,7 +48,7 @@
             app:layout_marginTopPercent="5%" />
 
         <TextView
-            android:id="@+id/TextView"
+            android:id="@+id/SoruAnket"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/getuser"
@@ -54,8 +60,8 @@
             app:layout_marginRightPercent="2%" />
 
         <ImageView
-            android:id="@+id/secenekfoto1"
-            android:layout_below="@+id/TextView"
+            android:id="@+id/anketSecenekFoto1"
+            android:layout_below="@+id/SoruAnket"
             android:background="@drawable/kapak"
             app:layout_heightPercent="30%"
             app:layout_marginLeftPercent="22%"
@@ -63,10 +69,10 @@
             app:layout_widthPercent="37%" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/anketSecenekFoto2"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/TextView"
+            android:layout_below="@+id/SoruAnket"
             android:background="@drawable/kapak"
             app:layout_heightPercent="30%"
             app:layout_marginRightPercent="3%"
@@ -75,7 +81,7 @@
 
         <ImageView
             android:id="@+id/Oy1"
-            android:layout_below="@+id/secenekfoto1"
+            android:layout_below="@+id/anketSecenekFoto1"
             android:src="@drawable/secenek_stil"
             app:layout_heightPercent="8%"
             app:layout_marginLeftPercent="22%"
@@ -83,7 +89,7 @@
             app:layout_widthPercent="12%" />
 
         <Button
-            android:layout_below="@+id/secenekfoto1"
+            android:layout_below="@+id/anketSecenekFoto1"
             android:background="@drawable/puan_onay"
             android:text="95"
             app:layout_heightPercent="8%"
@@ -94,7 +100,7 @@
 
         <ImageView
             android:id="@+id/oy2"
-            android:layout_below="@+id/secenekfoto1"
+            android:layout_below="@+id/anketSecenekFoto1"
             android:src="@drawable/secenek_bos_stil"
             app:layout_heightPercent="8%"
             app:layout_marginLeftPercent="61%"
@@ -102,7 +108,7 @@
             app:layout_widthPercent="12%" />
 
         <Button
-            android:layout_below="@+id/secenekfoto1"
+            android:layout_below="@+id/anketSecenekFoto1"
             android:background="@drawable/puan_onay"
             android:text="70"
             app:layout_heightPercent="8%"
@@ -131,14 +137,9 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dp"
-            android:layout_below="@+id/secenekfoto1"
             android:background="@color/girisveguvenlik"
             app:layout_marginTopPercent="15%" />
-=======
-        android:background="@color/girisveguvenlik"
-        android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
->>>>>>> 7de914d5aae264ee6bddd25d888226bc9d729a0e
+    </android.support.percent.PercentRelativeLayout>
 
-</FrameLayout>
+</android.support.v7.widget.CardView>

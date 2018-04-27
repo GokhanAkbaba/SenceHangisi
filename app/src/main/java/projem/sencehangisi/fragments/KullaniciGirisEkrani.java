@@ -53,9 +53,9 @@ public class KullaniciGirisEkrani extends Fragment{
     private final static String Email="EMAİL MESAJI";
     private ProgressDialog PD;
     private OturumYonetimi session;
-    private UserInfo userInfo;
+    private UserInfo userInfo;@BindView(R.id.epostaGirisText) EditText epostaGirisTxt;
 
-    @BindView(R.id.epostaGirisText) EditText epostaGirisTxt;
+
     @BindView(R.id.sifreGirisText) EditText sifreGirisTxt;
     @BindView(R.id.sifreUnuttumText) TextView sifreUnuttumTxt;
     @BindView(R.id.kayitOlText) TextView kayitOlTxt;

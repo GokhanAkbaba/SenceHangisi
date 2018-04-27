@@ -28,6 +28,7 @@
     <string name="text_bildirim_zil_sesi">Bildirim zil sesini ayarla</string>
     <string name="kAdi_buton">Kullanıcı Adını Güncelle</string>
     <string name="mevcut_kullaniciadi">Mevcut kullanıcı adı</string>
+    <string name="mevcut_adSoyad">Mevcut Ad Soyad</string>
     <string name="yeni_kullanıcıadi">Yeni kullanıcı adı</string>
     <string name="title_profil">Profil</string>
     <string name="title_populerler">Popülerler</string>
@@ -44,4 +45,8 @@
     <string name="title_activity_takip_edilen">Takip Edilen</string>
     <string name="title_tablayout_anaSayfa">Ana Sayfa</string>
     <string name="title_tablayout_enPopuler">En Popüler</string>
+    <string name="yeni_adSoyadınız"> Yeni Adınız ve Soyadınız</string>
+    <string name="yeni_adSoyad"> Yeni Ad Soyad</string>
+    <string name="yeni_adSoyad_buton"> Ad Soyadını Güncelle</string>
+
 </resources>

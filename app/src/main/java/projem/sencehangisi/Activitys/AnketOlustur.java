@@ -67,7 +67,7 @@ public class AnketOlustur extends AppCompatActivity  {
                 }
                 else
                 {
-                    Toast.makeText(AnketOlustur.this,"Lütfen Bigileri Tamamlayınız!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AnketOlustur.this,"Lütfen Anket Sorusunu Giriniz!", Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -55,7 +55,7 @@
             app:layout_marginRightPercent="2%" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/secenekfoto1"
             android:layout_below="@+id/TextView"
             android:background="@drawable/kapak"
             app:layout_heightPercent="30%"
@@ -76,7 +76,7 @@
 
         <ImageView
             android:id="@+id/Oy1"
-            android:layout_below="@+id/imageView3"
+            android:layout_below="@+id/secenekfoto1"
             android:src="@drawable/secenek_stil"
             app:layout_heightPercent="8%"
             app:layout_marginLeftPercent="22%"
@@ -84,7 +84,7 @@
             app:layout_widthPercent="12%" />
 
         <Button
-            android:layout_below="@+id/imageView3"
+            android:layout_below="@+id/secenekfoto1"
             android:background="@drawable/puan_onay"
             android:text="95"
             app:layout_heightPercent="8%"
@@ -95,7 +95,7 @@
 
         <ImageView
             android:id="@+id/oy2"
-            android:layout_below="@+id/imageView3"
+            android:layout_below="@+id/secenekfoto1"
             android:src="@drawable/secenek_bos_stil"
             app:layout_heightPercent="8%"
             app:layout_marginLeftPercent="61%"
@@ -103,7 +103,7 @@
             app:layout_widthPercent="12%" />
 
         <Button
-            android:layout_below="@+id/imageView3"
+            android:layout_below="@+id/secenekfoto1"
             android:background="@drawable/puan_onay"
             android:text="70"
             app:layout_heightPercent="8%"
@@ -132,7 +132,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dp"
-            android:layout_below="@+id/imageView3"
+            android:layout_below="@+id/secenekfoto1"
             android:background="@color/girisveguvenlik"
             app:layout_marginTopPercent="15%" />
 

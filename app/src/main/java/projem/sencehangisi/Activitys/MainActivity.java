@@ -38,6 +38,7 @@ public class  MainActivity extends AppCompatActivity
     private OturumYonetimi userSession;
     private TabLayout tabLayout;
     private UserInfo userInfo;
+    KullaniciProfiliActivity kullaniciProfiliActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,6 +181,17 @@ public class  MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void TakipciGoster(View view)
+    {
+        Intent intent=new Intent(getApplicationContext(), TakipcilerActivity.class);
+        startActivity(intent);
+    }
+    public void TakipEdileniGoster(View view)
+    {
+        Intent intent=new Intent(getApplicationContext(), TakipEdilenActivity.class);
+        startActivity(intent);
     }
 
 }

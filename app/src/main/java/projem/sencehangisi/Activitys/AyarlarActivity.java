@@ -17,6 +17,7 @@ import projem.sencehangisi.fragments.KullaniciGirisEkrani;
 public class AyarlarActivity extends AppCompatActivity {
     @BindView(R.id.ayar_username)    TextView getUsernameTxt;
     @BindView(R.id.ayar_email) TextView getEmailTxt;
+    @BindView(R.id.ayar_adSoyad) TextView getAdSoyadTxt;
     private UserInfo userInfo;
     private OturumYonetimi userSession;
     Intent intent= new Intent();
@@ -36,9 +37,11 @@ public class AyarlarActivity extends AppCompatActivity {
             finish();
         }
         String username = userInfo.getKeyUsername();
+        String adSoyad=userInfo.getKeyNAME();
         String email = userInfo.getKeyEmail();
         getUsernameTxt.setText(username);
         getEmailTxt.setText(email);
+        getAdSoyadTxt.setText(adSoyad);
     }
     public void KullaniciAdiDegistir(View view)
     {
@@ -54,6 +57,11 @@ public class AyarlarActivity extends AppCompatActivity {
     public void EpostaDegistir(View view)
     {
         intent.setClass(getApplicationContext(),AyarlarEposta.class);
+        startActivity(intent);
+    }
+    public void AdiSoyadiDegistir(View view)
+    {
+        intent.setClass(getApplicationContext(),AyarlarAdSoyad.class);
         startActivity(intent);
     }
 }

@@ -86,7 +86,7 @@
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
         android:onClick="TakipciGoster"
-         />
+        tools:ignore="OnClick" />
 
     <TextView
         android:id="@+id/textView"

@@ -203,6 +203,7 @@ public class KullaniciGirisEkrani extends Fragment{
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+
     }
 
     private void toast(String x){

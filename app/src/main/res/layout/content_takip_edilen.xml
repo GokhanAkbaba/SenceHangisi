@@ -70,12 +70,13 @@
             </RelativeLayout>
 
             <ImageButton
-                android:id="@+id/button2"
+                android:id="@+id/takipEdilenBtn"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="5dp"
+                android:onClick="TakipEdilen"
                 android:src="@drawable/checked"
                 app:layout_constraintEnd_toEndOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"

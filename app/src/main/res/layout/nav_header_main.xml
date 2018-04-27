@@ -45,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
         android:text="462"
+        android:onClick="TakipEdileniGoster"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -65,9 +66,11 @@
         android:layout_marginTop="-22dp"
         android:layout_marginLeft="136dp"
         android:text="316"
+        android:onClick="TakipciGoster"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="OnClick" />
 
     <TextView
         android:layout_width="wrap_content"

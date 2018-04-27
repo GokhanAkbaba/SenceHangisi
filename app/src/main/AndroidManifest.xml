@@ -12,8 +12,8 @@
     <application
         android:name=".Controls.AppController"
         android:allowBackup="true"
-        android:label="Sence Hangisi"
         android:icon="@drawable/question"
+        android:label="Sence Hangisi"
         android:roundIcon="@drawable/question"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -30,8 +30,8 @@
         <activity
             android:name=".fragments.KullaniciProfiliActivity"
             android:label=""
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Activitys.MainActivity">
+            android:parentActivityName=".Activitys.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activitys.MainActivity" />
@@ -87,7 +87,8 @@
         <activity
             android:name=".Activitys.TakipEdilenActivity"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activitys.AyarlarAdSoyad"></activity>
     </application>
 
 </manifest>

@@ -40,6 +40,7 @@ public class AyarlarKullaniciAdi extends AppCompatActivity {
     private UserInfo userInfo;
     String username;
     private OturumYonetimi userSession;
+    AyarlarActivity ayarlarActivity=new AyarlarActivity();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

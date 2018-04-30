@@ -1,7 +1,6 @@
 package projem.sencehangisi.Activitys;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -39,13 +38,11 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import projem.sencehangisi.Controls.AnketInfo;
 import projem.sencehangisi.Controls.AppController;
 import projem.sencehangisi.Controls.OturumYonetimi;
 import projem.sencehangisi.Controls.UserInfo;
 import projem.sencehangisi.Controls.WebServisLinkleri;
 import projem.sencehangisi.R;
-import projem.sencehangisi.fragments.KullaniciGirisEkrani;
 
 public class AnketOlustur extends AppCompatActivity  {
 
@@ -54,8 +51,7 @@ public class AnketOlustur extends AppCompatActivity  {
     @BindView(R.id.anketSecenekFoto1) ImageView anketSecenekFoto1;
     @BindView(R.id.anketSecenekFoto2) ImageView anketSecenekFoto2;
     @BindView(R.id.anketGonderBtn) ImageView anketGonderBtn;
-    private Bitmap bitmap,defaults;
-    private ProgressDialog PD;
+    private Bitmap bitmap,bitmap2,defaults;
     private UserInfo userInfo;
     private static final String IMAGE_DIRECTORY = "/Sence Hangisi";
     private int GALLERY = 1, CAMERA = 2;
@@ -70,8 +66,6 @@ public class AnketOlustur extends AppCompatActivity  {
         setSupportActionBar(toolbar);
         defaults = BitmapFactory.decodeResource(getResources(),R.drawable.ic_menu_camera);
         ButterKnife.bind(this);
-        PD=new ProgressDialog(this);
-        PD.setCancelable(false);
         userInfo = new UserInfo(this);
         session=new OturumYonetimi(AnketOlustur.this);
 
@@ -84,6 +78,7 @@ public class AnketOlustur extends AppCompatActivity  {
                 if(!anketSorusu.isEmpty())
                 {
                     anketKayit(user,anketSorusu);
+                    finish();
                 }
                 else
                 {
@@ -96,16 +91,12 @@ public class AnketOlustur extends AppCompatActivity  {
     public void anketKayit(final String userID,final String anketSoru)
     {
         String tag_string_req = "Anket_req";
-        PD.setMessage("Kayıt olunuyor ...");
-        showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 WebServisLinkleri.AnketOlustur, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
-             //   Log.d(TAG, "Anket  Response: " + response.toString());
-                hideDialog();
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
@@ -136,7 +127,6 @@ public class AnketOlustur extends AppCompatActivity  {
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Anket Error: " + error.getMessage());
                 toast("Unknown Error occurred");
-                hideDialog();
             }
         }) {
 
@@ -149,26 +139,16 @@ public class AnketOlustur extends AppCompatActivity  {
                 params.put("soru", anketSoru);
 
                 if (bitmap == null) {
-                    params.put("resim1", getStringImage(defaults));
-                    params.put("resim2",getStringImage(defaults));
+                    params.put("anketFoto1", getStringImage(defaults));
                 } else {
-                    params.put("resim1", getStringImage(bitmap));
-                    params.put("resim2", getStringImage(bitmap));
+                    params.put("anketFoto1", getStringImage(bitmap));
+                    params.put("anketFoto2", getStringImage2(bitmap2));
                 }
                 return params;
             }
 
         };
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-    }
-    private void showDialog() {
-        if (!PD.isShowing())
-            PD.show();
-    }
-
-    private void hideDialog() {
-        if (PD.isShowing())
-            PD.dismiss();
     }
 
     public String getStringImage(Bitmap bmp){
@@ -178,9 +158,22 @@ public class AnketOlustur extends AppCompatActivity  {
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
     }
-
-    public void anketResimSec(View v)
+    public String getStringImage2(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+    int deger;
+    public void anketResimSec1(View v)
     {
+        deger=1;
+        showPictureDialog();
+    }
+    public void anketResimSec2(View v)
+    {
+        deger=2;
         showPictureDialog();
     }
     private void showPictureDialog(){
@@ -228,8 +221,17 @@ public class AnketOlustur extends AppCompatActivity  {
             if (data != null) {
                 Uri contentURI = data.getData();
                 try {
-                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
-                    anketSecenekFoto1.setImageBitmap(bitmap);
+                    if(deger==1)
+                    {
+                        bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
+                        anketSecenekFoto1.setImageBitmap(bitmap);
+                    }
+                    else if(deger==2)
+                    {
+                        bitmap2 = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
+                        anketSecenekFoto2.setImageBitmap(bitmap2);
+                    }
+
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -240,7 +242,7 @@ public class AnketOlustur extends AppCompatActivity  {
         } else if (requestCode == CAMERA) {
             bitmap = (Bitmap) data.getExtras().get("data");
             anketSecenekFoto1.setImageBitmap(bitmap);
-           saveImage(bitmap);
+            saveImage(bitmap);
             Toast.makeText(this, "Fotoğraf Kaydedildi.", Toast.LENGTH_SHORT).show();
         }
     }

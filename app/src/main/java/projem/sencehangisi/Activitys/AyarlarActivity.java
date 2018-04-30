@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import projem.sencehangisi.Controls.OturumYonetimi;
 import projem.sencehangisi.Controls.UserInfo;
 import projem.sencehangisi.R;
@@ -18,10 +19,10 @@ public class AyarlarActivity extends AppCompatActivity {
     @BindView(R.id.ayar_username)    TextView getUsernameTxt;
     @BindView(R.id.ayar_email) TextView getEmailTxt;
     @BindView(R.id.ayar_adSoyad) TextView getAdSoyadTxt;
+    Unbinder unbinder;
     private UserInfo userInfo;
     private OturumYonetimi userSession;
     Intent intent= new Intent();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,13 +30,13 @@ public class AyarlarActivity extends AppCompatActivity {
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        ButterKnife.bind(this);
         userInfo = new UserInfo(this);
         userSession=new  OturumYonetimi(this);
         if(!userSession.girisYapildi()){
             startActivity(new Intent(this, KullaniciGirisEkrani.class));
             finish();
         }
+        unbinder= ButterKnife.bind(this);
         String username = userInfo.getKeyUsername();
         String adSoyad=userInfo.getKeyNAME();
         String email = userInfo.getKeyEmail();

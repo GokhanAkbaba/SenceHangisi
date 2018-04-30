@@ -12,6 +12,7 @@
     <application
         android:name=".Controls.AppController"
         android:allowBackup="true"
+        android:largeHeap="true"
         android:icon="@drawable/question"
         android:label="Sence Hangisi"
         android:roundIcon="@drawable/question"
@@ -88,7 +89,12 @@
             android:name=".Activitys.TakipEdilenActivity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activitys.AyarlarAdSoyad"></activity>
+        <activity android:name=".Activitys.AyarlarAdSoyad"
+            android:label="Ad Soyad Değiştir">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activitys.AyarlarActivity" />
+        </activity>
     </application>
 
 </manifest>

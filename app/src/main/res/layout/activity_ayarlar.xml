@@ -70,7 +70,8 @@
         app:layout_constraintHorizontal_bias="0.107"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:gravity="start" />
+        android:gravity="start"
+        tools:ignore="RtlCompat" />
 
     <TextView
         android:layout_width="wrap_content"

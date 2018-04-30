@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,35 +30,26 @@ import projem.sencehangisi.R;
  * A simple {@link Fragment} subclass.
  */
 public class AnaSayfa extends Fragment {
-    boolean isImageFitToScreen=false;
-
     private RecyclerView mRecyclerView;
     private Anket_adapter mAnket_adapter;
     private ArrayList<AnketInfo> mInfoArrayList;
     private RequestQueue mRequestQueue;
-    ImageButton imgBtn;
-    boolean deger=false;
     public AnaSayfa()
     {
 
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup view =(ViewGroup) inflater.inflate(R.layout.fragment_ana_sayfa, container, false);
              mRecyclerView=view.findViewById(R.id.recycler_view);
-               //mRecyclerView.setHasFixedSize(true);
+               mRecyclerView.setHasFixedSize(true);
                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 mInfoArrayList=new ArrayList<>();
                 mRequestQueue= Volley.newRequestQueue(getActivity());
-
-        parseJson();
+                 parseJson();
                 return view;
     }
-
-
     private void parseJson(){
         JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, WebServisLinkleri.AnketCEK, null,
                 new Response.Listener<JSONObject>() {
@@ -91,13 +81,4 @@ public class AnaSayfa extends Fragment {
         });
         mRequestQueue.add(request);
     }
-
-
-
-
-
-
-
-
-
 }

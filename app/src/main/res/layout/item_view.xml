@@ -13,7 +13,6 @@
         android:orientation="vertical"
         android:layout_margin="5dp"
         android:background="@color/beyaz"
-        tools:context="projem.sencehangisi.fragments.AnaSayfa"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -70,9 +69,11 @@
             app:layout_marginTopPercent="5%"
             android:layout_gravity="center"
             android:padding="1dp"
+            android:onClick="oy"
             android:cropToPadding="true"
             android:background="@color/girisveguvenlik"
-            app:layout_widthPercent="46%" />
+            app:layout_widthPercent="46%"
+            tools:ignore="OnClick" />
 
         <ImageView
             android:id="@+id/anketSecenekFoto2"
@@ -99,7 +100,6 @@
             app:layout_marginLeftPercent="9%"
             app:layout_marginTopPercent="2%"
             android:background="@color/beyaz"
-            android:onClick="OyVer"
             app:layout_widthPercent="12%" />
 
         <Button

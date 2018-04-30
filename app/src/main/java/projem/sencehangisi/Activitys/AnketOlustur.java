@@ -53,6 +53,7 @@ public class AnketOlustur extends AppCompatActivity  {
     @BindView(R.id.anketGonderBtn) ImageView anketGonderBtn;
     private Bitmap bitmap,bitmap2,defaults;
     private UserInfo userInfo;
+    File f;
     private static final String IMAGE_DIRECTORY = "/Sence Hangisi";
     private int GALLERY = 1, CAMERA = 2;
     Unbinder unbinder;
@@ -168,7 +169,7 @@ public class AnketOlustur extends AppCompatActivity  {
     int deger;
     public void anketResimSec1(View v)
     {
-        deger=1;
+       deger=1;
         showPictureDialog();
     }
     public void anketResimSec2(View v)
@@ -246,7 +247,6 @@ public class AnketOlustur extends AppCompatActivity  {
             Toast.makeText(this, "Fotoğraf Kaydedildi.", Toast.LENGTH_SHORT).show();
         }
     }
-
     public String saveImage(Bitmap myBitmap) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
@@ -257,7 +257,7 @@ public class AnketOlustur extends AppCompatActivity  {
         }
 
         try {
-            File f = new File(wallpaperDirectory, Calendar.getInstance()
+             f = new File(wallpaperDirectory, Calendar.getInstance()
                     .getTimeInMillis() + ".jpg");
             f.createNewFile();
             FileOutputStream fo = new FileOutputStream(f);

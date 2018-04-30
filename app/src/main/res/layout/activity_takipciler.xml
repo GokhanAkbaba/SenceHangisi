@@ -12,6 +12,13 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_takipci"
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:background="@color/beyaz"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -34,7 +41,5 @@
         android:textColor="#fff"
         android:textSize="19dp"
         />
-
-    <include layout="@layout/content_takipciler" />
 
 </android.support.design.widget.CoordinatorLayout>

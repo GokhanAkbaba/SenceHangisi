@@ -27,27 +27,27 @@ import projem.sencehangisi.Controls.WebServisLinkleri;
 import projem.sencehangisi.R;
 
 public class TakipcilerActivity extends AppCompatActivity {
-    Boolean deger=false;
-    ImageButton btn;
     private RecyclerView mRecyclerView;
-    private TakipTakipciAdapter mTakipTakipci;
+    private TakipTakipciAdapter mTakipTakipciAdapter;
     private ArrayList<TakipTakipciInfo> mInfoArrayList;
     private RequestQueue mRequestQueue;
+    boolean deger=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_takipciler);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         mRecyclerView=findViewById(R.id.recycler_view_takipci);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mInfoArrayList=new ArrayList<>();
         mRequestQueue= Volley.newRequestQueue(this);
 
-     parseJson();
 
+
+     parseJson();
     }
     private void parseJson(){
         JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, WebServisLinkleri.TakipciCEK, null,
@@ -64,8 +64,8 @@ public class TakipcilerActivity extends AppCompatActivity {
                                 int user_id=takip.getInt("kul_id");
                                 mInfoArrayList.add(new TakipTakipciInfo(user_id,user_kulAdi,user_ad,user_img));
                             }
-                            mTakipTakipci=new TakipTakipciAdapter(TakipcilerActivity.this,mInfoArrayList);
-                            mRecyclerView.setAdapter(mTakipTakipci);
+                            mTakipTakipciAdapter=new TakipTakipciAdapter(TakipcilerActivity.this,mInfoArrayList);
+                            mRecyclerView.setAdapter(mTakipTakipciAdapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -78,8 +78,11 @@ public class TakipcilerActivity extends AppCompatActivity {
         });
         mRequestQueue.add(request);
     }
+
     public void TakipEt(View v)
     {
+
+        final ImageButton btn=(ImageButton) findViewById(R.id.takipciBtn);
         if(deger==false)
         {
             btn.setImageResource(R.drawable.checked);
@@ -90,9 +93,7 @@ public class TakipcilerActivity extends AppCompatActivity {
             btn.setImageResource(R.drawable.plus);
             deger=false;
         }
-
     }
-
     public void anketOlusturKpt(View v)
     {
         finish();

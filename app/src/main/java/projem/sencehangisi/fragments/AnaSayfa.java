@@ -25,10 +25,6 @@ import projem.sencehangisi.Controls.AnketInfo;
 import projem.sencehangisi.Controls.Anket_adapter;
 import projem.sencehangisi.Controls.WebServisLinkleri;
 import projem.sencehangisi.R;
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class AnaSayfa extends Fragment {
     private RecyclerView mRecyclerView;
     private Anket_adapter mAnket_adapter;

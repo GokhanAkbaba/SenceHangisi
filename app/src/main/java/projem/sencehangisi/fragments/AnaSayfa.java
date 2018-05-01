@@ -59,7 +59,9 @@ public class AnaSayfa extends Fragment {
                                 String anket_soru=anket.getString("soru");
                                 String anket_img1=anket.getString("resim1");
                                 String anket_img2=anket.getString("resim2");
-                                mInfoArrayList.add(new AnketInfo(anketID,anket_soru,anket_img1,anket_img2,user_ad,user_kulAdi,user_img));
+                                int oy1=R.drawable.secenek_bos_stil;
+                                int oy2=R.drawable.secenek_bos_stil;
+                                mInfoArrayList.add(new AnketInfo(anketID,anket_soru,anket_img1,anket_img2,user_ad,user_kulAdi,user_img,oy1,oy2));
                             }
                             mAnket_adapter=new Anket_adapter(getActivity(),mInfoArrayList);
                             mRecyclerView.setAdapter(mAnket_adapter);

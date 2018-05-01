@@ -1,9 +1,6 @@
 package projem.sencehangisi.Controls;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,16 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,8 +24,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import projem.sencehangisi.Activitys.AnketOlustur;
-import projem.sencehangisi.Activitys.MainActivity;
 import projem.sencehangisi.R;
 
 /**
@@ -43,7 +33,7 @@ import projem.sencehangisi.R;
 public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewHolder> {
     private Context mContext;
     private ArrayList<AnketInfo> mAnketInfoList;
-    private ImageButton oy1,oy2;
+    private ImageButton oy2;
     private static final String TAG = Anket_adapter.class.getSimpleName();
     public Anket_adapter(Context Context, ArrayList<AnketInfo> AnketInfoList) {
         this.mContext = Context;
@@ -66,6 +56,8 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         String anketSoru=currentItem.getAnket_question();
         String anketImg1=currentItem.getAnket_image1();
         String anketImg2=currentItem.getAnket_image2();
+        int oy1=currentItem.getOy1();
+        int oy2=currentItem.getOy2();
 
         holder.textView.setText(anketID);
         holder.uAd_soyad.setText(user_ad);
@@ -74,6 +66,10 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         Picasso.with(mContext).load(user_img).fit().centerInside().into(holder.u_img);
         Picasso.with(mContext).load(anketImg1).fit().centerInside().into(holder.anket_img1);
         Picasso.with(mContext).load(anketImg2).fit().centerInside().into(holder.anket_img2);
+        Picasso.with(mContext).load(oy1).fit().centerInside().into(holder.u_oy1);
+        Picasso.with(mContext).load(oy2).fit().centerInside().into(holder.u_oy2);
+
+
     }
 
     @Override
@@ -83,7 +79,9 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
 
     public class AnketViewHolder extends RecyclerView.ViewHolder{
         public TextView uAd_soyad,ukullanici_adi,anket_soru;
-        public ImageView u_img,anket_img1,anket_img2;
+        public ImageView u_img,anket_img1,anket_img2,u_oy2;
+        public ImageButton u_oy1;
+        boolean deger=false;
         private TextView textView;
         int indis;
         private UserInfo userInfo;
@@ -98,26 +96,43 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
             anket_img2=itemView.findViewById(R.id.anketSecenekFoto2);
             textView=itemView.findViewById(R.id.textView8);
             textView.setVisibility(View.INVISIBLE);
-            oy1=itemView.findViewById(R.id.oy1);
-            oy2=itemView.findViewById(R.id.oy2);
+            u_oy1=itemView.findViewById(R.id.oy1);
+            u_oy2=itemView.findViewById(R.id.oy2);
 
-                oy1.setOnClickListener(new View.OnClickListener() {
+
+                u_oy1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                         indis = 0;
                         anketKayit(userInfo.getKeyId(), textView.getText().toString(), indis);
+                        if(deger==false)
+                        {
+                            u_oy1.setImageResource(R.drawable.secenek_stil);
+                            deger=true;
+                            u_oy1.setEnabled(false);
+                            u_oy2.setEnabled(false);
+                        }
+
                     }
                 });
-                oy2.setOnClickListener(new View.OnClickListener() {
+                u_oy2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         indis = 1;
                         anketKayit(userInfo.getKeyId(), textView.getText().toString(), indis);
+                        if(deger==false)
+                        {
+                            u_oy2.setImageResource(R.drawable.secenek_stil);
+                            deger=true;
+                            u_oy2.setEnabled(false);
+                            u_oy1.setEnabled(false);
+                        }
+
                     }
                 });
 
         }
+
     }
     public void anketKayit(final String userID,final String anketID,final int cevap_indis) {
         String tag_string_req = "ankat_oyla";

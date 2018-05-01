@@ -95,7 +95,6 @@
         <ImageButton
             android:id="@+id/oy1"
             android:layout_below="@+id/anketSecenekFoto1"
-            android:src="@drawable/secenek_stil"
             app:layout_heightPercent="8%"
             app:layout_marginLeftPercent="9%"
             app:layout_marginTopPercent="2%"
@@ -116,7 +115,6 @@
         <ImageButton
             android:id="@+id/oy2"
             android:layout_below="@+id/anketSecenekFoto1"
-            android:src="@drawable/secenek_bos_stil"
             android:background="@color/beyaz"
             app:layout_heightPercent="8%"
             app:layout_marginLeftPercent="57%"

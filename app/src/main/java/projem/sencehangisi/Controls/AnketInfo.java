@@ -1,9 +1,5 @@
 package projem.sencehangisi.Controls;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.support.v4.app.FragmentActivity;
-
 /**
  * Created by Müslüm BİTGEN on 25.04.2018.
  */
@@ -16,8 +12,9 @@ public class AnketInfo {
     private String user_name;
     private String user_username;
     private String user_image;
+    private int oy1,oy2;
 
-    public AnketInfo(String anketID,String anket_question, String anket_image1, String anket_image2, String user_name, String user_username, String user_image) {
+    public AnketInfo(String anketID,String anket_question, String anket_image1, String anket_image2, String user_name, String user_username, String user_image,int oy1,int oy2) {
         this.anket_question = anket_question;
         this.anket_image1 = anket_image1;
         this.anket_image2 = anket_image2;
@@ -25,6 +22,8 @@ public class AnketInfo {
         this.user_username = user_username;
         this.user_image = user_image;
         this.anketID=anketID;
+        this.oy1=oy1;
+        this.oy2=oy2;
     }
 
     public String getAnket_question() {
@@ -52,5 +51,13 @@ public class AnketInfo {
     }
     public String getAnketID() {
         return anketID;
+    }
+
+    public int getOy1() {
+        return oy1;
+    }
+
+    public int getOy2() {
+        return oy2;
     }
 }

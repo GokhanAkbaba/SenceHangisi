@@ -93,7 +93,7 @@
             app:layout_widthPercent="46%" />
 
         <ImageButton
-            android:id="@+id/Oy1"
+            android:id="@+id/oy1"
             android:layout_below="@+id/anketSecenekFoto1"
             android:src="@drawable/secenek_stil"
             app:layout_heightPercent="8%"
@@ -109,11 +109,12 @@
             app:layout_heightPercent="8%"
             app:layout_marginLeftPercent="30%"
             app:layout_marginTopPercent="2%"
-            app:layout_widthPercent="12%" />
+            app:layout_widthPercent="12%"
+            android:id="@+id/button3" />
 
 
         <ImageButton
-            android:id="@+id/Oy2"
+            android:id="@+id/oy2"
             android:layout_below="@+id/anketSecenekFoto1"
             android:src="@drawable/secenek_bos_stil"
             android:background="@color/beyaz"
@@ -134,16 +135,17 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dp"
-            android:layout_below="@+id/Oy1"
+            android:layout_below="@+id/oy1"
             android:background="@color/girisveguvenlik"
             app:layout_marginLeftPercent="9%"
             app:layout_marginTopPercent="2%"
-            app:layout_widthPercent="35%" />
+            app:layout_widthPercent="35%"
+            android:id="@+id/view" />
 
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dp"
-            android:layout_below="@+id/Oy1"
+            android:layout_below="@+id/oy1"
             android:background="@color/girisveguvenlik"
             app:layout_marginLeftPercent="58%"
             app:layout_marginTopPercent="2%"
@@ -155,6 +157,15 @@
             android:layout_below="@+id/anketSecenekFoto1"
             android:background="@color/girisveguvenlik"
             app:layout_marginTopPercent="32%" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view"
+            android:layout_toEndOf="@+id/button3"
+            android:layout_toRightOf="@+id/button3"
+            />
 
     </android.support.percent.PercentRelativeLayout>
 

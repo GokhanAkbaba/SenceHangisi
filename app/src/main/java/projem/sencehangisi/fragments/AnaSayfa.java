@@ -34,10 +34,6 @@ public class AnaSayfa extends Fragment {
     private Anket_adapter mAnket_adapter;
     private ArrayList<AnketInfo> mInfoArrayList;
     private RequestQueue mRequestQueue;
-    public AnaSayfa()
-    {
-
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,6 +44,7 @@ public class AnaSayfa extends Fragment {
                 mInfoArrayList=new ArrayList<>();
                 mRequestQueue= Volley.newRequestQueue(getActivity());
                  parseJson();
+
                 return view;
     }
     private void parseJson(){
@@ -59,13 +56,14 @@ public class AnaSayfa extends Fragment {
                             JSONArray jsonArray=response.getJSONArray("Anketler");
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject anket=jsonArray.getJSONObject(i);
+                                String anketID=anket.getString("gonderi_id");
                                 String user_ad=anket.getString("ad_soyad");
                                 String user_kulAdi=anket.getString("kul_adi");
                                 String user_img=anket.getString("kul_image");
                                 String anket_soru=anket.getString("soru");
                                 String anket_img1=anket.getString("resim1");
                                 String anket_img2=anket.getString("resim2");
-                                mInfoArrayList.add(new AnketInfo(anket_soru,anket_img1,anket_img2,user_ad,user_kulAdi,user_img));
+                                mInfoArrayList.add(new AnketInfo(anketID,anket_soru,anket_img1,anket_img2,user_ad,user_kulAdi,user_img));
                             }
                             mAnket_adapter=new Anket_adapter(getActivity(),mInfoArrayList);
                             mRecyclerView.setAdapter(mAnket_adapter);
@@ -81,4 +79,5 @@ public class AnaSayfa extends Fragment {
         });
         mRequestQueue.add(request);
     }
+
 }

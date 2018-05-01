@@ -1,21 +1,39 @@
 package projem.sencehangisi.Controls;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import projem.sencehangisi.Activitys.AnketOlustur;
+import projem.sencehangisi.Activitys.MainActivity;
 import projem.sencehangisi.R;
 
 /**
@@ -25,7 +43,8 @@ import projem.sencehangisi.R;
 public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewHolder> {
     private Context mContext;
     private ArrayList<AnketInfo> mAnketInfoList;
-    public ImageView deneme;
+    private ImageButton oy1,oy2;
+    private static final String TAG = Anket_adapter.class.getSimpleName();
     public Anket_adapter(Context Context, ArrayList<AnketInfo> AnketInfoList) {
         this.mContext = Context;
         this.mAnketInfoList = AnketInfoList;
@@ -40,6 +59,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
     @Override
     public void onBindViewHolder(AnketViewHolder holder, int position) {
         AnketInfo currentItem=mAnketInfoList.get(position);
+        String anketID=currentItem.getAnketID();
         String user_ad=currentItem.getUser_name();
         String user_kulAdi=currentItem.getUser_username();
         String user_img=currentItem.getUser_image();
@@ -47,6 +67,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         String anketImg1=currentItem.getAnket_image1();
         String anketImg2=currentItem.getAnket_image2();
 
+        holder.textView.setText(anketID);
         holder.uAd_soyad.setText(user_ad);
         holder.ukullanici_adi.setText(user_kulAdi);
         holder.anket_soru.setText(anketSoru);
@@ -63,31 +84,94 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
     public class AnketViewHolder extends RecyclerView.ViewHolder{
         public TextView uAd_soyad,ukullanici_adi,anket_soru;
         public ImageView u_img,anket_img1,anket_img2;
+        private TextView textView;
+        int indis;
+        private UserInfo userInfo;
         public AnketViewHolder(View itemView) {
             super(itemView);
+            userInfo=new UserInfo(mContext);
             uAd_soyad=itemView.findViewById(R.id.getName);
             anket_soru=itemView.findViewById(R.id.SoruAnket);
             ukullanici_adi=itemView.findViewById(R.id.getuser);
             u_img=itemView.findViewById(R.id.user_image);
             anket_img1=itemView.findViewById(R.id.anketSecenekFoto1);
             anket_img2=itemView.findViewById(R.id.anketSecenekFoto2);
-        }
-    }
-    public  void getImage(final String url){
-        String image_req="req_image";
-        ImageRequest request = new ImageRequest(url,
-                new Response.Listener<Bitmap>() {
-                    @Override
-                    public void onResponse(Bitmap bitmap) {
-                       deneme.setImageBitmap(bitmap);
+            textView=itemView.findViewById(R.id.textView8);
+            textView.setVisibility(View.INVISIBLE);
+            oy1=itemView.findViewById(R.id.oy1);
+            oy2=itemView.findViewById(R.id.oy2);
 
-                    }
-                }, 0, 0, null,
-                new Response.ErrorListener() {
-                    public void onErrorResponse(VolleyError error) {
-                        deneme.setImageResource(R.drawable.arka_plan);
+                oy1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        indis = 0;
+                        anketKayit(userInfo.getKeyId(), textView.getText().toString(), indis);
                     }
                 });
-        AppController.getInstance().addToRequestQueue(request,image_req);
+                oy2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        indis = 1;
+                        anketKayit(userInfo.getKeyId(), textView.getText().toString(), indis);
+                    }
+                });
+
+        }
     }
+    public void anketKayit(final String userID,final String anketID,final int cevap_indis) {
+        String tag_string_req = "ankat_oyla";
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                WebServisLinkleri.AnketOyla_URL, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Anket Oyla: " + response.toString());
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+
+                        Toast.makeText(mContext, "Tebrikler anket oyladınız!", Toast.LENGTH_LONG).show();
+
+                    } else {
+                        // Error in login. Get the error message
+                        String errorMsg = jObj.getString("error_msg");
+                        toast(errorMsg);
+
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    toast("Json error: " + e.getMessage());
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Error: " + error.getMessage());
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("kullanici_id", userID);
+                params.put("gonderi_id", anketID);
+                params.put("cevap_indis", Integer.toString(cevap_indis));
+                return params;
+            }
+
+        };
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    private void toast(String x){
+        Toast.makeText(mContext, x, Toast.LENGTH_SHORT).show();
+    }
+
 }

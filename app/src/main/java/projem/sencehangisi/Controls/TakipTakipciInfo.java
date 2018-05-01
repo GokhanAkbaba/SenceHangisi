@@ -7,9 +7,9 @@ package projem.sencehangisi.Controls;
 public class TakipTakipciInfo {
 
     private String k_adi,k_adSoyad,k_resmi;
-    private int k_id;
+    private String  k_id;
 
-    public TakipTakipciInfo(int k_id,String k_adi,String k_adSoyad,String k_resmi)
+    public TakipTakipciInfo(String  k_id,String k_adi,String k_adSoyad,String k_resmi)
     {
         this.k_adi=k_adi;
         this.k_id=k_id;
@@ -29,7 +29,7 @@ public class TakipTakipciInfo {
         return k_resmi;
     }
 
-    public int getK_id() {
+    public String getK_id() {
         return k_id;
     }
 

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,9 +21,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import projem.sencehangisi.Controls.TakipTakipciAdapter;
 import projem.sencehangisi.Controls.TakipTakipciInfo;
+import projem.sencehangisi.Controls.UserInfo;
 import projem.sencehangisi.Controls.WebServisLinkleri;
 import projem.sencehangisi.R;
 
@@ -30,6 +34,7 @@ public class TakipcilerActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private TakipTakipciAdapter mTakipTakipciAdapter;
     private ArrayList<TakipTakipciInfo> mInfoArrayList;
+    private UserInfo userInfo;
     private RequestQueue mRequestQueue;
     boolean deger=false;
     @Override
@@ -44,7 +49,7 @@ public class TakipcilerActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mInfoArrayList=new ArrayList<>();
         mRequestQueue= Volley.newRequestQueue(this);
-
+        userInfo=new UserInfo(this);
 
 
      parseJson();
@@ -61,7 +66,7 @@ public class TakipcilerActivity extends AppCompatActivity {
                                 String user_ad=takip.getString("ad_soyad");
                                 String user_kulAdi=takip.getString("kul_adi");
                                 String user_img=takip.getString("kul_image");
-                                int user_id=takip.getInt("kul_id");
+                                String  user_id=takip.getString("kul_id");
                                 mInfoArrayList.add(new TakipTakipciInfo(user_id,user_kulAdi,user_ad,user_img));
                             }
                             mTakipTakipciAdapter=new TakipTakipciAdapter(TakipcilerActivity.this,mInfoArrayList);

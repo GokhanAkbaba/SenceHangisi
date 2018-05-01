@@ -9,10 +9,7 @@ import android.support.v4.app.FragmentActivity;
  */
 
 public class AnketInfo {
-   private String anketID;
-
-
-
+     private String anketID;
     private String anket_question;
     private String anket_image1;
     private String anket_image2;

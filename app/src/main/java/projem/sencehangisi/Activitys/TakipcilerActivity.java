@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -50,11 +51,11 @@ public class TakipcilerActivity extends AppCompatActivity {
         mInfoArrayList=new ArrayList<>();
         mRequestQueue= Volley.newRequestQueue(this);
         userInfo=new UserInfo(this);
+        String ID=userInfo.getKeyId();
 
-
-     parseJson();
+     parseJson(ID);
     }
-    private void parseJson(){
+    private void parseJson(final String userID){
         JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, WebServisLinkleri.TakipciCEK, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -80,7 +81,14 @@ public class TakipcilerActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("kullanici_id", userID);
+                return  params;
+            }
+        };
         mRequestQueue.add(request);
     }
 

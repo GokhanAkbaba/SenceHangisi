@@ -6,17 +6,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,6 +38,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
     private Context mContext;
     private ArrayList<AnketInfo> mAnketInfoList;
     private ImageButton oy2;
+    public Button secenekOySayisi1,secenekOySayisi2;
     private static final String TAG = Anket_adapter.class.getSimpleName();
     public Anket_adapter(Context Context, ArrayList<AnketInfo> AnketInfoList) {
         this.mContext = Context;
@@ -69,7 +74,6 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         Picasso.with(mContext).load(oy1).fit().centerInside().into(holder.u_oy1);
         Picasso.with(mContext).load(oy2).fit().centerInside().into(holder.u_oy2);
 
-
     }
 
     @Override
@@ -81,6 +85,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         public TextView uAd_soyad,ukullanici_adi,anket_soru;
         public ImageView u_img,anket_img1,anket_img2,u_oy2;
         public ImageButton u_oy1;
+        public Button secenekOySayisi1,secenekOySayisi2;
         boolean deger=false;
         private TextView textView;
         int indis;
@@ -98,7 +103,8 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
             textView.setVisibility(View.INVISIBLE);
             u_oy1=itemView.findViewById(R.id.oy1);
             u_oy2=itemView.findViewById(R.id.oy2);
-
+            secenekOySayisi1=itemView.findViewById(R.id.secenekOySayisi1);
+            secenekOySayisi2=itemView.findViewById(R.id.secenekOySayisi2);
 
                 u_oy1.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -112,7 +118,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                             u_oy1.setEnabled(false);
                             u_oy2.setEnabled(false);
                         }
-
+                        OySayisi(textView.getText().toString(),String.valueOf(indis));
                     }
                 });
                 u_oy2.setOnClickListener(new View.OnClickListener() {
@@ -127,9 +133,10 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                             u_oy2.setEnabled(false);
                             u_oy1.setEnabled(false);
                         }
-
+                        OySayisi(textView.getText().toString(),String.valueOf(indis));
                     }
                 });
+
 
         }
 
@@ -184,7 +191,54 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         };
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
+    private void OySayisi(final String gonder_id, final String cevap_id){
+        String tag_string_req = "ankat_oyla";
 
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.AnketOySayisi_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println(response);
+
+                        try {
+                            //Toast.makeText(mContext,""+gonder_id+" "+cevap_id,Toast.LENGTH_SHORT).show();
+                            JSONObject jObj = new JSONObject(response);
+                            JSONArray array=jObj.getJSONArray("Oylar");
+                            for (int i=0; i < array.length(); i++) {
+                                JSONObject oylar=array.getJSONObject(i);
+                                String sayi=oylar.getString("Sayi");
+                               System.out.println(sayi);
+                               Toast.makeText(mContext,""+sayi,Toast.LENGTH_SHORT).show();
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params=new HashMap<String, String>();
+
+                params.put("gonder_id", gonder_id);
+                params.put("cevap_indis", cevap_id);
+
+                return params;
+            }
+
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
+
+    }
     private void toast(String x){
         Toast.makeText(mContext, x, Toast.LENGTH_SHORT).show();
     }

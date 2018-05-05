@@ -102,14 +102,16 @@
             app:layout_widthPercent="12%" />
 
         <Button
-            android:layout_below="@+id/anketSecenekFoto1"
+            android:id="@+id/secenekOySayisi1"
+            android:layout_above="@+id/view"
+            android:layout_alignEnd="@+id/view"
+            android:layout_alignRight="@+id/view"
             android:background="@drawable/puan_onay"
             android:text="95"
             app:layout_heightPercent="8%"
             app:layout_marginLeftPercent="30%"
             app:layout_marginTopPercent="2%"
-            app:layout_widthPercent="12%"
-            android:id="@+id/button3" />
+            app:layout_widthPercent="12%" />
 
 
         <ImageButton
@@ -122,6 +124,7 @@
             app:layout_widthPercent="12%" />
 
         <Button
+            android:id="@+id/secenekOySayisi2"
             android:layout_below="@+id/anketSecenekFoto1"
             android:background="@drawable/puan_onay"
             android:text="70"

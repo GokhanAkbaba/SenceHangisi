@@ -25,7 +25,7 @@ public class TakipEdilenActivity extends AppCompatActivity {
     {
         if(deger==false)
         {
-            btn.setImageResource(R.drawable.plus);
+
             deger=true;
         }
         else

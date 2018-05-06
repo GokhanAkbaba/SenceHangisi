@@ -12,9 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -87,6 +85,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         public ImageButton u_oy1;
         public Button secenekOySayisi1,secenekOySayisi2;
         boolean deger=false;
+        boolean oyDeger=false;
         private TextView textView;
         int indis;
         private UserInfo userInfo;
@@ -139,6 +138,56 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
 
 
         }
+        public void OySayisi(final String gonder_id, final String cevap_id){
+            String tag_string_req = "ankat_oyla";
+
+            StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.AnketOySayisi_URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            System.out.println(response);
+
+                            try {
+                                //Toast.makeText(mContext,""+gonder_id+" "+cevap_id,Toast.LENGTH_SHORT).show();
+                                JSONObject jObj = new JSONObject(response);
+                                JSONArray array=jObj.getJSONArray("Oylar");
+                                for (int i=0; i < array.length(); i++) {
+                                    JSONObject oylar=array.getJSONObject(i);
+                                    String sayi=oylar.getString("Sayi");
+                                    //Toast.makeText(mContext,""+sayi,Toast.LENGTH_SHORT).show();
+                                    secenekOySayisi1.setText(sayi);
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params=new HashMap<String, String>();
+
+                    params.put("gonder_id", gonder_id);
+                    params.put("cevap_indis", cevap_id);
+
+                    return params;
+                }
+
+            };
+            AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
+
+        }
+
+
 
     }
     public void anketKayit(final String userID,final String anketID,final int cevap_indis) {
@@ -191,54 +240,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         };
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
-    private void OySayisi(final String gonder_id, final String cevap_id){
-        String tag_string_req = "ankat_oyla";
 
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.AnketOySayisi_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        System.out.println(response);
-
-                        try {
-                            //Toast.makeText(mContext,""+gonder_id+" "+cevap_id,Toast.LENGTH_SHORT).show();
-                            JSONObject jObj = new JSONObject(response);
-                            JSONArray array=jObj.getJSONArray("Oylar");
-                            for (int i=0; i < array.length(); i++) {
-                                JSONObject oylar=array.getJSONObject(i);
-                                String sayi=oylar.getString("Sayi");
-                               System.out.println(sayi);
-                               Toast.makeText(mContext,""+sayi,Toast.LENGTH_SHORT).show();
-
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params=new HashMap<String, String>();
-
-                params.put("gonder_id", gonder_id);
-                params.put("cevap_indis", cevap_id);
-
-                return params;
-            }
-
-        };
-        AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
-
-    }
     private void toast(String x){
         Toast.makeText(mContext, x, Toast.LENGTH_SHORT).show();
     }

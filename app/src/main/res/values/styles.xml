@@ -23,4 +23,8 @@
         <item name="colorControlNormal">@color/textColorLine</item>
         <item name="colorControlActivated">@color/beyaz</item>
     </style>
+    <style name="MyEditTextAyarlar" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/textColorLine</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
 </resources>

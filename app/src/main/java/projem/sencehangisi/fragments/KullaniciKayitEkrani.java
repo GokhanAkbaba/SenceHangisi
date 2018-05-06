@@ -233,6 +233,7 @@ public class KullaniciKayitEkrani extends Fragment {
                 Log.d(TAG, "Register Response: " + response.toString());
                 hideDialog();
                 try {
+
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {

@@ -54,10 +54,12 @@ public class TakipTakipciAdapter extends RecyclerView.Adapter<TakipTakipciAdapte
         String kul_kulAdi=currentItem.getK_adi();
         String kul_img=currentItem.getK_resmi();
         String kul_id=currentItem.getK_id();
+        int tkpEtImg=currentItem.getTkpEtImg();
         holder.textViewID.setText(kul_id);
         holder.adSoyad.setText(kul_ad);
         holder.kullaniciAdi.setText(kul_kulAdi);
         Picasso.with(mContext).load(kul_img).fit().centerInside().into(holder.kulResmi);
+        Picasso.with(mContext).load(tkpEtImg).into(holder.takipBtn);
     }
 
     @Override
@@ -68,6 +70,7 @@ public class TakipTakipciAdapter extends RecyclerView.Adapter<TakipTakipciAdapte
     public class TakipViewHolder extends RecyclerView.ViewHolder{
         public TextView adSoyad,kullaniciAdi,textViewID;
         public ImageView kulResmi;
+        public ImageButton takipBtn;
         public TakipViewHolder(View itemView) {
             super(itemView);
             userInfo=new UserInfo(mContext);
@@ -81,6 +84,7 @@ public class TakipTakipciAdapter extends RecyclerView.Adapter<TakipTakipciAdapte
                 @Override
                 public void onClick(View view) {
                    TakipciEkle(userInfo.getKeyId(),textViewID.getText().toString());
+                   takipBtn.setImageResource(R.drawable.checked);
                 }
             });
         }

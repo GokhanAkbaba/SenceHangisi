@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -68,6 +67,7 @@ public class TakipcilerActivity extends AppCompatActivity {
                                 String user_kulAdi=takip.getString("kul_adi");
                                 String user_img=takip.getString("kul_image");
                                 String  user_id=takip.getString("kul_id");
+
                                 mInfoArrayList.add(new TakipTakipciInfo(user_id,user_kulAdi,user_ad,user_img));
                             }
                             mTakipTakipciAdapter=new TakipTakipciAdapter(TakipcilerActivity.this,mInfoArrayList);
@@ -103,7 +103,7 @@ public class TakipcilerActivity extends AppCompatActivity {
         }
         else
         {
-            btn.setImageResource(R.drawable.plus);
+
             deger=false;
         }
     }

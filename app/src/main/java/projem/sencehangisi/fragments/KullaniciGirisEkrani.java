@@ -63,8 +63,6 @@ public class KullaniciGirisEkrani extends Fragment{
     public KullaniciGirisEkrani() {
 
     }
-
-
     public static KullaniciGirisEkrani newInstance(String param1, String param2) {
         KullaniciGirisEkrani fragment = new KullaniciGirisEkrani();
         Bundle args = new Bundle();

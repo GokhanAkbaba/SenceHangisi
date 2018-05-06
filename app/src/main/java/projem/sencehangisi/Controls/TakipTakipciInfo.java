@@ -8,6 +8,7 @@ public class TakipTakipciInfo {
 
     private String k_adi,k_adSoyad,k_resmi;
     private String  k_id;
+    private int tkpEtImg;
 
     public TakipTakipciInfo(String  k_id,String k_adi,String k_adSoyad,String k_resmi)
     {
@@ -15,6 +16,7 @@ public class TakipTakipciInfo {
         this.k_id=k_id;
         this.k_adSoyad=k_adSoyad;
         this.k_resmi=k_resmi;
+        this.tkpEtImg=tkpEtImg;
     }
 
     public String getK_adi() {
@@ -33,4 +35,7 @@ public class TakipTakipciInfo {
         return k_id;
     }
 
+    public int getTkpEtImg() {
+        return tkpEtImg;
+    }
 }

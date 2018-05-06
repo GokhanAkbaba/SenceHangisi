@@ -45,11 +45,13 @@
 
     <TextView
         android:layout_width="wrap_content"
+        android:theme="@style/MyEditTextAyarlar"
+        android:textCursorDrawable="@drawable/cursor_style"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="130dp"
-        android:text="@string/yeni_adSoyad"
+        android:text="@string/yeni_kullanıcıadi"
         android:textColor="#5e5e5e"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"

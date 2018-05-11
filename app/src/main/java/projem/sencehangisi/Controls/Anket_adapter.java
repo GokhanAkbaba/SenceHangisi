@@ -85,7 +85,6 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         public ImageButton u_oy1;
         public Button secenekOySayisi1,secenekOySayisi2;
         boolean deger=false;
-        boolean oyDeger=false;
         private TextView textView;
         int indis;
         private UserInfo userInfo;
@@ -139,7 +138,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
 
         }
         public void OySayisi(final String gonder_id, final String cevap_id){
-            String tag_string_req = "ankat_oyla";
+            String tag_string_req = "anket_oyla";
 
             StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.AnketOySayisi_URL,
                     new Response.Listener<String>() {
@@ -150,14 +149,22 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                             try {
                                 //Toast.makeText(mContext,""+gonder_id+" "+cevap_id,Toast.LENGTH_SHORT).show();
                                 JSONObject jObj = new JSONObject(response);
+                                String  cevap1="0",cevap2="0";
                                 JSONArray array=jObj.getJSONArray("Oylar");
-                                for (int i=0; i < array.length(); i++) {
+                                for (int i = 0; i < array.length(); i++) {
                                     JSONObject oylar=array.getJSONObject(i);
-                                    String sayi=oylar.getString("Sayi");
-                                    //Toast.makeText(mContext,""+sayi,Toast.LENGTH_SHORT).show();
-                                    secenekOySayisi1.setText(sayi);
-
+                                    String cevap=oylar.getString("cevap");
+                                    String cevapSayisi=oylar.getString("cevapSayisi");
+                                    if (cevap.equals("0")){
+                                        cevap1=cevapSayisi;
+                                    }
+                                    else if (cevap.equals("1")){
+                                        cevap2=cevapSayisi;
+                                    }
                                 }
+                                secenekOySayisi1.setText(cevap1);
+                                secenekOySayisi2.setText(cevap2);
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -178,20 +185,15 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
 
                     params.put("gonder_id", gonder_id);
                     params.put("cevap_indis", cevap_id);
-
                     return params;
                 }
 
             };
             AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
-
         }
-
-
-
     }
     public void anketKayit(final String userID,final String anketID,final int cevap_indis) {
-        String tag_string_req = "ankat_oyla";
+        String tag_string_req = "anket_oyla";
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 WebServisLinkleri.AnketOyla_URL, new Response.Listener<String>() {
 

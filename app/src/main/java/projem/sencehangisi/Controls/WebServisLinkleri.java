@@ -14,8 +14,11 @@ public class WebServisLinkleri
     public static String adSoyad_URL="http://oftekfakitiraf.com/senceHangisi/adSoyadU.php";
     public static String AnketOlustur="http://oftekfakitiraf.com/senceHangisi/anketOlustur.php";
     public static String AnketCEK="http://oftekfakitiraf.com/senceHangisi/AnketGet.php";
-    public static String TakipciCEK="http://oftekfakitiraf.com/senceHangisi/kullaniciGet.php";
+    public static String AnketCevapCEK="http://oftekfakitiraf.com/senceHangisi/AnketCevapGet.php";
+    public static String TakipciCEK="http://oftekfakitiraf.com/senceHangisi/takipciGET.php";
+    public static String TakipEdilenCEK="http://oftekfakitiraf.com/senceHangisi/takipEdilenGET.php";
     public static String AnketOyla_URL="http://oftekfakitiraf.com/senceHangisi/AnketOyla.php";
     public static String TakipciEkle="http://oftekfakitiraf.com/senceHangisi/TakipciOlustur.php";
+    public static String TakipciBirak="http://oftekfakitiraf.com/senceHangisi/takipciSil.php";
     public static String AnketOySayisi_URL="http://oftekfakitiraf.com/senceHangisi/AnketOySayisi.php";
 }

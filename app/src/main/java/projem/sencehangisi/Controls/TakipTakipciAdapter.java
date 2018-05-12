@@ -35,6 +35,7 @@ public class TakipTakipciAdapter extends RecyclerView.Adapter<TakipTakipciAdapte
     private ArrayList<TakipTakipciInfo> mTakipTakipciInfoList;
     private ImageButton takipBtn;
     private UserInfo userInfo;
+    private int tkp;
     private static final String TAG = Anket_adapter.class.getSimpleName();
     public TakipTakipciAdapter(Context Context, ArrayList<TakipTakipciInfo> TakipInfoList) {
         this.mContext = Context;
@@ -55,20 +56,22 @@ public class TakipTakipciAdapter extends RecyclerView.Adapter<TakipTakipciAdapte
         String kul_img=currentItem.getK_resmi();
         String kul_id=currentItem.getK_id();
         int tkpEtImg=currentItem.getTkpEtImg();
+        String tkpDurumu=currentItem.getTkpDrm();
         holder.textViewID.setText(kul_id);
         holder.adSoyad.setText(kul_ad);
         holder.kullaniciAdi.setText(kul_kulAdi);
+        holder.textTkpDrm.setText(tkpDurumu);
         Picasso.with(mContext).load(kul_img).fit().centerInside().into(holder.kulResmi);
         Picasso.with(mContext).load(tkpEtImg).into(holder.takipBtn);
+
     }
 
     @Override
     public int getItemCount() {
         return mTakipTakipciInfoList.size();
     }
-
     public class TakipViewHolder extends RecyclerView.ViewHolder{
-        public TextView adSoyad,kullaniciAdi,textViewID;
+        public TextView adSoyad,kullaniciAdi,textViewID,textTkpDrm;
         public ImageView kulResmi;
         public ImageButton takipBtn;
         public TakipViewHolder(View itemView) {
@@ -76,15 +79,23 @@ public class TakipTakipciAdapter extends RecyclerView.Adapter<TakipTakipciAdapte
             userInfo=new UserInfo(mContext);
             textViewID=itemView.findViewById(R.id.textView9);
             textViewID.setVisibility(View.INVISIBLE);
+            textTkpDrm=itemView.findViewById(R.id.tkpDurmu);
+            textTkpDrm.setVisibility(View.INVISIBLE);
             adSoyad=itemView.findViewById(R.id.textAdSoyad);
             kullaniciAdi=itemView.findViewById(R.id.textKulAdi);
             kulResmi=itemView.findViewById(R.id.imgKulResmi);
             takipBtn=itemView.findViewById(R.id.takipciBtn);
-            takipBtn.setOnClickListener(new View.OnClickListener() {
+           takipBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                   TakipciEkle(userInfo.getKeyId(),textViewID.getText().toString());
-                   takipBtn.setImageResource(R.drawable.checked);
+                    if("isaretli"==textTkpDrm.getText().toString())
+                    {
+                        takipBtn.setImageResource(R.drawable.takip_et_img);
+                    }
+                    else if("isaretsiz"==textTkpDrm.getText().toString())
+                    {
+                        takipBtn.setImageResource(R.drawable.checked);
+                    }
                 }
             });
         }
@@ -103,6 +114,55 @@ public class TakipTakipciAdapter extends RecyclerView.Adapter<TakipTakipciAdapte
                     if (!error) {
 
                         Toast.makeText(mContext, "Tebrikler Takip ediyorsunuz!", Toast.LENGTH_LONG).show();
+
+                    } else {
+                        // Error in login. Get the error message
+                        String errorMsg = jObj.getString("error_msg");
+                        toast(errorMsg);
+
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    toast("Json error: " + e.getMessage());
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Error: " + error.getMessage());
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("takip_eden_kullanici", userID);
+                params.put("takip_edilen_kullanici", takipciID);
+                return params;
+            }
+
+        };
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    public void TakipciBirak(final String userID,final String takipciID) {
+        String tag_string_req = "takipci_birak";
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                WebServisLinkleri.TakipciBirak, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+
+                        Toast.makeText(mContext, "Tebrikler Takip Etmeyi Bıraktınız!", Toast.LENGTH_LONG).show();
 
                     } else {
                         // Error in login. Get the error message

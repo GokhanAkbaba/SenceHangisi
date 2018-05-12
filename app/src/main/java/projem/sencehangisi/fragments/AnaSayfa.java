@@ -12,7 +12,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -20,9 +20,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import projem.sencehangisi.Controls.AnketInfo;
 import projem.sencehangisi.Controls.Anket_adapter;
+import projem.sencehangisi.Controls.AppController;
 import projem.sencehangisi.Controls.WebServisLinkleri;
 import projem.sencehangisi.R;
 public class AnaSayfa extends Fragment {
@@ -30,6 +33,9 @@ public class AnaSayfa extends Fragment {
     private Anket_adapter mAnket_adapter;
     private ArrayList<AnketInfo> mInfoArrayList;
     private RequestQueue mRequestQueue;
+    String kul_ID;
+    int oy1,oy2;
+    boolean deger=false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,17 +45,19 @@ public class AnaSayfa extends Fragment {
                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 mInfoArrayList=new ArrayList<>();
                 mRequestQueue= Volley.newRequestQueue(getActivity());
-                 parseJson();
-
+                kul_ID="104";
+                AnketCek(kul_ID);
                 return view;
     }
-    private void parseJson(){
-        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, WebServisLinkleri.AnketCEK, null,
-                new Response.Listener<JSONObject>() {
+    public void AnketCek(final String kullanici_id){
+        String tag_string_req = "ankat_oyla";
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.AnketCEK,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(String response) {
                         try {
-                            JSONArray jsonArray=response.getJSONArray("Anketler");
+                            JSONObject jObj = new JSONObject(response);
+                            JSONArray jsonArray=jObj.getJSONArray("Anketler");
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject anket=jsonArray.getJSONObject(i);
                                 String anketID=anket.getString("gonderi_id");
@@ -59,9 +67,9 @@ public class AnaSayfa extends Fragment {
                                 String anket_soru=anket.getString("soru");
                                 String anket_img1=anket.getString("resim1");
                                 String anket_img2=anket.getString("resim2");
-                                int oy1=R.drawable.secenek_bos_stil;
-                                int oy2=R.drawable.secenek_bos_stil;
-                                mInfoArrayList.add(new AnketInfo(anketID,anket_soru,anket_img1,anket_img2,user_ad,user_kulAdi,user_img,oy1,oy2));
+                                oy2=R.drawable.secenek_bos_stil;
+                                oy1=R.drawable.secenek_bos_stil;
+                                        mInfoArrayList.add(new AnketInfo(anketID,anket_soru,anket_img1,anket_img2,user_ad,user_kulAdi,user_img,oy1,oy2));
                             }
                             mAnket_adapter=new Anket_adapter(getActivity(),mInfoArrayList);
                             mRecyclerView.setAdapter(mAnket_adapter);
@@ -69,13 +77,64 @@ public class AnaSayfa extends Fragment {
                             e.printStackTrace();
                         }
                     }
-                }, new Response.ErrorListener() {
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }) {
             @Override
-            public void onErrorResponse(VolleyError error) {
-           error.printStackTrace();
+            protected Map<String, String> getParams() {
+                Map<String, String> params=new HashMap<String, String>();
+                params.put("kullanici_id", kullanici_id);
+
+                return params;
             }
-        });
-        mRequestQueue.add(request);
+
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
+
+
+    }
+
+    public void AnketCevapCek(final String kullanici_id){
+        String tag_string_req = "ankat_oyla";
+
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.AnketCevapCEK,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jObj = new JSONObject(response);
+                            JSONArray jsonArray=jObj.getJSONArray("AnketlerCevap");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject anket=jsonArray.getJSONObject(i);
+                               String gonderiID=anket.getString("gonderi_id");
+                               int cevap_indis=anket.getInt("cevap_indis");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params=new HashMap<String, String>();
+                params.put("kullanici_id", kullanici_id);
+
+                return params;
+            }
+
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
+
     }
 
 }

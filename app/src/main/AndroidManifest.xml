@@ -74,9 +74,17 @@
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+
             android:name=".Activitys.ArkadasiniBulActivity"
             android:label="@string/title_arkadaslarini_bul"
             android:parentActivityName=".Activitys.MainActivity">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activitys.MainActivity" />

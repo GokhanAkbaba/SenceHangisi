@@ -48,5 +48,5 @@
     <string name="yeni_adSoyadınız"> Yeni Adınız ve Soyadınız</string>
     <string name="yeni_adSoyad"> Yeni Ad Soyad</string>
     <string name="yeni_adSoyad_buton"> Ad Soyadını Güncelle</string>
-
+    <string name="search_hint">Kullanıcı ara…</string>
 </resources>

@@ -1,7 +1,11 @@
 package projem.sencehangisi.Activitys;
 
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +18,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -33,6 +40,7 @@ import projem.sencehangisi.Controls.Search.SearchInfo;
 import projem.sencehangisi.Controls.Search.Search_adapter;
 import projem.sencehangisi.Controls.WebServisLinkleri;
 import projem.sencehangisi.R;
+import projem.sencehangisi.fragments.KullaniciProfiliActivity;
 
 public class ArkadasiniBulActivity extends AppCompatActivity implements Search_adapter.SearchAdapterListener{
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -40,7 +48,6 @@ public class ArkadasiniBulActivity extends AppCompatActivity implements Search_a
     private List<SearchInfo> contactList;
     private Search_adapter mAdapter;
     private SearchView searchView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,7 +151,12 @@ public class ArkadasiniBulActivity extends AppCompatActivity implements Search_a
     @Override
     public void onContactSelected(SearchInfo contact) {
         Toast.makeText(getApplicationContext(), "Seçilen: " + contact.getAd_soyad() + ", " + contact.getKul_adi(), Toast.LENGTH_LONG).show();
-
+        Intent i = new Intent(getApplicationContext(),KullaniciProfiliActivity.class);
+        i.putExtra("Adi", contact.getAd_soyad());
+        i.putExtra("KullaniciAdi",contact.getKul_adi());
+        i.putExtra("resim",contact.getKul_image());
+        startActivity(i);
     }
+
 }
 

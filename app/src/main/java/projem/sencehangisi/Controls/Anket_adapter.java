@@ -83,7 +83,10 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
 
     @Override
     public int getItemCount() {
-        return mAnketInfoList.size();
+        if (mAnketInfoList !=null){
+            return mAnketInfoList.size();
+        }
+        return 0;
     }
 
     public class AnketViewHolder extends RecyclerView.ViewHolder{

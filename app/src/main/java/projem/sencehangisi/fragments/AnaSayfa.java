@@ -2,6 +2,8 @@ package projem.sencehangisi.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,6 +29,7 @@ import java.util.Map;
 import projem.sencehangisi.Controls.AnketInfo;
 import projem.sencehangisi.Controls.Anket_adapter;
 import projem.sencehangisi.Controls.AppController;
+import projem.sencehangisi.Controls.Search.ItemControls;
 import projem.sencehangisi.Controls.UserInfo;
 import projem.sencehangisi.Controls.WebServisLinkleri;
 import projem.sencehangisi.R;
@@ -55,8 +58,13 @@ public class AnaSayfa extends Fragment {
                mRecyclerView=view.findViewById(R.id.recycler_view);
         btn=(ImageButton) view2.findViewById(R.id.oy1);
 
-               mRecyclerView.setHasFixedSize(true);
-               mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.addItemDecoration(new ItemControls(getActivity(), DividerItemDecoration.VERTICAL, 36));
+        mRecyclerView.setHasFixedSize(true);
+
                mInfoArrayList=new ArrayList<>();
                KulId=new ArrayList<String>();
                GonId=new ArrayList<String>();

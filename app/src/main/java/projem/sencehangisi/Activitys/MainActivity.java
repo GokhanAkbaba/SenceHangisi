@@ -19,21 +19,31 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import projem.sencehangisi.Controls.AppController;
 import projem.sencehangisi.Controls.OturumYonetimi;
 import projem.sencehangisi.Controls.UserInfo;
+import projem.sencehangisi.Controls.WebServisLinkleri;
 import projem.sencehangisi.R;
 import projem.sencehangisi.fragments.KullaniciGirisEkrani;
 import projem.sencehangisi.fragments.KullaniciProfiliActivity;
 
 
-public class  MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class  MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     ImageView mImageView;
+    TextView takipEden,takipEdilen;
     Toolbar toolbar;
     private OturumYonetimi userSession;
     private TabLayout tabLayout;
@@ -74,6 +84,8 @@ public class  MainActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         TextView getUsernameTxt=(TextView) headerView.findViewById(R.id.nav_header_kulAdiTxt);
         TextView getNameTxt=(TextView) headerView.findViewById(R.id.nav_header_adSoyadTxt);
+        takipEden=(TextView) headerView.findViewById(R.id.nav_header_takipciTxt);
+        takipEdilen=(TextView) headerView.findViewById(R.id.nav_header_takipEdilenTxt);
         mImageView=(ImageView) headerView.findViewById(R.id.nav_header_getImage) ;
 
         userInfo = new UserInfo(this);
@@ -88,7 +100,8 @@ public class  MainActivity extends AppCompatActivity
         getNameTxt.setText(name);
        getUsernameTxt.setText(username);
        getImage(image);
-
+       TakipEden(userInfo.getKeyId());
+       TakipEdilen(userInfo.getKeyId());
 
     }
     public  void getImage(final String url){
@@ -193,5 +206,84 @@ public class  MainActivity extends AppCompatActivity
         Intent intent=new Intent(getApplicationContext(), TakipEdilenActivity.class);
         startActivity(intent);
     }
+    public void TakipEden(final String userID){
+        String tag_string_req = "takipSayisi";
 
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.TakipciSayisi_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println(response);
+
+                        try {
+                            JSONObject jObj = new JSONObject(response);
+                            JSONArray array=jObj.getJSONArray("kullanici");
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject oylar=array.getJSONObject(i);
+                                String sayi=oylar.getString("sayi");
+                               takipEden.setText(sayi);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params=new HashMap<String, String>();
+
+                params.put("kullaniciID", userID);
+                return params;
+            }
+
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
+    }
+    public void TakipEdilen(final String userID){
+        String tag_string_req = "takipEdilenSayisi";
+
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.TakipEdenSayisi_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println(response);
+
+                        try {
+                            JSONObject jObj = new JSONObject(response);
+                            JSONArray array=jObj.getJSONArray("kullanici");
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject oylar=array.getJSONObject(i);
+                                String sayi=oylar.getString("sayi");
+                                takipEdilen.setText(sayi);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params=new HashMap<String, String>();
+
+                params.put("kullaniciID", userID);
+                return params;
+            }
+
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
+    }
 }

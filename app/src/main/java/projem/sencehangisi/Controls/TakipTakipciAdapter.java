@@ -36,6 +36,7 @@ public class TakipTakipciAdapter extends RecyclerView.Adapter<TakipTakipciAdapte
     private ImageButton takipBtn;
     private UserInfo userInfo;
     private int tkp;
+    boolean deger=false;
     private static final String TAG = Anket_adapter.class.getSimpleName();
     public TakipTakipciAdapter(Context Context, ArrayList<TakipTakipciInfo> TakipInfoList) {
         this.mContext = Context;
@@ -88,14 +89,40 @@ public class TakipTakipciAdapter extends RecyclerView.Adapter<TakipTakipciAdapte
            takipBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if("isaretli"==textTkpDrm.getText().toString())
-                    {
-                        takipBtn.setImageResource(R.drawable.takip_et_img);
-                    }
-                    else if("isaretsiz"==textTkpDrm.getText().toString())
-                    {
-                        takipBtn.setImageResource(R.drawable.checked);
-                    }
+
+                        if("isaretli"==textTkpDrm.getText().toString())
+                        {
+                            if(deger==false)
+                            {
+                                takipBtn.setImageResource(R.drawable.takip_et_img);
+                                TakipciBirak(userInfo.getKeyId(),textViewID.getText().toString());
+                                deger=true;
+                            }
+                            else
+                            {
+                                takipBtn.setImageResource(R.drawable.checked);
+                                TakipciEkle(userInfo.getKeyId(),textViewID.getText().toString());
+                                deger=false;
+                            }
+
+                        }
+                        else if("isaretsiz"==textTkpDrm.getText().toString())
+                        {
+
+                            if(deger==false)
+                            {
+                                takipBtn.setImageResource(R.drawable.checked);
+                                TakipciEkle(userInfo.getKeyId(),textViewID.getText().toString());
+                                deger=true;
+                            }
+                            else
+                            {
+                                takipBtn.setImageResource(R.drawable.takip_et_img);
+                                TakipciBirak(userInfo.getKeyId(),textViewID.getText().toString());
+                                deger=false;
+                            }
+                        }
+
                 }
             });
         }
@@ -112,19 +139,13 @@ public class TakipTakipciAdapter extends RecyclerView.Adapter<TakipTakipciAdapte
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
-
                         Toast.makeText(mContext, "Tebrikler Takip ediyorsunuz!", Toast.LENGTH_LONG).show();
-
                     } else {
-                        // Error in login. Get the error message
                         String errorMsg = jObj.getString("error_msg");
                         toast(errorMsg);
-
                     }
                 } catch (JSONException e) {
-                    // JSON error
                     e.printStackTrace();
-                    toast("Json error: " + e.getMessage());
                 }
 
             }
@@ -165,15 +186,12 @@ public class TakipTakipciAdapter extends RecyclerView.Adapter<TakipTakipciAdapte
                         Toast.makeText(mContext, "Tebrikler Takip Etmeyi Bıraktınız!", Toast.LENGTH_LONG).show();
 
                     } else {
-                        // Error in login. Get the error message
                         String errorMsg = jObj.getString("error_msg");
                         toast(errorMsg);
 
                     }
                 } catch (JSONException e) {
-                    // JSON error
                     e.printStackTrace();
-                    toast("Json error: " + e.getMessage());
                 }
 
             }

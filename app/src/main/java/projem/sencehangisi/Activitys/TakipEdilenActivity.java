@@ -52,7 +52,7 @@ public class TakipEdilenActivity extends AppCompatActivity {
         mRequestQueue= Volley.newRequestQueue(this);
         userInfo=new UserInfo(this);
         String ID=userInfo.getKeyId();
-       // TakipEdilenSayisi(ID);
+       TakipEdilenSayisi(ID);
     }
     public void TakipEdilenSayisi(final String kullanici_id){
         String tag_string_req = "ankat_takipEdilen";

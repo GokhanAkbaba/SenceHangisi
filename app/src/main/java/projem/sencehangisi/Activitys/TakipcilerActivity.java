@@ -39,7 +39,6 @@ public class TakipcilerActivity extends AppCompatActivity {
     boolean deger=false;
     boolean kontrol=false;
     ArrayList<String> IDler=new ArrayList<String>();
-    ArrayList<String> KulIdler=new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +47,7 @@ public class TakipcilerActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         mRecyclerView=findViewById(R.id.recycler_view_takipci);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(TakipcilerActivity.this));
         mInfoArrayList=new ArrayList<>();
         mRequestQueue= Volley.newRequestQueue(this);
         userInfo=new UserInfo(this);
@@ -128,8 +127,15 @@ public class TakipcilerActivity extends AppCompatActivity {
                                 }
 
                             }
-                            mTakipTakipciAdapter=new TakipTakipciAdapter(TakipcilerActivity.this,mInfoArrayList);
-                            mRecyclerView.setAdapter(mTakipTakipciAdapter);
+                            if(null==mTakipTakipciAdapter)
+                            {
+                                mTakipTakipciAdapter=new TakipTakipciAdapter(TakipcilerActivity.this,mInfoArrayList);
+                                mRecyclerView.setAdapter(mTakipTakipciAdapter);
+                            }
+                            else
+                            {
+
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();

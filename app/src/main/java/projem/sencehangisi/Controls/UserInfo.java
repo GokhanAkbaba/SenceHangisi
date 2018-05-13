@@ -27,6 +27,7 @@ public class UserInfo {
         editor = prefs.edit();
     }
 
+
     public void setId(String id){
         editor.putString(KEY_ID, id);
         editor.apply();

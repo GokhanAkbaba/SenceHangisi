@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_anket_olustur"
-    android:orientation="vertical"
-    >
+    android:orientation="horizontal"
 
+    >
     <MultiAutoCompleteTextView
         android:id="@+id/anketSorusuTxt"
         android:layout_width="fill_parent"
@@ -23,34 +24,56 @@
         app:layout_marginLeftPercent="2%"
         app:layout_marginRightPercent="2%" />
 
-    <ImageView
-        android:id="@+id/anketSecenekFoto1"
-        app:layout_marginTopPercent="4%"
-        android:src="@drawable/anket_ekle_icon1"
-        app:layout_heightPercent="50%"
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none"
         android:layout_below="@+id/anketSorusuTxt"
-        android:onClick="anketResimSec1"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
-        android:layout_gravity="center"
-        app:layout_marginLeftPercent="2%"
-        app:layout_widthPercent="47%" />
+        app:layout_marginTopPercent="3%">
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <android.support.percent.PercentRelativeLayout
 
+            android:layout_width="695dp"
+            android:orientation="horizontal"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/anketSecenekFoto1"
+                app:layout_marginTopPercent="4%"
+                android:src="@drawable/anket_ekle_icon1"
+                app:layout_heightPercent="75%"
+                android:onClick="anketResimSec1"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                android:layout_gravity="center"
+                app:layout_marginLeftPercent="3%"
+                app:layout_widthPercent="30%" />
 
-    <ImageView
-        android:id="@+id/anketSecenekFoto2"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        app:layout_marginTopPercent="4%"
-        android:onClick="anketResimSec2"
-        android:scaleType="centerCrop"
-        android:layout_below="@+id/anketSorusuTxt"
-        app:layout_marginRightPercent="2%"
-        android:src="@drawable/anket_ekle_icon2"
-        app:layout_heightPercent="50%"
-        app:layout_marginLeftPercent="20%"
-        app:layout_widthPercent="47%"
-         />
+            <ImageView
+                android:id="@+id/anketSecenekFoto2"
+                app:layout_marginTopPercent="4%"
+                android:onClick="anketResimSec2"
+                android:scaleType="centerCrop"
+                android:src="@drawable/anket_ekle_icon2"
+                app:layout_heightPercent="75%"
+                app:layout_marginLeftPercent="35%"
+                app:layout_widthPercent="30%"
+                />
 
+            <ImageView
+                android:id="@+id/anketSecenekFoto3"
+                app:layout_marginTopPercent="4%"
+                android:onClick="anketResimSec3"
+                android:scaleType="centerCrop"
+                android:src="@drawable/anket_ekle_icon3"
+                app:layout_heightPercent="75%"
+                app:layout_marginLeftPercent="67%"
+                app:layout_widthPercent="30%"
+                />
 
+        </android.support.percent.PercentRelativeLayout>
+        </android.support.percent.PercentRelativeLayout>
+    </HorizontalScrollView>
 </android.support.percent.PercentRelativeLayout>

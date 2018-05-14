@@ -5,7 +5,8 @@
     android:layout_height="490dp"
     android:background="@color/girisveguvenlik"
     >
-    <android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.percent.PercentRelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -54,52 +55,64 @@
             android:text="Sizce hangi ayakkabıyı almalıyım?"
             android:textColor="#000"
             android:textSize="15sp"
-            app:layout_marginTopPercent="3%"
+            app:layout_marginTopPercent="4%"
             app:layout_marginLeftPercent="3%"
             app:layout_marginRightPercent="2%" />
 
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            android:layout_below="@+id/SoruAnket"
+            app:layout_marginTopPercent="3%">
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="554dp"
+                android:orientation="horizontal"
+                android:layout_height="match_parent">
         <ImageView
             android:id="@+id/anketSecenekFoto1"
             android:layout_below="@+id/SoruAnket"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
-            app:layout_heightPercent="54%"
+            app:layout_heightPercent="70%"
             android:src="@drawable/kapak"
-            app:layout_marginLeftPercent="3%"
-            app:layout_marginTopPercent="5%"
+            app:layout_marginLeftPercent="2%"
             android:layout_gravity="center"
             android:padding="1dp"
             android:onClick="oy"
             android:cropToPadding="true"
             android:background="@color/girisveguvenlik"
-            app:layout_widthPercent="46%"
-            tools:ignore="OnClick" />
+            app:layout_widthPercent="32%"
+            tools:ignore="NotSibling,OnClick" />
 
         <ImageView
             android:id="@+id/anketSecenekFoto2"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_below="@+id/SoruAnket"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:src="@drawable/kapak"
-            app:layout_heightPercent="54%"
-            app:layout_marginRightPercent="3%"
-            app:layout_marginTopPercent="5%"
+            app:layout_heightPercent="70%"
+            app:layout_marginLeftPercent="35%"
             android:layout_gravity="center"
             android:padding="1dp"
             android:cropToPadding="true"
             android:background="@color/girisveguvenlik"
-            app:layout_widthPercent="46%" />
+            app:layout_widthPercent="32%"
+            tools:ignore="NotSibling" />
+
 
         <ImageButton
-            android:id="@+id/oy1"
+            android:id="@+id/oy2"
             android:layout_below="@+id/anketSecenekFoto1"
-            app:layout_heightPercent="8%"
-            app:layout_marginLeftPercent="9%"
+            app:layout_heightPercent="9%"
+            app:layout_marginLeftPercent="36%"
             app:layout_marginTopPercent="2%"
             android:background="@color/beyaz"
-            app:layout_widthPercent="12%" />
+            app:layout_widthPercent="11%" />
 
         <Button
             android:id="@+id/secenekOySayisi1"
@@ -107,38 +120,38 @@
             android:layout_alignEnd="@+id/view"
             android:layout_alignRight="@+id/view"
             android:background="@drawable/puan_onay"
-            app:layout_heightPercent="8%"
-            app:layout_marginLeftPercent="30%"
+            app:layout_heightPercent="9%"
+            app:layout_marginLeftPercent="44%"
             app:layout_marginTopPercent="2%"
-            app:layout_widthPercent="12%" />
+            app:layout_widthPercent="5%" />
 
 
         <ImageButton
-            android:id="@+id/oy2"
+            android:id="@+id/oy1"
             android:layout_below="@+id/anketSecenekFoto1"
             android:background="@color/beyaz"
-            app:layout_heightPercent="8%"
-            app:layout_marginLeftPercent="57%"
+            app:layout_heightPercent="9%"
+            app:layout_marginLeftPercent="2%"
             app:layout_marginTopPercent="2%"
-            app:layout_widthPercent="12%" />
+            app:layout_widthPercent="11%" />
 
         <Button
             android:id="@+id/secenekOySayisi2"
             android:layout_below="@+id/anketSecenekFoto1"
             android:background="@drawable/puan_onay"
-            app:layout_heightPercent="8%"
-            app:layout_marginLeftPercent="79%"
+            app:layout_heightPercent="9%"
+            app:layout_marginLeftPercent="60%"
             app:layout_marginTopPercent="2%"
-            app:layout_widthPercent="12%" />
+            app:layout_widthPercent="5%" />
 
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dp"
             android:layout_below="@+id/oy1"
             android:background="@color/girisveguvenlik"
-            app:layout_marginLeftPercent="9%"
+            app:layout_marginLeftPercent="2%"
             app:layout_marginTopPercent="2%"
-            app:layout_widthPercent="35%"
+            app:layout_widthPercent="32%"
             android:id="@+id/view" />
 
         <View
@@ -146,28 +159,66 @@
             android:layout_height="2dp"
             android:layout_below="@+id/oy1"
             android:background="@color/girisveguvenlik"
-            app:layout_marginLeftPercent="58%"
+            app:layout_marginLeftPercent="35%"
             app:layout_marginTopPercent="2%"
-            app:layout_widthPercent="35%" />
+            app:layout_widthPercent="32%" />
+                <ImageView
+                    android:id="@+id/anketSecenekFoto3"
+                    android:layout_below="@+id/SoruAnket"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kapak"
+                    app:layout_heightPercent="70%"
+                    app:layout_marginLeftPercent="68%"
+                    app:layout_marginRightPercent="2%"
+                    android:layout_gravity="center"
+                    android:padding="1dp"
+                    android:cropToPadding="true"
+                    android:background="@color/girisveguvenlik"
+                    app:layout_widthPercent="32%"
+                    tools:ignore="NotSibling" />
+                <ImageButton
+                    android:id="@+id/oy3"
+                    android:layout_below="@+id/anketSecenekFoto3"
+                    android:background="@color/beyaz"
+                    app:layout_heightPercent="9%"
+                    app:layout_marginLeftPercent="69%"
+                    app:layout_marginTopPercent="2%"
+                    app:layout_widthPercent="11%" />
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="3dp"
-            android:layout_below="@+id/anketSecenekFoto1"
-            android:background="@color/girisveguvenlik"
-            app:layout_marginTopPercent="32%" />
+                <Button
+                    android:id="@+id/secenekOySayisi3"
+                    android:layout_below="@+id/anketSecenekFoto3"
+                    android:background="@drawable/puan_onay"
+                    app:layout_heightPercent="9%"
+                    app:layout_marginLeftPercent="91%"
+                    app:layout_marginTopPercent="2%"
+                    app:layout_widthPercent="5%" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/oy1"
+                    android:background="@color/girisveguvenlik"
+                    app:layout_marginLeftPercent="68%"
+                    app:layout_marginTopPercent="2%"
+                    app:layout_widthPercent="32%"
+                    android:id="@+id/view3" />
+            </android.support.percent.PercentRelativeLayout>
+            </android.support.percent.PercentRelativeLayout>
+        </HorizontalScrollView>
+
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view"
             />
         <TextView
             android:id="@+id/btnDurum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view"
+
             />
 
     </android.support.percent.PercentRelativeLayout>

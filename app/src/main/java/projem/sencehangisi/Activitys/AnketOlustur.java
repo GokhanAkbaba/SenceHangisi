@@ -50,8 +50,9 @@ public class AnketOlustur extends AppCompatActivity  {
     @BindView(R.id.anketSorusuTxt) MultiAutoCompleteTextView anketSorusuTxt;
     @BindView(R.id.anketSecenekFoto1) ImageView anketSecenekFoto1;
     @BindView(R.id.anketSecenekFoto2) ImageView anketSecenekFoto2;
+    @BindView(R.id.anketSecenekFoto3) ImageView anketSecenekFoto3;
     @BindView(R.id.anketGonderBtn) ImageView anketGonderBtn;
-    private Bitmap bitmap,bitmap2,defaults;
+    private Bitmap bitmap,bitmap2,bitmap3,defaults;
     private UserInfo userInfo;
     File f;
     private static final String IMAGE_DIRECTORY = "/Sence Hangisi";
@@ -144,6 +145,7 @@ public class AnketOlustur extends AppCompatActivity  {
                 } else {
                     params.put("anketFoto1", getStringImage(bitmap));
                     params.put("anketFoto2", getStringImage2(bitmap2));
+                    params.put("anketFoto3", getStringImage3(bitmap3));
                 }
                 return params;
             }
@@ -166,6 +168,13 @@ public class AnketOlustur extends AppCompatActivity  {
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
     }
+    public String getStringImage3(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
     int deger;
     public void anketResimSec1(View v)
     {
@@ -175,6 +184,11 @@ public class AnketOlustur extends AppCompatActivity  {
     public void anketResimSec2(View v)
     {
         deger=2;
+        showPictureDialog();
+    }
+    public void anketResimSec3(View v)
+    {
+        deger=3;
         showPictureDialog();
     }
     private void showPictureDialog(){
@@ -231,6 +245,11 @@ public class AnketOlustur extends AppCompatActivity  {
                     {
                         bitmap2 = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
                         anketSecenekFoto2.setImageBitmap(bitmap2);
+                    }
+                    else if(deger==3)
+                    {
+                        bitmap3 = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
+                        anketSecenekFoto3.setImageBitmap(bitmap3);
                     }
 
 

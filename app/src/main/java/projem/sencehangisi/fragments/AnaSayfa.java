@@ -47,7 +47,7 @@ public class AnaSayfa extends Fragment {
     ImageButton btn;
     String kul_ID;
     String btnDrm;
-    int oy1,oy2;
+    int oy1,oy2,oy3;
     boolean deger=false;
     int durum=0;
     @Override
@@ -95,9 +95,11 @@ public class AnaSayfa extends Fragment {
                                 String anket_soru=anket.getString("soru");
                                 String anket_img1=anket.getString("resim1");
                                 String anket_img2=anket.getString("resim2");
+                                String anket_img3=anket.getString("resim3");
                                 String user_Id=anket.getString("kullanici_id");
                                 oy2=R.drawable.secenek_bos_stil;
                                 oy1=R.drawable.secenek_bos_stil;
+                                oy3=R.drawable.secenek_bos_stil;
 
                                     for (int j = 0; j < GonId.size(); j++) {
                                         if ((Integer.parseInt(anketID) == Integer.parseInt(GonId.get(j)))
@@ -111,21 +113,33 @@ public class AnaSayfa extends Fragment {
                                             durum = 1;
                                             break;
                                         }
+                                        else if ((Integer.parseInt(anketID) == Integer.parseInt(GonId.get(j)))
+                                                && (Integer.parseInt(CvpIndis.get(j)) == 3) && (Integer.parseInt(KulId.get(j)) == Integer.parseInt(user_Id))) {
+                                            deger = true;
+                                            durum = 3;
+                                            break;
+                                        }
                                     }
                                     if (deger == true && durum == 0) {
                                         oy1 = R.drawable.secenek_dolu_yildiz;
 
                                         btnDrm="buton1";
-                                        //anket_adapter.OySayisi(anketID,String.valueOf(0));
-                                        mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2, user_ad, user_kulAdi, user_img, oy1, oy2,btnDrm));
+                                        mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3, user_ad, user_kulAdi, user_img, oy1, oy2,oy3,btnDrm));
                                         deger = false;
                                         durum = 0;
                                     } else if (deger == true && durum == 1) {
                                         oy2 = R.drawable.secenek_dolu_yildiz;
                                         btnDrm="buton2";
-                                        mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2, user_ad, user_kulAdi, user_img, oy1, oy2,btnDrm));
+                                        mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3, user_ad, user_kulAdi, user_img, oy1, oy2,oy3,btnDrm));
                                         deger = false;
                                         durum = 1;
+                                    }
+                                    else if (deger == true && durum == 3) {
+                                        oy3 = R.drawable.secenek_dolu_yildiz;
+                                        btnDrm="buton3";
+                                        mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,user_ad, user_kulAdi, user_img, oy1, oy2,oy3,btnDrm));
+                                        deger = false;
+                                        durum = 3;
                                     }
 
 

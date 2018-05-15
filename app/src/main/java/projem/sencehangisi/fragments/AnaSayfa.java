@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -43,8 +42,6 @@ public class AnaSayfa extends Fragment {
     private ArrayList<String> KulId;
     private UserInfo userInfo;
     private RequestQueue mRequestQueue;
-    Anket_adapter anket_adapter=new Anket_adapter();
-    ImageButton btn;
     String kul_ID;
     String btnDrm;
     int oy1,oy2,oy3;
@@ -86,7 +83,6 @@ public class AnaSayfa extends Fragment {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject anket=jsonArray.getJSONObject(i);
                                 String anketID=anket.getString("gonderi_id");
-                                String user_Id=anket.getString("kullanici_id");
                                 String anket_soru=anket.getString("soru");
                                 String anket_img1=anket.getString("resim1");
                                 String anket_img2=anket.getString("resim2");
@@ -163,16 +159,13 @@ public class AnaSayfa extends Fragment {
             protected Map<String, String> getParams() {
                 Map<String, String> params=new HashMap<String, String>();
                 params.put("kullanici_id", kullanici_id);
-
                 return params;
             }
-
         };
         AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
 
 
     }
-
     public void AnketCevapCek(final String kullanici_id){
         String tag_string_req = "ankat_oyla";
 

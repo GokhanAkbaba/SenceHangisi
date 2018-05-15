@@ -158,5 +158,15 @@
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
         />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_profil"
+        app:layout_marginTopPercent="54%"
+        android:layout_width="match_parent"
+        android:background="@color/beyaz"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 </android.support.percent.PercentRelativeLayout>
+
+
+
 

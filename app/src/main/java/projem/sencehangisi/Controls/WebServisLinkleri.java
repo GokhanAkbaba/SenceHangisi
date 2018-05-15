@@ -24,7 +24,7 @@ public class WebServisLinkleri
     public static String KullaniciBul_URL="http://oftekfakitiraf.com/senceHangisi/KullaniciBul.php";
     public static String TakipciSayisi_URL="http://oftekfakitiraf.com/senceHangisi/TakipciSayisi.php";
     public static String TakipEdenSayisi_URL="http://oftekfakitiraf.com/senceHangisi/TakipEdenSayisi.php";
-    public static String UserAnketSayisi_URL="http://oftekfakitiraf.com/senceHangisi/UserAnketSayisi.php";
+    public static String UserAnketSayisi_URL="http://oftekfakitiraf.com/senceHangisi/KullaniciAnketSayisi.php";
     public static String KullanicininAnketleri_URL="http://oftekfakitiraf.com/senceHangisi/AnketKulGet.php";
 
 }

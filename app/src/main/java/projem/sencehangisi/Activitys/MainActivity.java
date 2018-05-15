@@ -217,7 +217,7 @@ public class  MainActivity extends AppCompatActivity implements NavigationView.O
 
                         try {
                             JSONObject jObj = new JSONObject(response);
-                            JSONArray array=jObj.getJSONArray("kullanici");
+                            JSONArray array=jObj.getJSONArray("TakipciSayisi");
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject oylar=array.getJSONObject(i);
                                 String sayi=oylar.getString("sayi");
@@ -257,7 +257,7 @@ public class  MainActivity extends AppCompatActivity implements NavigationView.O
 
                         try {
                             JSONObject jObj = new JSONObject(response);
-                            JSONArray array=jObj.getJSONArray("kullanici");
+                            JSONArray array=jObj.getJSONArray("TakipEdilenSayisi");
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject oylar=array.getJSONObject(i);
                                 String sayi=oylar.getString("sayi");

@@ -260,10 +260,28 @@ public class AnketOlustur extends AppCompatActivity  {
             }
 
         } else if (requestCode == CAMERA) {
-            bitmap = (Bitmap) data.getExtras().get("data");
-            anketSecenekFoto1.setImageBitmap(bitmap);
-            saveImage(bitmap);
-            Toast.makeText(this, "Fotoğraf Kaydedildi.", Toast.LENGTH_SHORT).show();
+            if(deger==1)
+            {
+                bitmap = (Bitmap) data.getExtras().get("data");
+                anketSecenekFoto1.setImageBitmap(bitmap);
+                saveImage(bitmap);
+                Toast.makeText(this, "Fotoğraf Kaydedildi.", Toast.LENGTH_SHORT).show();
+            }
+           else if(deger==2)
+            {
+                bitmap2 = (Bitmap) data.getExtras().get("data");
+                anketSecenekFoto2.setImageBitmap(bitmap2);
+                saveImage(bitmap2);
+                Toast.makeText(this, "Fotoğraf Kaydedildi.", Toast.LENGTH_SHORT).show();
+            }
+            else if(deger==3)
+            {
+                bitmap3 = (Bitmap) data.getExtras().get("data");
+                anketSecenekFoto3.setImageBitmap(bitmap3);
+                saveImage(bitmap3);
+                Toast.makeText(this, "Fotoğraf Kaydedildi.", Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
     public String saveImage(Bitmap myBitmap) {

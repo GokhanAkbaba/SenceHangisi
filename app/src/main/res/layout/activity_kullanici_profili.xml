@@ -64,7 +64,7 @@
     </de.hdodenhof.circleimageview.CircleImageView>
 
     <ImageButton
-        android:id="@+id/button2"
+        android:id="@+id/rsmDuzenle"
         app:layout_widthPercent="16%"
         app:layout_heightPercent="10%"
         app:layout_marginTopPercent="31%"
@@ -80,7 +80,7 @@
         app:layout_marginTopPercent="0.3%"
         app:layout_marginLeftPercent="40%"
         android:autoSizeTextType="uniform"
-        android:text="457"
+        android:text="0"
         android:textAlignment="center"
         android:textSize="17sp"
         android:textColor="@android:color/background_light"
@@ -109,7 +109,7 @@
         app:layout_marginLeftPercent="10%"
         android:layout_below="@id/cerceve"
         android:autoSizeTextType="uniform"
-        android:text="150"
+        android:text="0"
         android:textAlignment="center"
         android:textSize="17sp"
         android:textColor="@android:color/background_light"
@@ -152,7 +152,7 @@
         app:layout_marginTopPercent="0.3%"
         app:layout_marginLeftPercent="63%"
         android:autoSizeTextType="uniform"
-        android:text="300"
+        android:text="0"
         android:textAlignment="center"
         android:textSize="17sp"
         android:textColor="@android:color/background_light"

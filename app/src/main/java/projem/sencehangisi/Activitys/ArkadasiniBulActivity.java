@@ -1,26 +1,18 @@
 package projem.sencehangisi.Activitys;
 
-import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -150,7 +142,6 @@ public class ArkadasiniBulActivity extends AppCompatActivity implements Search_a
     }
     @Override
     public void onContactSelected(SearchInfo contact) {
-        Toast.makeText(getApplicationContext(), "Seçilen: " + contact.getAd_soyad() + ", " + contact.getKul_adi(), Toast.LENGTH_LONG).show();
         Intent i = new Intent(getApplicationContext(),KullaniciProfiliActivity.class);
         i.putExtra("Adi", contact.getAd_soyad());
         i.putExtra("KullaniciAdi",contact.getKul_adi());

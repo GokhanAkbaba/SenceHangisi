@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="projem.sencehangisi.fragments.AnaSayfa">
+    tools:context="projem.sencehangisi.fragments.AnaSayfa"
+    tools:ignore="Orientation">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_marginTop="15dp"

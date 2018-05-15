@@ -16,8 +16,7 @@ public class AnketInfo {
     private String btnDrm;
     private int oy1,oy2,oy3;
 
-    public AnketInfo(String anketID,String anket_question, String anket_image1, String anket_image2,String anket_image3, String user_name, String user_username,
-                     String user_image,int oy1,int oy2,int oy3,String btnDrm) {
+    public AnketInfo(String anketID,String anket_question, String anket_image1, String anket_image2,String anket_image3,int oy1, int oy2, int oy3, String user_image,String user_name,String user_username,String btnDrm) {
         this.anket_question = anket_question;
         this.anket_image1 = anket_image1;
         this.anket_image2 = anket_image2;

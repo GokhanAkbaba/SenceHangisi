@@ -35,8 +35,8 @@ import projem.sencehangisi.R;
 public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewHolder> {
     private Context mContext;
     private ArrayList<AnketInfo> mAnketInfoList;
-    private ImageButton oy2;
-    String textDurum,textID;
+    public ArrayList<String> oyID=new ArrayList<String>();
+    public ArrayList<String> Drm=new ArrayList<String>();
     public Button secenekOySayisi1,secenekOySayisi2,secenekOySayisi3;
     private static final String TAG = Anket_adapter.class.getSimpleName();
     public Anket_adapter()
@@ -66,8 +66,6 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         String anketImg2=currentItem.getAnket_image2();
         String anketImg3=currentItem.getAnket_image3();
         String btnDrm=currentItem.getBtnDrm();
-        textDurum=btnDrm;
-        textID=anketID;
         int oy1=currentItem.getOy1();
         int oy2=currentItem.getOy2();
         int oy3=currentItem.getOy3();
@@ -83,11 +81,34 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         Picasso.with(mContext).load(oy2).fit().centerInside().into(holder.u_oy2);
         Picasso.with(mContext).load(oy3).fit().centerInside().into(holder.u_oy3);
 
+        if(btnDrm=="buton1")
+        {
+            holder.u_oy2.setEnabled(false);
+            holder.u_oy1.setEnabled(false);
+            holder.u_oy3.setEnabled(false);
+           OySayisi(anketID,String.valueOf(1));
+        }
+       else if(btnDrm=="buton2")
+        {
+            holder.u_oy2.setEnabled(false);
+            holder.u_oy1.setEnabled(false);
+            holder.u_oy3.setEnabled(false);
+            OySayisi(anketID,String.valueOf(0));
+
+        }
+        else if(btnDrm=="buton3")
+        {
+            holder.u_oy2.setEnabled(false);
+            holder.u_oy1.setEnabled(false);
+            holder.u_oy3.setEnabled(false);
+            OySayisi(anketID,String.valueOf(3));
+        }
     }
 
     @Override
     public int getItemCount() {
-        if (mAnketInfoList !=null){
+        if (mAnketInfoList !=null)
+        {
             return mAnketInfoList.size();
         }
         return 0;
@@ -114,12 +135,14 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
             anket_img3=itemView.findViewById(R.id.anketSecenekFoto3);
             textView=itemView.findViewById(R.id.textView8);
             textView.setVisibility(View.INVISIBLE);
+            txtDurum=itemView.findViewById(R.id.btnDurum);
             u_oy1=itemView.findViewById(R.id.oy1);
             u_oy2=itemView.findViewById(R.id.oy2);
             u_oy3=itemView.findViewById(R.id.oy3);
             secenekOySayisi1=itemView.findViewById(R.id.secenekOySayisi1);
             secenekOySayisi2=itemView.findViewById(R.id.secenekOySayisi2);
             secenekOySayisi3=itemView.findViewById(R.id.secenekOySayisi3);
+
                 u_oy1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -173,12 +196,9 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
             });
 
         }
-
-
     }
     public void OySayisi(final String gonder_id, final String cevap_id){
         String tag_string_req = "anket_oyla";
-
         StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.AnketOySayisi_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -186,7 +206,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                         System.out.println(response);
 
                         try {
-                            //Toast.makeText(mContext,""+gonder_id+" "+cevap_id,Toast.LENGTH_SHORT).show();
+
                             JSONObject jObj = new JSONObject(response);
                             String  cevap1="0",cevap2="0",cevap3="0";
                             JSONArray array=jObj.getJSONArray("Oylar");
@@ -204,10 +224,10 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                                     cevap3=cevapSayisi;
                                 }
                             }
-                            System.out.println("Cevap1: "+cevap1+"Cevap2:"+cevap2+"cevap3"+cevap3);
-                            secenekOySayisi1.setText(cevap1);
+                            System.out.println("Cevap1: "+cevap1+"Cevap2: "+cevap2+"cevap3: "+cevap3);
+                           /* secenekOySayisi1.setText(cevap1);
                             secenekOySayisi2.setText(cevap2);
-                            secenekOySayisi3.setText(cevap3);
+                            secenekOySayisi3.setText(cevap3);*/
 
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -106,19 +106,22 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
         getNameTxt.setText(name);
         getUsernameTxt.setText(username);
         getImage(image);
-
+        TakipEden(userInfo.getKeyId());
+        TakipEdilen(userInfo.getKeyId());
+        anketSayisi(userInfo.getKeyId());
         Bundle extras = getIntent().getExtras();
         if (extras !=null){
+            String kul_id = extras.getString("kul_id");
             String adsoyad = extras.getString("Adi");
             String kuladi = extras.getString("KullaniciAdi");
             String foto = extras.getString("resim");
             getNameTxt.setText(adsoyad);
             getUsernameTxt.setText(kuladi);
             getImage(foto);
+            TakipEden(kul_id);
+            TakipEdilen(kul_id);
+            anketSayisi(kul_id);
         }
-        TakipEden(userInfo.getKeyId());
-        TakipEdilen(userInfo.getKeyId());
-        anketSayisi(userInfo.getKeyId());
         AnketCek(userInfo.getKeyId());
         AnketCevapCek(userInfo.getKeyId());
     }
@@ -143,13 +146,13 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
     {
         Intent intent=new Intent(getApplicationContext(), TakipcilerActivity.class);
         startActivity(intent);
+
     }
     public void TakipEdileniGoster(View view)
     {
         Intent intent=new Intent(getApplicationContext(), TakipEdilenActivity.class);
         startActivity(intent);
     }
-
     public void TakipEden(final String userID){
         String tag_string_req = "takipSayisi";
 

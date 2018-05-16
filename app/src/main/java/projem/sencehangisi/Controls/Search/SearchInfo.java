@@ -1,9 +1,13 @@
 package projem.sencehangisi.Controls.Search;
 
 public class SearchInfo {
-    String ad_soyad,kul_adi,kul_image;
+    String kul_id,ad_soyad,kul_adi,kul_image;
 
     public SearchInfo() {
+    }
+
+    public String getKul_id() {
+        return kul_id;
     }
 
     public String getAd_soyad() {

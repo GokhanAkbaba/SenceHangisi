@@ -87,9 +87,6 @@ public class Search_adapter extends RecyclerView.Adapter<Search_adapter.MyViewHo
                 } else {
                     List<SearchInfo> filteredList = new ArrayList<>();
                     for (SearchInfo row : contactList) {
-
-                        // name match condition. this might differ depending on your requirement
-                        // here we are looking for name or phone number match
                         if (row.getAd_soyad().toLowerCase().contains(charString.toLowerCase()) || row.getKul_adi().contains(charSequence)) {
                             filteredList.add(row);
                         }

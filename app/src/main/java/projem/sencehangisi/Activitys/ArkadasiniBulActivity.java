@@ -118,12 +118,7 @@ public class ArkadasiniBulActivity extends AppCompatActivity implements Search_a
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.ara) {
             return true;
         }
@@ -133,7 +128,6 @@ public class ArkadasiniBulActivity extends AppCompatActivity implements Search_a
 
     @Override
     public void onBackPressed() {
-        // close search view on back button pressed
         if (!searchView.isIconified()) {
             searchView.setIconified(true);
             return;
@@ -143,6 +137,7 @@ public class ArkadasiniBulActivity extends AppCompatActivity implements Search_a
     @Override
     public void onContactSelected(SearchInfo contact) {
         Intent i = new Intent(getApplicationContext(),KullaniciProfiliActivity.class);
+        i.putExtra("kul_id",contact.getKul_id());
         i.putExtra("Adi", contact.getAd_soyad());
         i.putExtra("KullaniciAdi",contact.getKul_adi());
         i.putExtra("resim",contact.getKul_image());

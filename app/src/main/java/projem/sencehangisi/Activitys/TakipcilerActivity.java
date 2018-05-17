@@ -38,7 +38,7 @@ public class TakipcilerActivity extends AppCompatActivity {
     String ID;
     boolean deger=false;
     boolean kontrol=false;
-    ArrayList<String> IDler=new ArrayList<String>();
+    public  ArrayList<String> IDler=new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,13 +29,13 @@ public class Search_adapter extends RecyclerView.Adapter<Search_adapter.MyViewHo
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView adsoyad, kullanici;
         public ImageView thumbnail;
+        public ImageButton tkpAra;
 
         public MyViewHolder(View view) {
             super(view);
             adsoyad = view.findViewById(R.id.search_adsoyad);
             kullanici = view.findViewById(R.id.search_kullaniciAdi);
             thumbnail = view.findViewById(R.id.search_foto);
-
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

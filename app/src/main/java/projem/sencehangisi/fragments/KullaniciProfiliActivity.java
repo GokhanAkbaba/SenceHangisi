@@ -14,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -42,6 +43,7 @@ import projem.sencehangisi.Controls.Anket_adapter;
 import projem.sencehangisi.Controls.AppController;
 import projem.sencehangisi.Controls.OturumYonetimi;
 import projem.sencehangisi.Controls.Search.ItemControls;
+import projem.sencehangisi.Controls.Takipciİslemleri;
 import projem.sencehangisi.Controls.UserInfo;
 import projem.sencehangisi.Controls.WebServisLinkleri;
 import projem.sencehangisi.R;
@@ -56,17 +58,21 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private Anket_adapter mAnket_adapter;
     private RequestQueue mRequestQueue;
-    private ArrayList<AnketInfo> mInfoArrayList;
-    private ArrayList<String> CvpIndis;
-    private ArrayList<String> GonId;
-    private ArrayList<String> KulId;
+
+    private ArrayList<AnketInfo> mInfoArrayList=new ArrayList<>();
+    private ArrayList<String> CvpIndis=new ArrayList<String>();
+    private ArrayList<String> GonId=new ArrayList<String>();
+    private ArrayList<String> KulId=new ArrayList<String>();
+    public ArrayList<String> PrfIDler=new ArrayList<String>();
+
     private UserInfo userInfo;
     private OturumYonetimi userSession;
-    String kul_ID;
-    String btnDrm;
-    int oy1,oy2,oy3;
-    boolean deger=false;
-    int durum=0;
+    Takipciİslemleri takipciİslemleri=new Takipciİslemleri();
+    String kul_ID,kul_id,btnDrm;
+    int oy1,oy2,oy3,durum=0;
+    boolean deger=false,kontrol=false,tkpKontrol=false,btnKontrol=false;
+    ImageButton prfTakipEt,prfResDuzenle;
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,10 +87,10 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new ItemControls(this, DividerItemDecoration.VERTICAL, 36));
         mRequestQueue= Volley.newRequestQueue(this);
-        mInfoArrayList=new ArrayList<>();
-        KulId=new ArrayList<String>();
-        GonId=new ArrayList<String>();
-        CvpIndis=new ArrayList<String>();
+        prfTakipEt=(ImageButton)findViewById(R.id.profilTkpEt);
+        prfResDuzenle=(ImageButton)findViewById(R.id.profilResimDüzenle);
+        prfTakipEt.setVisibility(View.INVISIBLE);
+
        getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
@@ -109,21 +115,100 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
         TakipEden(userInfo.getKeyId());
         TakipEdilen(userInfo.getKeyId());
         anketSayisi(userInfo.getKeyId());
-        Bundle extras = getIntent().getExtras();
-        if (extras !=null){
-            String kul_id = extras.getString("kul_id");
-            String adsoyad = extras.getString("Adi");
-            String kuladi = extras.getString("KullaniciAdi");
-            String foto = extras.getString("resim");
-            getNameTxt.setText(adsoyad);
-            getUsernameTxt.setText(kuladi);
-            getImage(foto);
-            TakipEden(kul_id);
-            TakipEdilen(kul_id);
-            anketSayisi(kul_id);
-        }
         AnketCek(userInfo.getKeyId());
         AnketCevapCek(userInfo.getKeyId());
+        TakipEdilenCek(userInfo.getKeyId());
+        if(tkpKontrol==true || tkpKontrol==false)
+        {
+            prfTakipEt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(tkpKontrol==true)
+                    {
+                        prfTakipEt.setImageResource(R.drawable.takip_et_img);
+                        takipciİslemleri.TakipciBirak(userInfo.getKeyId(),kul_id);
+                        tkpKontrol=false;
+                    }
+                    else if(tkpKontrol==false)
+                    {
+                        prfTakipEt.setImageResource(R.drawable.checked);
+                        takipciİslemleri.TakipciEkle(userInfo.getKeyId(),kul_id);
+                        tkpKontrol=true;
+                    }
+                }
+            });
+        }
+    }
+    public void TakipEdilenCek(final String kullanici_id){
+        String tag_string_req = "ankat_takipEdilen";
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.TakipEdilenCEK,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jObj = new JSONObject(response);
+                            JSONArray array=jObj.getJSONArray("TakipEdilen");
+                            for (int i=0; i < array.length(); i++) {
+                                JSONObject takip=array.getJSONObject(i);
+                                String  user_id=takip.getString("kul_id");
+                                PrfIDler.add(user_id);
+                            }
+                            Bundle extras = getIntent().getExtras();
+                            if (extras !=null){
+                                kul_id = extras.getString("kul_id");
+                                String adsoyad = extras.getString("Adi");
+                                String kuladi = extras.getString("KullaniciAdi");
+                                String foto = extras.getString("resim");
+                                getNameTxt.setText(adsoyad);
+                                getUsernameTxt.setText(kuladi);
+                                if(Integer.parseInt(kul_id)==Integer.parseInt(userInfo.getKeyId()))
+                                {
+                                    System.out.println("ÇAlıştıııı");
+                                    btnKontrol=true;
+                                }
+                                for(int k=0;k<PrfIDler.size();k++)
+                                {
+                                    if(Integer.parseInt(PrfIDler.get(k))==Integer.parseInt(kul_id))
+                                    {
+                                        kontrol=true;
+                                        break;
+                                    }
+                                }
+                                if(kontrol==true)
+                                {
+                                    prfTakipEt.setImageResource(R.drawable.checked);
+                                    kontrol=false;
+                                    tkpKontrol=true;
+                                }
+                                else
+                                {
+                                    prfTakipEt.setImageResource(R.drawable.takip_et_img);
+                                }
+                                getImage(foto);
+                                TakipEden(kul_id);
+                                TakipEdilen(kul_id);
+                                anketSayisi(kul_id);
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params=new HashMap<String, String>();
+                params.put("kullanici_id",kullanici_id);
+                params.put("takip_eden_id",kullanici_id);
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
     }
     public  void getImage(final String url){
         String image_req="req_image";

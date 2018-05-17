@@ -64,20 +64,6 @@
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     tools:ignore="MissingConstraints" />
             </RelativeLayout>
-
-            <ImageButton
-                android:id="@+id/button2"
-                android:layout_width="81dp"
-                android:layout_height="50dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/settings"
-                app:layout_constraintEnd_toEndOf="@+id/guideline"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints" />
-
             <android.support.constraint.Guideline
                 android:id="@+id/guideline"
                 android:layout_width="wrap_content"

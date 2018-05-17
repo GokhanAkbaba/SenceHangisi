@@ -64,9 +64,17 @@
     </de.hdodenhof.circleimageview.CircleImageView>
 
     <ImageButton
-        android:id="@+id/rsmDuzenle"
-        app:layout_widthPercent="16%"
-        app:layout_heightPercent="10%"
+        android:id="@+id/profilTkpEt"
+        app:layout_widthPercent="13%"
+        app:layout_heightPercent="9%"
+        app:layout_marginTopPercent="31%"
+        app:layout_marginLeftPercent="81%"
+
+        />
+    <ImageButton
+        android:id="@+id/profilResimDüzenle"
+        app:layout_widthPercent="13%"
+        app:layout_heightPercent="9%"
         app:layout_marginTopPercent="31%"
         app:layout_marginLeftPercent="81%"
         android:src="@drawable/settings"

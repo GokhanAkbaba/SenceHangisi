@@ -153,11 +153,13 @@ public class KullaniciGirisEkrani extends Fragment{
                         String sifre = user.getString("sifre");
                         String resim = user.getString("resim");
                         String ad_soyad = user.getString("ad_soyad");
+                        String kapak_foto=user.getString("kapak_foto");
                         userInfo.setSifre(sifre);
                         userInfo.setResim(resim);
                         userInfo.setEmail(email);
                         userInfo.setUsername(uName);
                         userInfo.setName(ad_soyad);
+                        userInfo.setKeyKapakfoto(kapak_foto);
                         userInfo.setId(uId);
                         session.setLogin(true);
 

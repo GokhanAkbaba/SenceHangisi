@@ -1,13 +1,16 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<LinearLayout
+android:layout_height="match_parent"
+android:layout_width="match_parent"
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+    tools:context="projem.sencehangisi.fragments.EnPopuler"
+tools:ignore="Orientation">
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/recycler_view_enPopuler"
+    android:layout_marginTop="15dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="projem.sencehangisi.fragments.EnPopuler">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
-</FrameLayout>
+    android:background="@color/beyaz"
+    android:layout_height="match_parent">
+</android.support.v7.widget.RecyclerView>
+</LinearLayout>

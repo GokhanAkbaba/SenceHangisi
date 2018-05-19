@@ -33,11 +33,10 @@ import projem.sencehangisi.R;
 public class TakipEdilenActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private TakipTakipciAdapter mTakipTakipciAdapter;
-    private ArrayList<TakipTakipciInfo> mInfoArrayList;
+    public ArrayList<TakipTakipciInfo> mInfoArrayListTakip=new ArrayList<>();
     private UserInfo userInfo;
     private RequestQueue mRequestQueue;
     ImageButton btn;
-    Boolean deger=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,15 +47,13 @@ public class TakipEdilenActivity extends AppCompatActivity {
         mRecyclerView=findViewById(R.id.recycler_view_takip_edilen);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mInfoArrayList=new ArrayList<>();
         mRequestQueue= Volley.newRequestQueue(this);
         userInfo=new UserInfo(this);
         String ID=userInfo.getKeyId();
-       TakipEdilenSayisi(ID);
+       TakipEdilenlerCek(ID);
     }
-    public void TakipEdilenSayisi(final String kullanici_id){
+    public void TakipEdilenlerCek(final String kullanici_id){
         String tag_string_req = "ankat_takipEdilen";
-
         StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.TakipEdilenCEK,
                 new Response.Listener<String>() {
                     @Override
@@ -72,9 +69,9 @@ public class TakipEdilenActivity extends AppCompatActivity {
                                 String  user_id=takip.getString("kul_id");
                                 String tkp_drm="isaretli";
                                 int tkp_img=R.drawable.checked;
-                                mInfoArrayList.add(new TakipTakipciInfo(user_id,user_kulAdi,user_ad,user_img,tkp_img,tkp_drm));
+                                mInfoArrayListTakip.add(new TakipTakipciInfo(user_id,user_kulAdi,user_ad,user_img,tkp_img,tkp_drm));
                             }
-                            mTakipTakipciAdapter=new TakipTakipciAdapter(TakipEdilenActivity.this,mInfoArrayList);
+                            mTakipTakipciAdapter=new TakipTakipciAdapter(TakipEdilenActivity.this,mInfoArrayListTakip);
                             mRecyclerView.setAdapter(mTakipTakipciAdapter);
                         } catch (JSONException e) {
                             e.printStackTrace();

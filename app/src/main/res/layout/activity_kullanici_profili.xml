@@ -6,12 +6,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="projem.sencehangisi.fragments.KullaniciProfiliActivity">
+
     <ImageView
         android:id="@+id/kapakFoto"
-        android:background="@drawable/kapak"
+        android:src="@drawable/kapak"
+        android:scaleType="centerCrop"
+        android:scrollbars="vertical"
         app:layout_heightPercent="35%"
         app:layout_widthPercent="100%"/>
+    <ImageView
+        android:id="@+id/fotoDegis2"
+        android:background="#40000000"
+        app:layout_heightPercent="35%"
+        android:onClick="KapakFotoDegis"
+        app:layout_widthPercent="100%"/>
+    <ImageView
+        android:id="@+id/fotoDegis"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:layout_marginTopPercent="9%"
+        android:src="@drawable/anket_ekle"
+        app:layout_heightPercent="20%"
 
+        app:layout_widthPercent="15%" />
     <RelativeLayout
         android:id="@+id/bilgiler"
         android:layout_width="match_parent"
@@ -62,22 +79,33 @@
         android:src="@drawable/man">
 
     </de.hdodenhof.circleimageview.CircleImageView>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imagesDuzenle"
+        app:layout_widthPercent="14%"
+        app:layout_heightPercent="10%"
+        app:layout_marginTopPercent="32%"
+        app:layout_marginLeftPercent="5%"
+        android:onClick="ProfilFotoDegis"
+        android:background="#40000000"
+        android:src="@drawable/anket_ekle">
+
+    </de.hdodenhof.circleimageview.CircleImageView>
 
     <ImageButton
         android:id="@+id/profilTkpEt"
         app:layout_widthPercent="13%"
-        app:layout_heightPercent="9%"
-        app:layout_marginTopPercent="31%"
+        app:layout_heightPercent="7%"
+        app:layout_marginTopPercent="32%"
         app:layout_marginLeftPercent="81%"
 
         />
     <ImageButton
         android:id="@+id/profilResimDüzenle"
-        app:layout_widthPercent="13%"
-        app:layout_heightPercent="9%"
-        app:layout_marginTopPercent="31%"
-        app:layout_marginLeftPercent="81%"
-        android:src="@drawable/settings"
+        app:layout_widthPercent="10%"
+        app:layout_heightPercent="6%"
+        app:layout_marginTopPercent="48%"
+        app:layout_marginLeftPercent="88%"
+        android:src="@drawable/edit"
         />
 
     <TextView

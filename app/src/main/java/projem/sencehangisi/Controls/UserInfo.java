@@ -16,6 +16,7 @@ public class UserInfo {
     private static final String KEY_SIFRE = "sifre";
     private static final String KEY_RESIM = "resim";
     private static final String KEY_NAME = "ad_soyad";
+    private static final String KEY_KAPAKFOTO = "kapak_foto";
 
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
@@ -26,7 +27,6 @@ public class UserInfo {
         prefs = ctx.getSharedPreferences(PREF_NAME, ctx.MODE_PRIVATE);
         editor = prefs.edit();
     }
-
 
     public void setId(String id){
         editor.putString(KEY_ID, id);
@@ -53,6 +53,11 @@ public class UserInfo {
         editor.putString(KEY_RESIM, resim);
         editor.apply();
     }
+    public void setKeyKapakfoto(String kapakfoto)
+    {
+        editor.putString(KEY_KAPAKFOTO,kapakfoto);
+        editor.apply();
+    }
     public void clearUserInfo(){
         editor.clear();
         editor.commit();
@@ -64,6 +69,8 @@ public class UserInfo {
     public String getKeyRESIM(){return prefs.getString(KEY_RESIM, "");}
     public String getKeyNAME(){return prefs.getString(KEY_NAME, "");}
     public String getKeyId(){return prefs.getString(KEY_ID, "");}
+    public String getKeyKapakfoto() {return prefs.getString(KEY_KAPAKFOTO,"");}
+
 
 
 }

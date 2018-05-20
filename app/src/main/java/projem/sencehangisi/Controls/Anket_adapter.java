@@ -1,6 +1,7 @@
 package projem.sencehangisi.Controls;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
@@ -40,7 +41,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
     public ArrayList<String> oyID=new ArrayList<String>();
     public ArrayList<String> Drm=new ArrayList<String>();
     public Button secenekOySayisi1,secenekOySayisi2,secenekOySayisi3;
-    String anketImg1;
+    String  cevap1="0",cevap2="0",cevap3="0";
     private static final String TAG = Anket_adapter.class.getSimpleName();
     public Anket_adapter()
     {
@@ -52,7 +53,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
     }
 
     public class AnketViewHolder extends RecyclerView.ViewHolder{
-        public TextView uAd_soyad,ukullanici_adi,anket_soru,txtDurum,idBilgi;
+        public TextView uAd_soyad,ukullanici_adi,anket_soru,txtDurum,idBilgi,resim1Url,resim2Url,resim3Url;
         public ImageView u_img,anket_img1,anket_img2,anket_img3,anket_silImg;
         public ImageButton u_oy1,u_oy2,u_oy3;
         public Button secenekOySayisi1,secenekOySayisi2,secenekOySayisi3;
@@ -76,12 +77,51 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
             textView=itemView.findViewById(R.id.textView8);
             textView.setVisibility(View.INVISIBLE);
             txtDurum=itemView.findViewById(R.id.btnDurum);
+            resim1Url=itemView.findViewById(R.id.resim1Url);
+            resim1Url.setVisibility(View.INVISIBLE);
+            resim2Url=itemView.findViewById(R.id.resim2Url);
+            resim2Url.setVisibility(View.INVISIBLE);
+            resim3Url=itemView.findViewById(R.id.resim3Url);
+            resim3Url.setVisibility(View.INVISIBLE);
             u_oy1=itemView.findViewById(R.id.oy1);
             u_oy2=itemView.findViewById(R.id.oy2);
             u_oy3=itemView.findViewById(R.id.oy3);
             secenekOySayisi1=itemView.findViewById(R.id.secenekOySayisi1);
             secenekOySayisi2=itemView.findViewById(R.id.secenekOySayisi2);
             secenekOySayisi3=itemView.findViewById(R.id.secenekOySayisi3);
+           anket_img1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog alertDialog = new Dialog(mContext);
+                    alertDialog.setContentView(R.layout.resim_buyult);
+                    alertDialog.setTitle("Sence Hangisi : Secenek 1");
+                    ImageView ımgBuyult=(ImageView) alertDialog.findViewById(R.id.resimBuyult);
+                    Picasso.with(mContext).load(resim1Url.getText().toString()).into(ımgBuyult);
+                    alertDialog.show();
+                }
+            });
+            anket_img2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog alertDialog = new Dialog(mContext);
+                    alertDialog.setContentView(R.layout.resim_buyult);
+                    alertDialog.setTitle("Sence Hangisi : Secenek 2");
+                    ImageView ımgBuyult=(ImageView) alertDialog.findViewById(R.id.resimBuyult);
+                    Picasso.with(mContext).load(resim2Url.getText().toString()).into(ımgBuyult);
+                    alertDialog.show();
+                }
+            });
+            anket_img3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog alertDialog = new Dialog(mContext);
+                    alertDialog.setContentView(R.layout.resim_buyult);
+                    alertDialog.setTitle("Sence Hangisi : Secenek 3");
+                    ImageView ımgBuyult=(ImageView) alertDialog.findViewById(R.id.resimBuyult);
+                    Picasso.with(mContext).load(resim3Url.getText().toString()).into(ımgBuyult);
+                    alertDialog.show();
+                }
+            });
             anket_silImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -179,7 +219,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         String user_kulAdi=currentItem.getUser_username();
         String user_img=currentItem.getUser_image();
         String anketSoru=currentItem.getAnket_question();
-        anketImg1=currentItem.getAnket_image1();
+        String anketImg1=currentItem.getAnket_image1();
         String anketImg2=currentItem.getAnket_image2();
         String anketImg3=currentItem.getAnket_image3();
         String btnDrm=currentItem.getBtnDrm();
@@ -191,6 +231,9 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         holder.ukullanici_adi.setText(user_kulAdi);
         holder.anket_soru.setText(anketSoru);
         holder.idBilgi.setText(user_ID);
+        holder.resim1Url.setText(anketImg1);
+        holder.resim2Url.setText(anketImg2);
+        holder.resim3Url.setText(anketImg3);
         Picasso.with(mContext).load(user_img).fit().centerInside().into(holder.u_img);
         Picasso.with(mContext).load(anketImg1).fit().centerInside().into(holder.anket_img1);
         Picasso.with(mContext).load(anketImg2).fit().centerInside().into(holder.anket_img2);
@@ -204,14 +247,14 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
             holder.u_oy2.setEnabled(false);
             holder.u_oy1.setEnabled(false);
             holder.u_oy3.setEnabled(false);
-           OySayisi(anketID,String.valueOf(1));
+           OySayisi(anketID,String.valueOf(0));
         }
        else if(btnDrm=="buton2")
         {
             holder.u_oy2.setEnabled(false);
             holder.u_oy1.setEnabled(false);
             holder.u_oy3.setEnabled(false);
-            OySayisi(anketID,String.valueOf(0));
+            OySayisi(anketID,String.valueOf(1));
 
         }
         else if(btnDrm=="buton3")
@@ -248,7 +291,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                         try {
 
                             JSONObject jObj = new JSONObject(response);
-                            String  cevap1="0",cevap2="0",cevap3="0";
+
                             JSONArray array=jObj.getJSONArray("Oylar");
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject oylar=array.getJSONObject(i);

@@ -63,9 +63,6 @@ public class AnaSayfa extends Fragment {
                mRequestQueue= Volley.newRequestQueue(getActivity());
                 userInfo=new UserInfo(this.getContext());
                 kul_ID=userInfo.getKeyId();
-
-
-
                         AnketCek(kul_ID);
                         AnketCevapCek(kul_ID);
 
@@ -165,12 +162,9 @@ public class AnaSayfa extends Fragment {
             }
         };
         AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
-
-
     }
     public void AnketCevapCek(final String kullanici_id){
         String tag_string_req = "ankat_oyla";
-
         StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.AnketCevapCEK,
                 new Response.Listener<String>() {
                     @Override

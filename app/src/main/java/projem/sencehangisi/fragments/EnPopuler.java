@@ -89,6 +89,7 @@ public class EnPopuler extends Fragment {
                                 JSONObject anket=jsonArray.getJSONObject(i);
                                 String anketID=anket.getString("gonderi_id");
                                 String anket_soru=anket.getString("soru");
+                                String anketKulId=anket.getString("kul_id");
                                 String anket_img1=anket.getString("resim1");
                                 String anket_img2=anket.getString("resim2");
                                 String anket_img3=anket.getString("resim3");
@@ -124,27 +125,27 @@ public class EnPopuler extends Fragment {
                                 if (deger == true && durum == 0) {
                                     oy1 = R.drawable.secenek_dolu_yildiz;
                                     btnDrm="buton1";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,anketKulId));
                                     deger = false;
                                     durum = 0;
                                 } else if (deger == true && durum == 1) {
                                     oy2 = R.drawable.secenek_dolu_yildiz;
                                     btnDrm="buton2";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,anketKulId));
                                     deger = false;
                                     durum = 1;
                                 }
                                 else if (deger == true && durum == 3) {
                                     oy3 = R.drawable.secenek_dolu_yildiz;
                                     btnDrm="buton3";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,anketKulId));
                                     deger = false;
                                     durum = 3;
                                 }
                                 else if(deger==false && durum==4 || GonId.size()==0)
                                 {
                                     btnDrm="bos";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,anketKulId));
                                 }
                             }
                             mAnket_adapter=new Anket_adapter(getActivity(),mInfoArrayList);

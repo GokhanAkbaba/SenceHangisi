@@ -91,6 +91,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
     private UserInfo userInfo;
     private OturumYonetimi userSession;
     Takipciİslemleri takipciİslemleri=new Takipciİslemleri();
+    TakipEdilenActivity takipEdilenActivity=new TakipEdilenActivity();
     public String kul_id,btnDrm;
     int oy1,oy2,oy3,durum=0;
     File f;
@@ -104,6 +105,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_kullanici_profili);
+
         mRecyclerView=findViewById(R.id.recycler_view_profil);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -151,7 +153,6 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
         fotoDegis.setVisibility(View.INVISIBLE);
         fotoDegis2.setVisibility(View.INVISIBLE);
         prfDuzenle.setVisibility(View.INVISIBLE);
-
         prfResDuzenle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,7 +172,6 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                     prfResDuzenle.setImageResource(R.drawable.edit);
                     btnKontrol=false;
                 }
-                System.out.println("sdffsd"+kpkFotoKontrol+"sdfd"+prfFotoKontrol);
                 if(kpkFotoKontrol==true)
                 {
                     fotoGuncelle(userInfo.getKeyId(),"1");
@@ -231,6 +231,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
+                        toast("Başarıyla Güncellendi");
                         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                     } else {
                         // Error in login. Get the error message
@@ -429,6 +430,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                                 String adsoyad = extras.getString("Adi");
                                 String kuladi = extras.getString("KullaniciAdi");
                                 String foto = extras.getString("resim");
+                                String kapakFoto=extras.getString("kapak_foto");
                                 getNameTxt.setText(adsoyad);
                                 getUsernameTxt.setText(kuladi);
                                 AnketCek(kul_id);
@@ -461,6 +463,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                                     prfResDuzenle.setVisibility(View.VISIBLE);
                                 }
                                 getImage(foto);
+                                getImageKapak(kapakFoto);
                                 TakipEden(kul_id);
                                 TakipEdilen(kul_id);
                                 anketSayisi(kul_id);
@@ -520,12 +523,18 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
     }
     public void TakipciGoster(View view) {
         Intent intent=new Intent(getApplicationContext(), TakipcilerActivity.class);
+        intent.putExtra("kul_id",kul_id);
         startActivity(intent);
 
     }
     public void TakipEdileniGoster(View view) {
-        Intent intent=new Intent(getApplicationContext(), TakipEdilenActivity.class);
-        startActivity(intent);
+
+            Intent intent=new Intent(getApplicationContext(), TakipEdilenActivity.class);
+            intent.putExtra("kul_id",kul_id);
+            startActivity(intent);
+
+
+
     }
     public void TakipEden(final String userID){
         String tag_string_req = "takipSayisi";
@@ -695,27 +704,27 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                                 if (deger == true && durum == 0) {
                                     oy1 = R.drawable.secenek_dolu_yildiz;
                                     btnDrm="buton1";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id));
                                     deger = false;
                                     durum = 0;
                                 } else if (deger == true && durum == 1) {
                                     oy2 = R.drawable.secenek_dolu_yildiz;
                                     btnDrm="buton2";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id));
                                     deger = false;
                                     durum = 1;
                                 }
                                 else if (deger == true && durum == 3) {
                                     oy3 = R.drawable.secenek_dolu_yildiz;
                                     btnDrm="buton3";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id));
                                     deger = false;
                                     durum = 3;
                                 }
                                 else if(deger==false && durum==4 || GonId.size()==0)
                                 {
                                     btnDrm="bos";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id));
                                 }
                             }
                             mAnket_adapter=new Anket_adapter(KullaniciProfiliActivity.this,mInfoArrayList);

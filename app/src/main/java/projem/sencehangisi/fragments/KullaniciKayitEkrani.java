@@ -21,7 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -42,6 +41,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 import projem.sencehangisi.Controls.AppController;
 import projem.sencehangisi.Controls.OturumYonetimi;
 import projem.sencehangisi.Controls.UserInfo;
@@ -51,7 +51,7 @@ import projem.sencehangisi.R;
 public class KullaniciKayitEkrani extends Fragment {
     private static final String TAG = KullaniciKayitEkrani.class.getSimpleName();
     @BindView(R.id.kayitEpostaText) EditText kayitEpostaTxt;
-    @BindView(R.id.kullaniciKayitFoto) ImageView kullaniciKayitFoto;
+    @BindView(R.id.kullaniciKayitFoto) CircleImageView kullaniciKayitFoto;
     @BindView(R.id.kayitAdSoyadText) EditText kayitAdSoyadTxt;
     @BindView(R.id.kayitKullaniciAdiText) EditText kayitKullaniciAdiTxt;
     @BindView(R.id.kayitSifreText) EditText kayitSifreTxt;
@@ -122,7 +122,6 @@ public class KullaniciKayitEkrani extends Fragment {
         });
         return view;
     }
-
     private void showPictureDialog(){
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(getActivity());
         pictureDialog.setTitle("Resim Seç");
@@ -151,15 +150,12 @@ public class KullaniciKayitEkrani extends Fragment {
 
         startActivityForResult(galleryIntent, GALLERY);
     }
-
     private void takePhotoFromCamera() {
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, CAMERA);
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == getActivity().RESULT_CANCELED) {
             return;

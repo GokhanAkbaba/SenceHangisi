@@ -53,7 +53,8 @@ public class KullaniciGirisEkrani extends Fragment{
     private final static String Email="EMAİL MESAJI";
     private ProgressDialog PD;
     private OturumYonetimi session;
-    private UserInfo userInfo;@BindView(R.id.epostaGirisText) EditText epostaGirisTxt;
+    private UserInfo userInfo;
+    @BindView(R.id.epostaGirisText) EditText epostaGirisTxt;
 
 
     @BindView(R.id.sifreGirisText) EditText sifreGirisTxt;
@@ -126,7 +127,7 @@ public class KullaniciGirisEkrani extends Fragment{
         });
         return view;
     }
-    private void girisYap(final String email, final String sifre){
+    public void girisYap(final String email, final String sifre){
         // Tag used to cancel the request
         String tag_string_req="req_login";
         PD.setMessage("Giriş..");

@@ -28,5 +28,7 @@ public class WebServisLinkleri
     public static String KullanicininAnketleri_URL="http://oftekfakitiraf.com/senceHangisi/AnketKulGet.php";
     public static String EnPopulerAnketler_URL="http://oftekfakitiraf.com/senceHangisi/EnPopulerAnket.php";
     public static String FotoGuncelle_URL="http://oftekfakitiraf.com/senceHangisi/anketFotoGuncelle.php";
+    public static String KullaniciVeriGuncelle_URL="http://oftekfakitiraf.com/senceHangisi/kullaniciVeriGuncelle.php";
+    public static String AnketSil_URL="http://oftekfakitiraf.com/senceHangisi/anketSil.php";
 
 }

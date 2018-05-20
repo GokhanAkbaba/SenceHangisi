@@ -35,7 +35,7 @@ public class TakipcilerActivity extends AppCompatActivity {
     private ArrayList<TakipTakipciInfo> mInfoArrayList;
     private UserInfo userInfo;
     private RequestQueue mRequestQueue;
-    String ID;
+    String ID,kul_id;
     boolean deger=false;
     boolean kontrol=false;
     public  ArrayList<String> IDler=new ArrayList<String>();
@@ -54,6 +54,12 @@ public class TakipcilerActivity extends AppCompatActivity {
         ID=userInfo.getKeyId();
         TakipciCek(ID);
         TakipEdilenCek(ID);
+        Bundle extras = getIntent().getExtras();
+        if (extras !=null) {
+            kul_id = extras.getString("kul_id");
+            TakipciCek(kul_id);
+        }
+
     }
     public void TakipEdilenCek(final String kullanici_id){
         String tag_string_req = "ankat_takipEdilen";
@@ -98,6 +104,7 @@ public class TakipcilerActivity extends AppCompatActivity {
                         try {
                             JSONObject jObj = new JSONObject(response);
                             JSONArray array=jObj.getJSONArray("Takip");
+                            mInfoArrayList.clear();
                             for (int i=0; i < array.length(); i++) {
                                 JSONObject takip=array.getJSONObject(i);
                                 String user_ad=takip.getString("ad_soyad");

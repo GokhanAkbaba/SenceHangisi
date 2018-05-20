@@ -27,6 +27,7 @@ public class OturumYonetimi {
         editor=pref.edit();
     }
 
+
     public void setLogin(boolean girisYapildi)
     {
         editor.putBoolean(KEY_IS_LOGGEDIN,girisYapildi);

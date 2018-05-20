@@ -33,10 +33,12 @@ import projem.sencehangisi.R;
 public class TakipEdilenActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private TakipTakipciAdapter mTakipTakipciAdapter;
-    public ArrayList<TakipTakipciInfo> mInfoArrayListTakip=new ArrayList<>();
+    public ArrayList<TakipTakipciInfo> mInfoArrayListTakip;
     private UserInfo userInfo;
     private RequestQueue mRequestQueue;
+    String kul_id,ID;
     ImageButton btn;
+    boolean kontrol=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +51,15 @@ public class TakipEdilenActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRequestQueue= Volley.newRequestQueue(this);
         userInfo=new UserInfo(this);
-        String ID=userInfo.getKeyId();
-       TakipEdilenlerCek(ID);
+        ID=userInfo.getKeyId();
+        mInfoArrayListTakip=new ArrayList<>();
+        TakipEdilenlerCek(ID);
+        Bundle extras = getIntent().getExtras();
+        if (extras !=null) {
+            kul_id = extras.getString("kul_id");
+            TakipEdilenlerCek(kul_id);
+        }
+
     }
     public void TakipEdilenlerCek(final String kullanici_id){
         String tag_string_req = "ankat_takipEdilen";
@@ -61,6 +70,7 @@ public class TakipEdilenActivity extends AppCompatActivity {
                         try {
                             JSONObject jObj = new JSONObject(response);
                             JSONArray array=jObj.getJSONArray("TakipEdilen");
+                            mInfoArrayListTakip.clear();
                             for (int i=0; i < array.length(); i++) {
                                 JSONObject takip=array.getJSONObject(i);
                                 String user_ad=takip.getString("ad_soyad");

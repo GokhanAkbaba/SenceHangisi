@@ -14,9 +14,10 @@ public class AnketInfo {
     private String user_username;
     private String user_image;
     private String btnDrm;
+    private String anketKulId;
     private int oy1,oy2,oy3;
 
-    public AnketInfo(String anketID,String anket_question, String anket_image1, String anket_image2,String anket_image3,int oy1, int oy2, int oy3, String user_image,String user_name,String user_username,String btnDrm) {
+    public AnketInfo(String anketID,String anket_question, String anket_image1, String anket_image2,String anket_image3,int oy1, int oy2, int oy3, String user_image,String user_name,String user_username,String btnDrm,String anketKulId) {
         this.anket_question = anket_question;
         this.anket_image1 = anket_image1;
         this.anket_image2 = anket_image2;
@@ -25,10 +26,15 @@ public class AnketInfo {
         this.user_username = user_username;
         this.user_image = user_image;
         this.anketID=anketID;
+        this.anketKulId=anketKulId;
         this.oy1=oy1;
         this.oy2=oy2;
         this.oy3=oy3;
         this.btnDrm=btnDrm;
+    }
+
+    public String getAnketKulId() {
+        return anketKulId;
     }
 
     public int getOy3() {

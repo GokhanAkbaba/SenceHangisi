@@ -1,6 +1,8 @@
 package projem.sencehangisi.Controls;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +40,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
     public ArrayList<String> oyID=new ArrayList<String>();
     public ArrayList<String> Drm=new ArrayList<String>();
     public Button secenekOySayisi1,secenekOySayisi2,secenekOySayisi3;
+    String anketImg1;
     private static final String TAG = Anket_adapter.class.getSimpleName();
     public Anket_adapter()
     {
@@ -48,21 +51,135 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         this.mAnketInfoList = AnketInfoList;
     }
 
-    @Override
-    public AnketViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(mContext).inflate(R.layout.item_view,parent,false);
-        return new AnketViewHolder(v);
-    }
+    public class AnketViewHolder extends RecyclerView.ViewHolder{
+        public TextView uAd_soyad,ukullanici_adi,anket_soru,txtDurum,idBilgi;
+        public ImageView u_img,anket_img1,anket_img2,anket_img3,anket_silImg;
+        public ImageButton u_oy1,u_oy2,u_oy3;
+        public Button secenekOySayisi1,secenekOySayisi2,secenekOySayisi3;
+        boolean deger=false;
+        private TextView textView;
+        int indis;
+        private UserInfo userInfo;
+        public AnketViewHolder(View itemView) {
+            super(itemView);
+            userInfo=new UserInfo(mContext);
+            uAd_soyad=itemView.findViewById(R.id.getName);
+            anket_soru=itemView.findViewById(R.id.SoruAnket);
+            ukullanici_adi=itemView.findViewById(R.id.getuser);
+            u_img=itemView.findViewById(R.id.user_image);
+            anket_img1=itemView.findViewById(R.id.anketSecenekFoto1);
+            anket_img2=itemView.findViewById(R.id.anketSecenekFoto2);
+            anket_img3=itemView.findViewById(R.id.anketSecenekFoto3);
+            anket_silImg=itemView.findViewById(R.id.silSecenek);
+            idBilgi=itemView.findViewById(R.id.idBilgi);
+            idBilgi.setVisibility(View.INVISIBLE);
+            textView=itemView.findViewById(R.id.textView8);
+            textView.setVisibility(View.INVISIBLE);
+            txtDurum=itemView.findViewById(R.id.btnDurum);
+            u_oy1=itemView.findViewById(R.id.oy1);
+            u_oy2=itemView.findViewById(R.id.oy2);
+            u_oy3=itemView.findViewById(R.id.oy3);
+            secenekOySayisi1=itemView.findViewById(R.id.secenekOySayisi1);
+            secenekOySayisi2=itemView.findViewById(R.id.secenekOySayisi2);
+            secenekOySayisi3=itemView.findViewById(R.id.secenekOySayisi3);
+            anket_silImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(Integer.parseInt(userInfo.getKeyId())==Integer.parseInt(idBilgi.getText().toString()))
+                    {
+                        final AlertDialog.Builder builder=new AlertDialog.Builder(mContext);
+                        builder.setTitle("Sil");
+                        builder.setMessage("Gönderi Silinsin mi?");
+                        builder.setCancelable(false);
+                        builder.setIcon(R.drawable.delete_icon);
 
+                        builder.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                AnketSil(userInfo.getKeyId(),textView.getText().toString());
+                            }
+                        });
+                        builder.setNegativeButton("Hayır", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+                        AlertDialog dialog=builder.create();
+                        dialog.show();
+                    }
+                    else
+                    {
+
+                    }
+
+                }
+            });
+
+            u_oy1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    indis = 0;
+                    anketKayit(userInfo.getKeyId(), textView.getText().toString(), indis);
+                    if(deger==false)
+                    {
+                        u_oy1.setImageResource(R.drawable.secenek_dolu_yildiz);
+                        deger=true;
+                        u_oy2.setEnabled(false);
+                        u_oy1.setEnabled(false);
+                        u_oy3.setEnabled(false);
+                    }
+                    OySayisi(textView.getText().toString(),String.valueOf(indis));
+                }
+            });
+            u_oy2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    indis = 1;
+                    anketKayit(userInfo.getKeyId(), textView.getText().toString(), indis);
+                    if(deger==false)
+                    {
+                        u_oy2.setImageResource(R.drawable.secenek_dolu_yildiz);
+                        deger=true;
+                        u_oy2.setEnabled(false);
+                        u_oy1.setEnabled(false);
+                        u_oy3.setEnabled(false);
+                    }
+                    OySayisi(textView.getText().toString(),String.valueOf(indis));
+                }
+            });
+
+            u_oy3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    indis = 3;
+                    anketKayit(userInfo.getKeyId(), textView.getText().toString(), indis);
+                    if(deger==false)
+                    {
+                        u_oy3.setImageResource(R.drawable.secenek_dolu_yildiz);
+                        deger=true;
+                        u_oy2.setEnabled(false);
+                        u_oy1.setEnabled(false);
+                        u_oy3.setEnabled(false);
+                    }
+                    OySayisi(textView.getText().toString(),String.valueOf(indis));
+                }
+            });
+
+        }
+    }
     @Override
     public void onBindViewHolder(AnketViewHolder holder, int position) {
         AnketInfo currentItem=mAnketInfoList.get(position);
         String anketID=currentItem.getAnketID();
+        String user_ID=currentItem.getAnketKulId();
         String user_ad=currentItem.getUser_name();
         String user_kulAdi=currentItem.getUser_username();
         String user_img=currentItem.getUser_image();
         String anketSoru=currentItem.getAnket_question();
-        String anketImg1=currentItem.getAnket_image1();
+        anketImg1=currentItem.getAnket_image1();
         String anketImg2=currentItem.getAnket_image2();
         String anketImg3=currentItem.getAnket_image3();
         String btnDrm=currentItem.getBtnDrm();
@@ -73,6 +190,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         holder.uAd_soyad.setText(user_ad);
         holder.ukullanici_adi.setText(user_kulAdi);
         holder.anket_soru.setText(anketSoru);
+        holder.idBilgi.setText(user_ID);
         Picasso.with(mContext).load(user_img).fit().centerInside().into(holder.u_img);
         Picasso.with(mContext).load(anketImg1).fit().centerInside().into(holder.anket_img1);
         Picasso.with(mContext).load(anketImg2).fit().centerInside().into(holder.anket_img2);
@@ -106,6 +224,11 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
     }
 
     @Override
+    public AnketViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v= LayoutInflater.from(mContext).inflate(R.layout.item_view,parent,false);
+        return new AnketViewHolder(v);
+    }
+    @Override
     public int getItemCount() {
         if (mAnketInfoList !=null)
         {
@@ -114,89 +237,6 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         return 0;
     }
 
-    public class AnketViewHolder extends RecyclerView.ViewHolder{
-        public TextView uAd_soyad,ukullanici_adi,anket_soru,txtDurum;
-        public ImageView u_img,anket_img1,anket_img2,anket_img3;
-        public ImageButton u_oy1,u_oy2,u_oy3;
-        public Button secenekOySayisi1,secenekOySayisi2,secenekOySayisi3;
-        boolean deger=false;
-        private TextView textView;
-        int indis;
-        private UserInfo userInfo;
-        public AnketViewHolder(View itemView) {
-            super(itemView);
-            userInfo=new UserInfo(mContext);
-            uAd_soyad=itemView.findViewById(R.id.getName);
-            anket_soru=itemView.findViewById(R.id.SoruAnket);
-            ukullanici_adi=itemView.findViewById(R.id.getuser);
-            u_img=itemView.findViewById(R.id.user_image);
-            anket_img1=itemView.findViewById(R.id.anketSecenekFoto1);
-            anket_img2=itemView.findViewById(R.id.anketSecenekFoto2);
-            anket_img3=itemView.findViewById(R.id.anketSecenekFoto3);
-            textView=itemView.findViewById(R.id.textView8);
-            textView.setVisibility(View.INVISIBLE);
-            txtDurum=itemView.findViewById(R.id.btnDurum);
-            u_oy1=itemView.findViewById(R.id.oy1);
-            u_oy2=itemView.findViewById(R.id.oy2);
-            u_oy3=itemView.findViewById(R.id.oy3);
-            secenekOySayisi1=itemView.findViewById(R.id.secenekOySayisi1);
-            secenekOySayisi2=itemView.findViewById(R.id.secenekOySayisi2);
-            secenekOySayisi3=itemView.findViewById(R.id.secenekOySayisi3);
-
-                u_oy1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        indis = 0;
-                        anketKayit(userInfo.getKeyId(), textView.getText().toString(), indis);
-                        if(deger==false)
-                        {
-                            u_oy1.setImageResource(R.drawable.secenek_dolu_yildiz);
-                            deger=true;
-                            u_oy2.setEnabled(false);
-                            u_oy1.setEnabled(false);
-                            u_oy3.setEnabled(false);
-                        }
-                        OySayisi(textView.getText().toString(),String.valueOf(indis));
-                    }
-                });
-                u_oy2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        indis = 1;
-                        anketKayit(userInfo.getKeyId(), textView.getText().toString(), indis);
-                        if(deger==false)
-                        {
-                            u_oy2.setImageResource(R.drawable.secenek_dolu_yildiz);
-                            deger=true;
-                            u_oy2.setEnabled(false);
-                            u_oy1.setEnabled(false);
-                            u_oy3.setEnabled(false);
-                        }
-                        OySayisi(textView.getText().toString(),String.valueOf(indis));
-                    }
-                });
-
-            u_oy3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    indis = 3;
-                    anketKayit(userInfo.getKeyId(), textView.getText().toString(), indis);
-                    if(deger==false)
-                    {
-                        u_oy3.setImageResource(R.drawable.secenek_dolu_yildiz);
-                        deger=true;
-                        u_oy2.setEnabled(false);
-                        u_oy1.setEnabled(false);
-                        u_oy3.setEnabled(false);
-                    }
-                    OySayisi(textView.getText().toString(),String.valueOf(indis));
-                }
-            });
-
-        }
-    }
     public void OySayisi(final String gonder_id, final String cevap_id){
         String tag_string_req = "anket_oyla";
         StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.AnketOySayisi_URL,
@@ -225,7 +265,8 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                                 }
                             }
                             System.out.println("Cevap1: "+cevap1+"Cevap2: "+cevap2+"cevap3: "+cevap3);
-                           /* secenekOySayisi1.setText(cevap1);
+                            /*
+                           secenekOySayisi1.setText(cevap1);
                             secenekOySayisi2.setText(cevap2);
                             secenekOySayisi3.setText(cevap3);*/
 
@@ -299,6 +340,55 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                 params.put("kullanici_id", userID);
                 params.put("gonderi_id", anketID);
                 params.put("cevap_indis", Integer.toString(cevap_indis));
+                return params;
+            }
+
+        };
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+    public void AnketSil(final String userID,final String anketID) {
+        String tag_string_req = "anket_sil";
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                WebServisLinkleri.AnketSil_URL, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Anket Sil: " + response.toString());
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+
+                        Toast.makeText(mContext, "Anketiniz Silinmiştir!", Toast.LENGTH_LONG).show();
+
+                    } else {
+                        // Error in login. Get the error message
+                        String errorMsg = jObj.getString("error_msg");
+                        toast(errorMsg);
+
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    toast("Json error: " + e.getMessage());
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Error: " + error.getMessage());
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("kullanici_id", userID);
+                params.put("gonderi_id", anketID);
                 return params;
             }
 

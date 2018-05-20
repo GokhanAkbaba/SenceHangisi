@@ -56,7 +56,6 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         public TextView uAd_soyad,ukullanici_adi,anket_soru,txtDurum,idBilgi,resim1Url,resim2Url,resim3Url;
         public ImageView u_img,anket_img1,anket_img2,anket_img3,anket_silImg;
         public ImageButton u_oy1,u_oy2,u_oy3;
-        public Button secenekOySayisi1,secenekOySayisi2,secenekOySayisi3;
         boolean deger=false;
         private TextView textView;
         int indis;
@@ -291,7 +290,9 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                         try {
 
                             JSONObject jObj = new JSONObject(response);
-
+                            cevap1="0";
+                            cevap2="0";
+                            cevap3="0";
                             JSONArray array=jObj.getJSONArray("Oylar");
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject oylar=array.getJSONObject(i);
@@ -308,10 +309,9 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                                 }
                             }
                             System.out.println("Cevap1: "+cevap1+"Cevap2: "+cevap2+"cevap3: "+cevap3);
-                            /*
-                           secenekOySayisi1.setText(cevap1);
+                            secenekOySayisi1.setText(cevap1);
                             secenekOySayisi2.setText(cevap2);
-                            secenekOySayisi3.setText(cevap3);*/
+                            secenekOySayisi3.setText(cevap3);
 
                         } catch (JSONException e) {
                             e.printStackTrace();

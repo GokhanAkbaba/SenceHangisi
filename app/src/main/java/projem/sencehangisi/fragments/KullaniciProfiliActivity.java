@@ -2,6 +2,7 @@ package projem.sencehangisi.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -35,6 +36,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -79,6 +81,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private Anket_adapter mAnket_adapter;
     private RequestQueue mRequestQueue;
+    String foto;
 
     private ArrayList<AnketInfo> mInfoArrayList=new ArrayList<>();
     private ArrayList<String> CvpIndis=new ArrayList<String>();
@@ -153,6 +156,16 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
         fotoDegis.setVisibility(View.INVISIBLE);
         fotoDegis2.setVisibility(View.INVISIBLE);
         prfDuzenle.setVisibility(View.INVISIBLE);
+        mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog alertDialog = new Dialog(KullaniciProfiliActivity.this);
+                alertDialog.setContentView(R.layout.resim_buyult);
+                ImageView ımgBuyult=(ImageView) alertDialog.findViewById(R.id.resimBuyult);
+                Picasso.with(KullaniciProfiliActivity.this).load(foto).into(ımgBuyult);
+                alertDialog.show();
+            }
+        });
         prfResDuzenle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -427,9 +440,10 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                             if (extras !=null){
                                 mInfoArrayList.clear();
                                 kul_id = extras.getString("kul_id");
+                                System.out.println("asdfasf"+kul_id);
                                 String adsoyad = extras.getString("Adi");
                                 String kuladi = extras.getString("KullaniciAdi");
-                                String foto = extras.getString("resim");
+                                foto = extras.getString("resim");
                                 String kapakFoto=extras.getString("kapak_foto");
                                 getNameTxt.setText(adsoyad);
                                 getUsernameTxt.setText(kuladi);
@@ -673,6 +687,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                                 String anket_img1=anket.getString("resim1");
                                 String anket_img2=anket.getString("resim2");
                                 String anket_img3=anket.getString("resim3");
+                                String user_kapak_foto=anket.getString("kapak_foto");
                                 String kul_adi=anket.getString("kul_adi");
                                 String ad_soyad=anket.getString("ad_soyad");
                                 String kul_resim=anket.getString("kul_image");
@@ -704,27 +719,27 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                                 if (deger == true && durum == 0) {
                                     oy1 = R.drawable.secenek_dolu_yildiz;
                                     btnDrm="buton1";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id,user_kapak_foto));
                                     deger = false;
                                     durum = 0;
                                 } else if (deger == true && durum == 1) {
                                     oy2 = R.drawable.secenek_dolu_yildiz;
                                     btnDrm="buton2";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id,user_kapak_foto));
                                     deger = false;
                                     durum = 1;
                                 }
                                 else if (deger == true && durum == 3) {
                                     oy3 = R.drawable.secenek_dolu_yildiz;
                                     btnDrm="buton3";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id,user_kapak_foto));
                                     deger = false;
                                     durum = 3;
                                 }
                                 else if(deger==false && durum==4 || GonId.size()==0)
                                 {
                                     btnDrm="bos";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id,user_kapak_foto));
                                 }
                             }
                             mAnket_adapter=new Anket_adapter(KullaniciProfiliActivity.this,mInfoArrayList);

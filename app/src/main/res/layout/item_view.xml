@@ -28,6 +28,7 @@
             android:id="@+id/getuser"
             android:layout_width="fill_parent"
             android:layout_below="@+id/getName"
+            android:layout_toLeftOf="@+id/images"
             android:autoSizeTextType="uniform"
             android:text="\@gokhanakbaba"
             android:textColor="@android:color/darker_gray"
@@ -47,6 +48,7 @@
             android:id="@+id/getName"
             android:layout_width="wrap_content"
             android:autoSizeTextType="uniform"
+            android:layout_toLeftOf="@+id/images"
             android:text="Gökhan Akbaba"
             android:textColor="@android:color/black"
             android:textSize="17sp"
@@ -251,6 +253,20 @@
             />
         <TextView
             android:id="@+id/resim3Url"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            />
+        <TextView
+            android:id="@+id/profilResBilgi"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            />
+        <TextView
+            android:id="@+id/profilKpkBilgi"
             android:layout_marginLeft="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

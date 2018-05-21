@@ -180,7 +180,6 @@ public class KullaniciKayitEkrani extends Fragment {
             Toast.makeText(getActivity(), "Fotoğraf Kaydedildi.", Toast.LENGTH_SHORT).show();
         }
     }
-
     public String saveImage(Bitmap myBitmap) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);

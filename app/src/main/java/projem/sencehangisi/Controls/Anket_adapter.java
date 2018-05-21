@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import projem.sencehangisi.R;
+import projem.sencehangisi.fragments.KullaniciProfiliActivity;
 
 /**
  * Created by Müslüm BİTGEN on 27.04.2018.
@@ -53,7 +55,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
     }
 
     public class AnketViewHolder extends RecyclerView.ViewHolder{
-        public TextView uAd_soyad,ukullanici_adi,anket_soru,txtDurum,idBilgi,resim1Url,resim2Url,resim3Url;
+        public TextView uAd_soyad,ukullanici_adi,anket_soru,txtDurum,idBilgi,resim1Url,resim2Url,resim3Url,profilResBilgi,profilKpkBilgi;
         public ImageView u_img,anket_img1,anket_img2,anket_img3,anket_silImg;
         public ImageButton u_oy1,u_oy2,u_oy3;
         boolean deger=false;
@@ -71,6 +73,10 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
             anket_img2=itemView.findViewById(R.id.anketSecenekFoto2);
             anket_img3=itemView.findViewById(R.id.anketSecenekFoto3);
             anket_silImg=itemView.findViewById(R.id.silSecenek);
+            profilResBilgi=itemView.findViewById(R.id.profilResBilgi);
+            profilResBilgi.setVisibility(View.INVISIBLE);
+            profilKpkBilgi=itemView.findViewById(R.id.profilKpkBilgi);
+            profilKpkBilgi.setVisibility(View.INVISIBLE);
             idBilgi=itemView.findViewById(R.id.idBilgi);
             idBilgi.setVisibility(View.INVISIBLE);
             textView=itemView.findViewById(R.id.textView8);
@@ -131,7 +137,6 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                         builder.setMessage("Gönderi Silinsin mi?");
                         builder.setCancelable(false);
                         builder.setIcon(R.drawable.delete_icon);
-
                         builder.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -151,10 +156,32 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                     {
 
                     }
-
                 }
             });
-
+            uAd_soyad.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(mContext,KullaniciProfiliActivity.class);
+                    i.putExtra("kul_id",idBilgi.getText().toString());
+                    i.putExtra("Adi",uAd_soyad.getText().toString());
+                    i.putExtra("KullaniciAdi",ukullanici_adi.getText().toString());
+                    i.putExtra("resim",profilResBilgi.getText().toString());
+                    i.putExtra("kapak_foto",profilKpkBilgi.getText().toString());
+                    mContext.startActivity(i);
+                }
+            });
+            ukullanici_adi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(mContext,KullaniciProfiliActivity.class);
+                    i.putExtra("kul_id",idBilgi.getText().toString());
+                    i.putExtra("Adi",uAd_soyad.getText().toString());
+                    i.putExtra("KullaniciAdi",ukullanici_adi.getText().toString());
+                    i.putExtra("resim",profilResBilgi.getText().toString());
+                    i.putExtra("kapak_foto",profilKpkBilgi.getText().toString());
+                    mContext.startActivity(i);
+                }
+            });
             u_oy1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -221,6 +248,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         String anketImg1=currentItem.getAnket_image1();
         String anketImg2=currentItem.getAnket_image2();
         String anketImg3=currentItem.getAnket_image3();
+        String user_kapak_foto=currentItem.getUser_kapak_image();
         String btnDrm=currentItem.getBtnDrm();
         int oy1=currentItem.getOy1();
         int oy2=currentItem.getOy2();
@@ -233,6 +261,8 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         holder.resim1Url.setText(anketImg1);
         holder.resim2Url.setText(anketImg2);
         holder.resim3Url.setText(anketImg3);
+        holder.profilResBilgi.setText(user_img);
+        holder.profilKpkBilgi.setText(user_kapak_foto);
         Picasso.with(mContext).load(user_img).fit().centerInside().into(holder.u_img);
         Picasso.with(mContext).load(anketImg1).fit().centerInside().into(holder.anket_img1);
         Picasso.with(mContext).load(anketImg2).fit().centerInside().into(holder.anket_img2);
@@ -264,7 +294,6 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
             OySayisi(anketID,String.valueOf(3));
         }
     }
-
     @Override
     public AnketViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(mContext).inflate(R.layout.item_view,parent,false);
@@ -278,7 +307,6 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         }
         return 0;
     }
-
     public void OySayisi(final String gonder_id, final String cevap_id){
         String tag_string_req = "anket_oyla";
         StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.AnketOySayisi_URL,
@@ -441,5 +469,4 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
     private void toast(String x){
         Toast.makeText(mContext, x, Toast.LENGTH_SHORT).show();
     }
-
 }

@@ -183,9 +183,9 @@ public class  MainActivity extends AppCompatActivity implements NavigationView.O
             intent.setClass(getApplicationContext(),KullaniciProfiliActivity.class);
             startActivity(intent);
         }
-        else if (id == R.id.nav_populerler)
+        /*else if (id == R.id.nav_populerler)
         {
-        }
+        }*/
         else if (id == R.id.nav_cikis)
         {
 

@@ -11,10 +11,7 @@
             android:id="@+id/nav_profile"
             android:icon="@drawable/profile"
             android:title="@string/title_profil" />
-        <item
-            android:id="@+id/nav_populerler"
-            android:icon="@drawable/populerler"
-            android:title="@string/title_populerler" />
+
         <item
             android:id="@+id/nav_arkadasBul"
             android:icon="@drawable/user"

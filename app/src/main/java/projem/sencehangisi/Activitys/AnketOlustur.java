@@ -1,6 +1,7 @@
 package projem.sencehangisi.Activitys;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -54,6 +55,7 @@ public class AnketOlustur extends AppCompatActivity  {
     @BindView(R.id.anketGonderBtn) ImageView anketGonderBtn;
     private Bitmap bitmap,bitmap2,bitmap3,defaults;
     private UserInfo userInfo;
+    private ProgressDialog PD;
     File f;
     private static final String IMAGE_DIRECTORY = "/Sence Hangisi";
     private int GALLERY = 1, CAMERA = 2;
@@ -70,7 +72,8 @@ public class AnketOlustur extends AppCompatActivity  {
         ButterKnife.bind(this);
         userInfo = new UserInfo(this);
         session=new OturumYonetimi(AnketOlustur.this);
-
+        PD=new ProgressDialog(AnketOlustur.this);
+        PD.setCancelable(false);
 
         anketGonderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +83,6 @@ public class AnketOlustur extends AppCompatActivity  {
                 if(!anketSorusu.isEmpty())
                 {
                     anketKayit(user,anketSorusu);
-                    finish();
                 }
                 else
                 {
@@ -93,23 +95,24 @@ public class AnketOlustur extends AppCompatActivity  {
     public void anketKayit(final String userID,final String anketSoru)
     {
         String tag_string_req = "Anket_req";
-
+        PD.setMessage("Gönderiniz Paylaşılıyor Lütfen Bekleyiniz...");
+        showDialog();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 WebServisLinkleri.AnketOlustur, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
+              hideDialog();
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
 
-                        Intent intent = new Intent(
+                       Intent intent = new Intent(
                                 AnketOlustur.this,
                                 MainActivity.class);
                         startActivity(intent);
-                        toast("Anket Oluşturuldu");
-                        finish();
+                        toast("Gönderiniz Başarılı Bir Şekilde Oluşturuldu.");
                         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                     } else {
                         // Error in login. Get the error message
@@ -128,6 +131,7 @@ public class AnketOlustur extends AppCompatActivity  {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Anket Error: " + error.getMessage());
+
                 toast("Unknown Error occurred");
             }
         }) {
@@ -314,6 +318,15 @@ public class AnketOlustur extends AppCompatActivity  {
     }
     private void toast(String x){
         Toast.makeText(AnketOlustur.this, x, Toast.LENGTH_SHORT).show();
+    }
+    private void showDialog() {
+        if (!PD.isShowing())
+            PD.show();
+    }
+
+    private void hideDialog() {
+        if (PD.isShowing())
+            PD.dismiss();
     }
     public void anketOlusturKpt(View v)
     {

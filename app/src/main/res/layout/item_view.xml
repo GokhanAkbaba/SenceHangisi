@@ -213,6 +213,26 @@
                     app:layout_marginTopPercent="2%"
                     app:layout_widthPercent="32%"
                     android:id="@+id/view3" />
+
+                <TextView
+                    android:id="@+id/tarih"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginStart="32dp"
+                    android:text="tarih"
+                    android:layout_alignParentLeft="true"
+                    tools:ignore="RtlCompat" />
+
+                <TextView
+                    android:id="@+id/saat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tarih"
+                    android:layout_centerHorizontal="true"
+                    android:text="saat" />
             </android.support.percent.PercentRelativeLayout>
             </android.support.percent.PercentRelativeLayout>
         </HorizontalScrollView>

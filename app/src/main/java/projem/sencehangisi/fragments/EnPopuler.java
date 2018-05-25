@@ -1,6 +1,7 @@
 package projem.sencehangisi.fragments;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -37,7 +38,7 @@ import projem.sencehangisi.R;
 public class EnPopuler extends Fragment {
     private RecyclerView mRecyclerView;
     private Anket_adapter mAnket_adapter;
-
+    private ProgressDialog PD;
     private ArrayList<AnketInfo>  mInfoArrayList=new ArrayList<>();
     private ArrayList<String>  CvpIndis=new ArrayList<String>();
     private ArrayList<String> GonId=new ArrayList<String>();
@@ -49,6 +50,7 @@ public class EnPopuler extends Fragment {
     boolean deger=false;
     int durum=0;
     String kul_ID;
+
     public EnPopuler() {
 
     }
@@ -59,6 +61,8 @@ public class EnPopuler extends Fragment {
                              Bundle savedInstanceState) {
 
         ViewGroup view =(ViewGroup) inflater.inflate(R.layout.fragment_en_populer, container, false);
+        PD=new ProgressDialog(this.getContext());
+        PD.setCancelable(false);
         mRecyclerView=view.findViewById(R.id.recycler_view_enPopuler);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -77,12 +81,14 @@ public class EnPopuler extends Fragment {
     }
     public void AnketCek(){
         String tag_string_req = "anket_getir";
-
+        PD.setMessage("Yükleniyor..");
+        showDialog();
         StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.EnPopulerAnketler_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            hideDialog();
                             JSONObject jObj = new JSONObject(response);
                             JSONArray jsonArray=jObj.getJSONArray("EnPopulerAnketler");
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -93,6 +99,8 @@ public class EnPopuler extends Fragment {
                                 String anket_img1=anket.getString("resim1");
                                 String anket_img2=anket.getString("resim2");
                                 String anket_img3=anket.getString("resim3");
+                                String tarih=anket.getString("tarih");
+                                String saat=anket.getString("saat");
                                 String kul_adi=anket.getString("kul_adi");
                                 String users_kapak_foto=anket.getString("kapak_foto");
                                 String ad_soyad=anket.getString("ad_soyad");
@@ -125,27 +133,27 @@ public class EnPopuler extends Fragment {
                                 if (deger == true && durum == 0) {
                                     oy1 = R.drawable.secenek_dolu_yildiz;
                                     btnDrm="buton1";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,anketKulId,users_kapak_foto));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,tarih,saat,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,anketKulId,users_kapak_foto));
                                     deger = false;
                                     durum = 0;
                                 } else if (deger == true && durum == 1) {
                                     oy2 = R.drawable.secenek_dolu_yildiz;
                                     btnDrm="buton2";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,anketKulId,users_kapak_foto));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,tarih,saat,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,anketKulId,users_kapak_foto));
                                     deger = false;
                                     durum = 1;
                                 }
                                 else if (deger == true && durum == 3) {
                                     oy3 = R.drawable.secenek_dolu_yildiz;
                                     btnDrm="buton3";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,anketKulId,users_kapak_foto));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,tarih,saat,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,anketKulId,users_kapak_foto));
                                     deger = false;
                                     durum = 3;
                                 }
                                 else if(deger==false && durum==4 || GonId.size()==0)
                                 {
                                     btnDrm="bos";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,anketKulId,users_kapak_foto));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,tarih,saat,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,anketKulId,users_kapak_foto));
                                 }
                             }
                             mAnket_adapter=new Anket_adapter(getActivity(),mInfoArrayList);
@@ -158,7 +166,7 @@ public class EnPopuler extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        hideDialog();
                     }
                 }) {
             @Override
@@ -173,12 +181,14 @@ public class EnPopuler extends Fragment {
     }
     public void AnketCevapCek(final String kullanici_id){
         String tag_string_req = "ankat_oyla";
-
+        PD.setMessage("Yükleniyor..");
+        showDialog();
         StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.AnketCevapCEK,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            hideDialog();
                             JSONObject jObj = new JSONObject(response);
                             JSONArray jsonArray=jObj.getJSONArray("AnketlerCevap");
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -198,7 +208,7 @@ public class EnPopuler extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        hideDialog();
                     }
                 }) {
             @Override
@@ -213,6 +223,19 @@ public class EnPopuler extends Fragment {
         AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
 
     }
-
+    private void showDialog()
+    {
+        if(!PD.isShowing())
+        {
+            PD.show();
+        }
+    }
+    private void hideDialog()
+    {
+        if(PD.isShowing())
+        {
+            PD.dismiss();
+        }
+    }
 
 }

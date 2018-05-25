@@ -3,6 +3,7 @@ package projem.sencehangisi.fragments;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -82,7 +83,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
     private Anket_adapter mAnket_adapter;
     private RequestQueue mRequestQueue;
     String foto;
-
+    private ProgressDialog PD;
     private ArrayList<AnketInfo> mInfoArrayList=new ArrayList<>();
     private ArrayList<String> CvpIndis=new ArrayList<String>();
     private ArrayList<String> GonId=new ArrayList<String>();
@@ -108,7 +109,8 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_kullanici_profili);
-
+        PD=new ProgressDialog(this);
+        PD.setCancelable(false);
         mRecyclerView=findViewById(R.id.recycler_view_profil);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -236,11 +238,14 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
     public void fotoGuncelle(final String userID, final String fotoCst)
     {
         String tag_string_req = "Foto_Degis";
+        PD.setMessage("Yükleniyor..");
+        showDialog();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 WebServisLinkleri.FotoGuncelle_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
+                    hideDialog();
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
@@ -264,6 +269,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Anket Error: " + error.getMessage());
                 toast("Unknown Error occurred");
+                hideDialog();
             }
         }) {
 
@@ -424,11 +430,14 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
     }
     public void TakipEdilenCek(final String kullanici_id){
         final String tag_string_req = "ankat_takipEdilen";
+        PD.setMessage("Yükleniyor..");
+        showDialog();
         StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.TakipEdilenCEK,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            hideDialog();
                             JSONObject jObj = new JSONObject(response);
                             JSONArray array=jObj.getJSONArray("TakipEdilen");
                             for (int i=0; i < array.length(); i++) {
@@ -491,6 +500,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        hideDialog();
                     }
                 }) {
             @Override
@@ -552,7 +562,8 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
     }
     public void TakipEden(final String userID){
         String tag_string_req = "takipSayisi";
-
+        PD.setMessage("Yükleniyor..");
+        showDialog();
         StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.TakipciSayisi_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -560,6 +571,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                         System.out.println(response);
 
                         try {
+                            hideDialog();
                             JSONObject jObj = new JSONObject(response);
                             JSONArray array=jObj.getJSONArray("TakipciSayisi");
                             for (int i = 0; i < array.length(); i++) {
@@ -576,7 +588,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        hideDialog();
                     }
                 }) {
             @Override
@@ -592,7 +604,8 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
     }
     public void TakipEdilen(final String userID){
         String tag_string_req = "takipEdilenSayisi";
-
+        PD.setMessage("Yükleniyor..");
+        showDialog();
         StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.TakipEdenSayisi_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -600,6 +613,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                         System.out.println(response);
 
                         try {
+                            hideDialog();
                             JSONObject jObj = new JSONObject(response);
                             JSONArray array=jObj.getJSONArray("TakipEdilenSayisi");
                             for (int i = 0; i < array.length(); i++) {
@@ -615,7 +629,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        hideDialog();
                     }
                 }) {
             @Override
@@ -631,7 +645,8 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
     }
     public void anketSayisi(final String userID){
         String tag_string_req = "userAnketSayisi";
-
+        PD.setMessage("Yükleniyor..");
+        showDialog();
         StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.UserAnketSayisi_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -639,6 +654,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                         System.out.println(response);
 
                         try {
+                            hideDialog();
                             JSONObject jObj = new JSONObject(response);
                             JSONArray array=jObj.getJSONArray("KullaniciAnketSayisi");
                             for (int i = 0; i < array.length(); i++) {
@@ -655,7 +671,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        hideDialog();
                     }
                 }) {
             @Override
@@ -671,12 +687,14 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
     }
     public void AnketCek(final String kullanici_id){
         String tag_string_req = "anket_getir";
-
+        PD.setMessage("Yükleniyor..");
+        showDialog();
         StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.KullanicininAnketleri_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            hideDialog();
                             JSONObject jObj = new JSONObject(response);
                             JSONArray jsonArray=jObj.getJSONArray("KullanicininAnketleri");
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -687,6 +705,8 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                                 String anket_img1=anket.getString("resim1");
                                 String anket_img2=anket.getString("resim2");
                                 String anket_img3=anket.getString("resim3");
+                                String tarih=anket.getString("tarih");
+                                String saat=anket.getString("saat");
                                 String user_kapak_foto=anket.getString("kapak_foto");
                                 String kul_adi=anket.getString("kul_adi");
                                 String ad_soyad=anket.getString("ad_soyad");
@@ -719,27 +739,27 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                                 if (deger == true && durum == 0) {
                                     oy1 = R.drawable.secenek_dolu_yildiz;
                                     btnDrm="buton1";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id,user_kapak_foto));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,tarih,saat,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id,user_kapak_foto));
                                     deger = false;
                                     durum = 0;
                                 } else if (deger == true && durum == 1) {
                                     oy2 = R.drawable.secenek_dolu_yildiz;
                                     btnDrm="buton2";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id,user_kapak_foto));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,tarih,saat,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id,user_kapak_foto));
                                     deger = false;
                                     durum = 1;
                                 }
                                 else if (deger == true && durum == 3) {
                                     oy3 = R.drawable.secenek_dolu_yildiz;
                                     btnDrm="buton3";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id,user_kapak_foto));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,tarih,saat,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id,user_kapak_foto));
                                     deger = false;
                                     durum = 3;
                                 }
                                 else if(deger==false && durum==4 || GonId.size()==0)
                                 {
                                     btnDrm="bos";
-                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id,user_kapak_foto));
+                                    mInfoArrayList.add(new AnketInfo(anketID, anket_soru, anket_img1, anket_img2,anket_img3,tarih,saat,oy1,oy2,oy3,kul_resim,ad_soyad,kul_adi,btnDrm,user_Id,user_kapak_foto));
                                 }
                             }
                             mAnket_adapter=new Anket_adapter(KullaniciProfiliActivity.this,mInfoArrayList);
@@ -752,7 +772,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        hideDialog();
                     }
                 }) {
             @Override
@@ -769,12 +789,14 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
     }
     public void AnketCevapCek(final String kullanici_id){
         String tag_string_req = "ankat_oyla";
-
+        PD.setMessage("Yükleniyor..");
+        showDialog();
         StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.AnketCevapCEK,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            hideDialog();
                             JSONObject jObj = new JSONObject(response);
                             JSONArray jsonArray=jObj.getJSONArray("AnketlerCevap");
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -794,7 +816,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        hideDialog();
                     }
                 }) {
             @Override
@@ -808,6 +830,20 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
         };
         AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
 
+    }
+    private void showDialog()
+    {
+        if(!PD.isShowing())
+        {
+            PD.show();
+        }
+    }
+    private void hideDialog()
+    {
+        if(PD.isShowing())
+        {
+            PD.dismiss();
+        }
     }
 
 }

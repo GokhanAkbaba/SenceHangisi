@@ -26,8 +26,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import projem.sencehangisi.R;
@@ -55,9 +58,10 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
     }
 
     public class AnketViewHolder extends RecyclerView.ViewHolder{
-        public TextView uAd_soyad,ukullanici_adi,anket_soru,txtDurum,idBilgi,resim1Url,resim2Url,resim3Url,profilResBilgi,profilKpkBilgi;
+        public TextView uAd_soyad,ukullanici_adi,anket_soru,txtDurum,idBilgi,resim1Url,resim2Url,resim3Url,tarih,saat,profilResBilgi,profilKpkBilgi;
         public ImageView u_img,anket_img1,anket_img2,anket_img3,anket_silImg;
         public ImageButton u_oy1,u_oy2,u_oy3;
+
         boolean deger=false;
         private TextView textView;
         int indis;
@@ -65,6 +69,8 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         public AnketViewHolder(View itemView) {
             super(itemView);
             userInfo=new UserInfo(mContext);
+            tarih=itemView.findViewById(R.id.tarih);
+            saat=itemView.findViewById(R.id.saat);
             uAd_soyad=itemView.findViewById(R.id.getName);
             anket_soru=itemView.findViewById(R.id.SoruAnket);
             ukullanici_adi=itemView.findViewById(R.id.getuser);
@@ -248,8 +254,15 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         String anketImg1=currentItem.getAnket_image1();
         String anketImg2=currentItem.getAnket_image2();
         String anketImg3=currentItem.getAnket_image3();
+        String tarih=currentItem.getTarih();
+        String saat=currentItem.getSaat();
         String user_kapak_foto=currentItem.getUser_kapak_image();
         String btnDrm=currentItem.getBtnDrm();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("H");
+        String date = sdf.format(new Date());
+        int fark=Integer.parseInt(date)-Integer.parseInt(saat);
+
         int oy1=currentItem.getOy1();
         int oy2=currentItem.getOy2();
         int oy3=currentItem.getOy3();
@@ -261,6 +274,8 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         holder.resim1Url.setText(anketImg1);
         holder.resim2Url.setText(anketImg2);
         holder.resim3Url.setText(anketImg3);
+        holder.tarih.setText(tarih);
+        holder.saat.setText(fark+" saat önce");
         holder.profilResBilgi.setText(user_img);
         holder.profilKpkBilgi.setText(user_kapak_foto);
         Picasso.with(mContext).load(user_img).fit().centerInside().into(holder.u_img);

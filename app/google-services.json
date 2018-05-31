@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "221046699879",
+    "firebase_url": "https://sencehangisi-e4a0f.firebaseio.com",
+    "project_id": "sencehangisi-e4a0f",
+    "storage_bucket": "sencehangisi-e4a0f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:221046699879:android:e71db9a0447cc794",
+        "android_client_info": {
+          "package_name": "projem.sencehangisi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "221046699879-jtvh76u2eko070ts9fdbcfurl5s4svci.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "221046699879-jtvh76u2eko070ts9fdbcfurl5s4svci.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSS8r8BjxN9wKrfUngT-JaB5fKm3kUc0E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

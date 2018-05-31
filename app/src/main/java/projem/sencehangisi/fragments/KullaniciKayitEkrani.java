@@ -122,6 +122,7 @@ public class KullaniciKayitEkrani extends Fragment {
         });
         return view;
     }
+
     private void showPictureDialog(){
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(getActivity());
         pictureDialog.setTitle("Resim Seç");
@@ -311,5 +312,6 @@ public class KullaniciKayitEkrani extends Fragment {
     private void toast(String x){
         Toast.makeText(getActivity(), x, Toast.LENGTH_SHORT).show();
     }
+
 
 }

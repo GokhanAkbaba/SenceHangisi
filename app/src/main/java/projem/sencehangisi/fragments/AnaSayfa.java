@@ -56,6 +56,7 @@ public class AnaSayfa extends Fragment {
         ViewGroup view =(ViewGroup) inflater.inflate(R.layout.fragment_ana_sayfa, container, false);
         PD=new ProgressDialog(getActivity());
         PD.setCancelable(false);
+
         mRecyclerView=view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -73,14 +74,13 @@ public class AnaSayfa extends Fragment {
     }
     public void AnketCek(final String kullanici_id){
         String tag_string_req = "anket_getir";
-        PD.setMessage("Yükleniyor..");
-        showDialog();
         StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.AnketCEK,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            hideDialog();
+                            PD.setMessage("Yükleniyor..");
+                            showDialog();
                             JSONObject jObj = new JSONObject(response);
                             JSONArray jsonArray=jObj.getJSONArray("TakipEdilenAnketler");
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -151,6 +151,7 @@ public class AnaSayfa extends Fragment {
                             }
                             mAnket_adapter=new Anket_adapter(getActivity(),mInfoArrayList);
                             mRecyclerView.setAdapter(mAnket_adapter);
+                            hideDialog();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -173,14 +174,14 @@ public class AnaSayfa extends Fragment {
     }
     public void AnketCevapCek(final String kullanici_id){
         String tag_string_req = "ankat_oyla";
-        PD.setMessage("Yükleniyor..");
-        showDialog();
+
         StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.AnketCevapCEK,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            hideDialog();
+                            PD.setMessage("Yükleniyor..");
+                            showDialog();
                             JSONObject jObj = new JSONObject(response);
                             JSONArray jsonArray=jObj.getJSONArray("AnketlerCevap");
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -192,6 +193,7 @@ public class AnaSayfa extends Fragment {
                                 GonId.add(gonderiID);
                                 KulId.add(kulID);
                             }
+                            hideDialog();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

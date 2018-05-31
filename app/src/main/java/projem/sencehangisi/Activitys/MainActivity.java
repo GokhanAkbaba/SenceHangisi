@@ -65,7 +65,6 @@ public class  MainActivity extends AppCompatActivity implements NavigationView.O
 
             }
         });
-
         tabLayout= (TabLayout) findViewById(R.id.tab);
         ViewPager viewPager=(ViewPager)findViewById(R.id.viewPager);
         tabLayout.setupWithViewPager(viewPager);

@@ -2,6 +2,7 @@ package projem.sencehangisi.Controls;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,7 +31,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import projem.sencehangisi.R;
@@ -42,6 +42,7 @@ import projem.sencehangisi.fragments.KullaniciProfiliActivity;
 
 public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewHolder> {
     private Context mContext;
+    private ProgressDialog PD;
     private ArrayList<AnketInfo> mAnketInfoList;
     public ArrayList<String> oyID=new ArrayList<String>();
     public ArrayList<String> Drm=new ArrayList<String>();
@@ -146,6 +147,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                         builder.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                System.out.println("IF"+userInfo.getKeyId()+"sdf"+textView.getText().toString());
                                 AnketSil(userInfo.getKeyId(),textView.getText().toString());
                             }
                         });
@@ -262,7 +264,6 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         SimpleDateFormat sdf = new SimpleDateFormat("H");
         String date = sdf.format(new Date());
         int fark=Integer.parseInt(date)-Integer.parseInt(saat);
-
         int oy1=currentItem.getOy1();
         int oy2=currentItem.getOy2();
         int oy3=currentItem.getOy3();
@@ -331,7 +332,6 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                         System.out.println(response);
 
                         try {
-
                             JSONObject jObj = new JSONObject(response);
                             cevap1="0";
                             cevap2="0";
@@ -483,5 +483,19 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
     }
     private void toast(String x){
         Toast.makeText(mContext, x, Toast.LENGTH_SHORT).show();
+    }
+    private void showDialog()
+    {
+        if(!PD.isShowing())
+        {
+            PD.show();
+        }
+    }
+    private void hideDialog()
+    {
+        if(PD.isShowing())
+        {
+            PD.dismiss();
+        }
     }
 }

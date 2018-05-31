@@ -214,29 +214,32 @@
                     app:layout_widthPercent="32%"
                     android:id="@+id/view3" />
 
-                <TextView
-                    android:id="@+id/tarih"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginStart="32dp"
-                    android:text="tarih"
-                    android:layout_alignParentLeft="true"
-                    tools:ignore="RtlCompat" />
 
-                <TextView
-                    android:id="@+id/saat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/tarih"
-                    android:layout_centerHorizontal="true"
-                    android:text="saat" />
             </android.support.percent.PercentRelativeLayout>
             </android.support.percent.PercentRelativeLayout>
         </HorizontalScrollView>
+        <TextView
+            android:id="@+id/tarih"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            android:text="tarih"
+            android:autoSizeTextType="uniform"
+            android:textSize="15sp"
+            app:layout_marginTopPercent="90%"
+            app:layout_marginLeftPercent="3%"
+            app:layout_marginRightPercent="2%" />
 
+        <TextView
+            android:id="@+id/saat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="15sp"
+            app:layout_marginTopPercent="90%"
+            app:layout_marginLeftPercent="70%"
+            app:layout_marginRightPercent="2%"
+            android:text="saat" />
 
         <TextView
             android:id="@+id/textView8"

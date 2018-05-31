@@ -19,6 +19,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -132,7 +134,8 @@ public class KullaniciGirisEkrani extends Fragment{
         String tag_string_req="req_login";
         PD.setMessage("Giriş..");
         showDialog();
-
+        FirebaseMessaging.getInstance().subscribeToTopic("test");
+        FirebaseInstanceId.getInstance().getToken();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 WebServisLinkleri.GIRIS_URL, new Response.Listener<String>() {
 

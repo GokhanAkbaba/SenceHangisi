@@ -5,6 +5,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import projem.sencehangisi.R;
 import projem.sencehangisi.fragments.KullaniciGirisEkrani;
 import projem.sencehangisi.fragments.KullaniciKayitEkrani;
@@ -19,7 +22,6 @@ public class KullaniciIslemleriActivity extends AppCompatActivity {
         ActionBar actionBar=getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_kullanici_islemleri);
-
         KullaniciGirisEkrani kullaniciGirisEkrani=new KullaniciGirisEkrani();
         getSupportFragmentManager().beginTransaction().replace(R.id.k_islemleri,kullaniciGirisEkrani).commit();
 

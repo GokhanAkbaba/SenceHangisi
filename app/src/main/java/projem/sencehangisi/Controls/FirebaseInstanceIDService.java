@@ -1,16 +1,6 @@
 package projem.sencehangisi.Controls;
 
-import android.util.Log;
-
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
-
-import java.io.IOException;
-
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 
 
 /**
@@ -19,19 +9,20 @@ import okhttp3.RequestBody;
 
 public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
     private static final String TAG = "MyFirebaseIIDService";
-    private UserInfo userInfo;
-    String kul_ID;
     @Override
     public void onTokenRefresh() {
+       /* UserInfo userInfo=new UserInfo(this);;
+        String kul_ID;
         String token = FirebaseInstanceId.getInstance().getToken();
-        userInfo=new UserInfo(this);
             kul_ID=userInfo.getKeyId();
-        registerToken(token,kul_ID);
+       // registerToken(token,kul_ID);
         Log.d(TAG, "Token: " + token);
-        Log.d(TAG, "Kul_id: " + kul_ID);
+        Log.d(TAG, "Kul_id: " + kul_ID);*/
+        /*FirebaseMessaging.getInstance().subscribeToTopic("test");
+        FirebaseInstanceId.getInstance().getToken();*/
     }
 
-    private void registerToken(String token,String kul_id){
+    /*public void registerToken(String token,String kul_id){
         okhttp3.OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("token", token)
@@ -47,5 +38,5 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

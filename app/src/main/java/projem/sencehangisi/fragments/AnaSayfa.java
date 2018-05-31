@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +36,9 @@ import projem.sencehangisi.Controls.Search.ItemControls;
 import projem.sencehangisi.Controls.UserInfo;
 import projem.sencehangisi.Controls.WebServisLinkleri;
 import projem.sencehangisi.R;
+
+import static com.android.volley.VolleyLog.TAG;
+
 public class AnaSayfa extends Fragment {
     private Context mContext;
     private RecyclerView mRecyclerView;
@@ -49,14 +54,14 @@ public class AnaSayfa extends Fragment {
     int oy1,oy2,oy3;
     boolean deger=false;
     int durum=0;
-    String kul_ID;
+    String kul_ID,token;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup view =(ViewGroup) inflater.inflate(R.layout.fragment_ana_sayfa, container, false);
         PD=new ProgressDialog(getActivity());
         PD.setCancelable(false);
-
+        token = FirebaseInstanceId.getInstance().getToken();
         mRecyclerView=view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -69,6 +74,8 @@ public class AnaSayfa extends Fragment {
                 kul_ID=userInfo.getKeyId();
                         AnketCek(kul_ID);
                         AnketCevapCek(kul_ID);
+                    TokenGonder(kul_ID,token);
+        Log.d(TAG, "Token: " + token);
 
                 return view;
     }
@@ -209,6 +216,35 @@ public class AnaSayfa extends Fragment {
             protected Map<String, String> getParams() {
                 Map<String, String> params=new HashMap<String, String>();
                 params.put("kullanici_id", kullanici_id);
+
+                return params;
+            }
+
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
+
+    }
+    public void TokenGonder(final String kullanici_id, final String token){
+        String tag_string_req = "token_gonder";
+
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.Token_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        hideDialog();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params=new HashMap<String, String>();
+                params.put("kul_id", kullanici_id);
+                params.put("token", token);
 
                 return params;
             }

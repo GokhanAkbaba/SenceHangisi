@@ -19,8 +19,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,7 +47,6 @@ public class KullaniciGirisEkrani extends Fragment{
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
     //Temel sınıfın basit adını getirir.
     private static final String TAG=KullaniciGirisEkrani.class.getSimpleName();
     private final static String Email="EMAİL MESAJI";
@@ -57,8 +54,6 @@ public class KullaniciGirisEkrani extends Fragment{
     private OturumYonetimi session;
     private UserInfo userInfo;
     @BindView(R.id.epostaGirisText) EditText epostaGirisTxt;
-
-
     @BindView(R.id.sifreGirisText) EditText sifreGirisTxt;
     @BindView(R.id.sifreUnuttumText) TextView sifreUnuttumTxt;
     @BindView(R.id.kayitOlText) TextView kayitOlTxt;
@@ -134,8 +129,7 @@ public class KullaniciGirisEkrani extends Fragment{
         String tag_string_req="req_login";
         PD.setMessage("Giriş..");
         showDialog();
-        FirebaseMessaging.getInstance().subscribeToTopic("test");
-        FirebaseInstanceId.getInstance().getToken();
+
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 WebServisLinkleri.GIRIS_URL, new Response.Listener<String>() {
 
@@ -166,7 +160,6 @@ public class KullaniciGirisEkrani extends Fragment{
                         userInfo.setKeyKapakfoto(kapak_foto);
                         userInfo.setId(uId);
                         session.setLogin(true);
-
                         Intent intent =new Intent(getActivity(),MainActivity.class);
                         startActivity(intent);
                         getActivity().finish();

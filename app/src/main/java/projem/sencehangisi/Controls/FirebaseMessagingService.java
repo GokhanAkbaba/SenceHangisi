@@ -33,14 +33,14 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         NotificationCompat.Builder builder = (NotificationCompat.Builder) new NotificationCompat.Builder(this)
                 .setAutoCancel(true)
-                .setContentTitle("SineCepim")
+                .setContentTitle("Sence Hangisi")
                 .setContentText(message)
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(message))
-                .setTicker("Yakında Vizyonda ! ")
+                .setTicker("Takip Etti ")
                 .setSound(ses)
                 .setDefaults(Notification.DEFAULT_VIBRATE)
-                .setSmallIcon(R.drawable.carpi_icon)
+                .setSmallIcon(R.drawable.question)
                 .setContentIntent(pendingIntent);
 
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

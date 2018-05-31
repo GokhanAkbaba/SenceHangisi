@@ -44,6 +44,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
     private Context mContext;
     private ProgressDialog PD;
     private ArrayList<AnketInfo> mAnketInfoList;
+    private Takipciİslemleri takipciİslemleri=new Takipciİslemleri();
     public ArrayList<String> oyID=new ArrayList<String>();
     public ArrayList<String> Drm=new ArrayList<String>();
     public Button secenekOySayisi1,secenekOySayisi2,secenekOySayisi3;
@@ -204,6 +205,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                         u_oy3.setEnabled(false);
                     }
                     OySayisi(textView.getText().toString(),String.valueOf(indis));
+                    takipciİslemleri.GoneriBildirim(userInfo.getKeyId(),idBilgi.getText().toString(),textView.getText().toString());
                 }
             });
             u_oy2.setOnClickListener(new View.OnClickListener() {
@@ -221,6 +223,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                         u_oy3.setEnabled(false);
                     }
                     OySayisi(textView.getText().toString(),String.valueOf(indis));
+                    takipciİslemleri.GoneriBildirim(userInfo.getKeyId(),idBilgi.getText().toString(),textView.getText().toString());
                 }
             });
 
@@ -239,6 +242,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                         u_oy3.setEnabled(false);
                     }
                     OySayisi(textView.getText().toString(),String.valueOf(indis));
+                    takipciİslemleri.GoneriBildirim(userInfo.getKeyId(),idBilgi.getText().toString(),textView.getText().toString());
                 }
             });
 

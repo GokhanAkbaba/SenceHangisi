@@ -211,6 +211,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                                     } else if (tkpKontrol == false) {
                                         prfTakipEt.setImageResource(R.drawable.checked);
                                         takipciİslemleri.TakipciEkle(userInfo.getKeyId(), kul_id);
+                                        takipciİslemleri.TakipBildirim(userInfo.getKeyId(),kul_id);
                                         tkpKontrol = true;
                                     }
                                 }

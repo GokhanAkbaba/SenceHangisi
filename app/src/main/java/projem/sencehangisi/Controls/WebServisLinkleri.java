@@ -31,5 +31,7 @@ public class WebServisLinkleri
     public static String KullaniciVeriGuncelle_URL="http://oftekfakitiraf.com/senceHangisi/kullaniciVeriGuncelle.php";
     public static String AnketSil_URL="http://oftekfakitiraf.com/senceHangisi/anketSil.php";
     public static String Token_URL="http://oftekfakitiraf.com/senceHangisi/bildirimRegister.php";
+    public static String TakipBildirim_URL="http://oftekfakitiraf.com/senceHangisi/sendNotification.php";
+    public static String GonderiBildirim_URL="http://oftekfakitiraf.com/senceHangisi/sendNotificationAnket.php";
 
 }

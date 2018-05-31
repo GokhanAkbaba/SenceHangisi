@@ -113,6 +113,60 @@ public class Takipciİslemleri {
         };
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
+    public void TakipBildirim(final String userID,final String takipciID){
+        String tag_string_req = "bildirim_gonder";
+
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.TakipBildirim_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params=new HashMap<String, String>();
+                params.put("user_id",userID);
+                params.put("takipci",takipciID);
+                return params;
+            }
+
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
+
+    }
+    public void GoneriBildirim(final String userID, final String takipciID, final String anketID){
+        String tag_string_req = "bildirim_gonder";
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.GonderiBildirim_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params=new HashMap<String, String>();
+                params.put("user_id",userID);
+                params.put("takipci",takipciID);
+                params.put("anketID",anketID);
+                return params;
+            }
+
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
+
+    }
     private void toast(String x){
         Toast.makeText(mContext, x, Toast.LENGTH_SHORT).show();
     }

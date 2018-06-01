@@ -39,7 +39,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="260dp"
-        android:text="Parolanızı sıfırlamak için kayıtlı e-posta adresinizi giriniz"
+        android:text="Parolanızı sıfırlamak için telefon numaranızı giriniz"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="18sp"
@@ -54,8 +54,9 @@
         android:drawableLeft="@drawable/profile"
         android:drawablePadding="12dp"
         android:ems="6"
-        android:hint="E-Posta"
-        android:inputType="textEmailAddress"
+        android:hint="05xxxxxxxxx"
+        android:inputType="phone"
+        android:digits="0123456789+"
         android:maxLines="1"
         android:padding="20dp"
         android:textColorHint="#fff"
@@ -66,6 +67,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
+        android:id="@+id/SifremiSifirla"
         android:layout_width="311dp"
         android:layout_height="52dp"
         android:layout_marginEnd="8dp"

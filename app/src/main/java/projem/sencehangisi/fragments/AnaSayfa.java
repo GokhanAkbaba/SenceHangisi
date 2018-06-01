@@ -8,7 +8,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +35,6 @@ import projem.sencehangisi.Controls.Search.ItemControls;
 import projem.sencehangisi.Controls.UserInfo;
 import projem.sencehangisi.Controls.WebServisLinkleri;
 import projem.sencehangisi.R;
-
-import static com.android.volley.VolleyLog.TAG;
 
 public class AnaSayfa extends Fragment {
     private Context mContext;
@@ -75,8 +72,6 @@ public class AnaSayfa extends Fragment {
                         AnketCek(kul_ID);
                         AnketCevapCek(kul_ID);
                     TokenGonder(kul_ID,token);
-        Log.d(TAG, "Token: " + token);
-
                 return view;
     }
     public void AnketCek(final String kullanici_id){

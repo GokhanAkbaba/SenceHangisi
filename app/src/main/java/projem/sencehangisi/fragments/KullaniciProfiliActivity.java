@@ -219,16 +219,14 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                 }
     }
     int dgr;
-    public void KapakFotoDegis(View v)
-    {
+    public void KapakFotoDegis(View v) {
         dgr=1;
         showPictureDialog();
         fotoDegis.setVisibility(View.INVISIBLE);
         fotoDegis2.setVisibility(View.INVISIBLE);
         kpkFotoKontrol=true;
     }
-    public void ProfilFotoDegis(View v)
-    {
+    public void ProfilFotoDegis(View v) {
         dgr=2;
         showPictureDialog();
         fotoDegis.setVisibility(View.INVISIBLE);
@@ -236,8 +234,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
         prfDuzenle.setVisibility(View.INVISIBLE);
         prfFotoKontrol=true;
     }
-    public void fotoGuncelle(final String userID, final String fotoCst)
-    {
+    public void fotoGuncelle(final String userID, final String fotoCst) {
         String tag_string_req = "Foto_Degis";
         PD.setMessage("Yükleniyor..");
         showDialog();
@@ -450,7 +447,6 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                             if (extras !=null){
                                 mInfoArrayList.clear();
                                 kul_id = extras.getString("kul_id");
-                                System.out.println("asdfasf"+kul_id);
                                 String adsoyad = extras.getString("Adi");
                                 String kuladi = extras.getString("KullaniciAdi");
                                 foto = extras.getString("resim");
@@ -832,15 +828,13 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
 
     }
-    private void showDialog()
-    {
+    private void showDialog() {
         if(!PD.isShowing())
         {
             PD.show();
         }
     }
-    private void hideDialog()
-    {
+    private void hideDialog() {
         if(PD.isShowing())
         {
             PD.dismiss();

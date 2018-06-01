@@ -93,6 +93,7 @@ public class TakipTakipciAdapter extends RecyclerView.Adapter<TakipTakipciAdapte
                             {
                                 takipBtn.setImageResource(R.drawable.checked);
                                 takipciİslemleri.TakipciEkle(userInfo.getKeyId(),textViewID.getText().toString());
+                                takipciİslemleri.TakipBildirim(userInfo.getKeyId(),textViewID.getText().toString());
                                 deger=false;
                             }
 
@@ -104,6 +105,7 @@ public class TakipTakipciAdapter extends RecyclerView.Adapter<TakipTakipciAdapte
                             {
                                 takipBtn.setImageResource(R.drawable.checked);
                                 takipciİslemleri.TakipciEkle(userInfo.getKeyId(),textViewID.getText().toString());
+                                takipciİslemleri.TakipBildirim(userInfo.getKeyId(),textViewID.getText().toString());
                                 deger=true;
                             }
                             else

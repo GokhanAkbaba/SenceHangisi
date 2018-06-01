@@ -47,7 +47,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
     private Takipciİslemleri takipciİslemleri=new Takipciİslemleri();
     public ArrayList<String> oyID=new ArrayList<String>();
     public ArrayList<String> Drm=new ArrayList<String>();
-    public Button secenekOySayisi1,secenekOySayisi2,secenekOySayisi3;
+    public Button OySayisi1,OySayisi2,OySayisi3;
     String  cevap1="0",cevap2="0",cevap3="0";
     private static final String TAG = Anket_adapter.class.getSimpleName();
     public Anket_adapter()
@@ -99,9 +99,9 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
             u_oy1=itemView.findViewById(R.id.oy1);
             u_oy2=itemView.findViewById(R.id.oy2);
             u_oy3=itemView.findViewById(R.id.oy3);
-            secenekOySayisi1=itemView.findViewById(R.id.secenekOySayisi1);
-            secenekOySayisi2=itemView.findViewById(R.id.secenekOySayisi2);
-            secenekOySayisi3=itemView.findViewById(R.id.secenekOySayisi3);
+            OySayisi1=itemView.findViewById(R.id.secenekOySayisi1);
+            OySayisi2=itemView.findViewById(R.id.secenekOySayisi2);
+            OySayisi3=itemView.findViewById(R.id.secenekOySayisi3);
            anket_img1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -205,7 +205,10 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                         u_oy3.setEnabled(false);
                     }
                     OySayisi(textView.getText().toString(),String.valueOf(indis));
-                    takipciİslemleri.GoneriBildirim(userInfo.getKeyId(),idBilgi.getText().toString(),textView.getText().toString());
+                    if(Integer.parseInt(userInfo.getKeyId())!=Integer.parseInt(idBilgi.getText().toString()))
+                    {
+                        takipciİslemleri.GoneriBildirim(userInfo.getKeyId(),idBilgi.getText().toString(),textView.getText().toString());
+                    }
                 }
             });
             u_oy2.setOnClickListener(new View.OnClickListener() {
@@ -223,7 +226,10 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                         u_oy3.setEnabled(false);
                     }
                     OySayisi(textView.getText().toString(),String.valueOf(indis));
-                    takipciİslemleri.GoneriBildirim(userInfo.getKeyId(),idBilgi.getText().toString(),textView.getText().toString());
+                    if(Integer.parseInt(userInfo.getKeyId())!=Integer.parseInt(idBilgi.getText().toString()))
+                    {
+                        takipciİslemleri.GoneriBildirim(userInfo.getKeyId(),idBilgi.getText().toString(),textView.getText().toString());
+                    }
                 }
             });
 
@@ -242,7 +248,10 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                         u_oy3.setEnabled(false);
                     }
                     OySayisi(textView.getText().toString(),String.valueOf(indis));
-                    takipciİslemleri.GoneriBildirim(userInfo.getKeyId(),idBilgi.getText().toString(),textView.getText().toString());
+                    if(Integer.parseInt(userInfo.getKeyId())!=Integer.parseInt(idBilgi.getText().toString()))
+                    {
+                        takipciİslemleri.GoneriBildirim(userInfo.getKeyId(),idBilgi.getText().toString(),textView.getText().toString());
+                    }
                 }
             });
 
@@ -290,7 +299,6 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         Picasso.with(mContext).load(oy1).fit().centerInside().into(holder.u_oy1);
         Picasso.with(mContext).load(oy2).fit().centerInside().into(holder.u_oy2);
         Picasso.with(mContext).load(oy3).fit().centerInside().into(holder.u_oy3);
-
         if(btnDrm=="buton1")
         {
             holder.u_oy2.setEnabled(false);
@@ -317,6 +325,8 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
     @Override
     public AnketViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(mContext).inflate(R.layout.item_view,parent,false);
+        PD=new ProgressDialog(mContext);
+        PD.setCancelable(false);
         return new AnketViewHolder(v);
     }
     @Override
@@ -356,9 +366,9 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
                                 }
                             }
                             System.out.println("Cevap1: "+cevap1+"Cevap2: "+cevap2+"cevap3: "+cevap3);
-                            secenekOySayisi1.setText(cevap1);
-                            secenekOySayisi2.setText(cevap2);
-                            secenekOySayisi3.setText(cevap3);
+                            OySayisi1.setText(cevap1);
+                            OySayisi2.setText(cevap2);
+                            OySayisi3.setText(cevap3);
 
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -49,6 +49,7 @@ public class  MainActivity extends AppCompatActivity implements NavigationView.O
     private TabLayout tabLayout;
     private UserInfo userInfo;
     KullaniciProfiliActivity kullaniciProfiliActivity;
+    Intent intent=new Intent();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,17 +140,19 @@ public class  MainActivity extends AppCompatActivity implements NavigationView.O
         }
     }
 
-   /* @Override
+   @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.bildirim) {
+            intent.setClass(getApplicationContext(),BildirimSonuclari.class);
+            startActivity(intent);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -160,7 +163,6 @@ public class  MainActivity extends AppCompatActivity implements NavigationView.O
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        Intent intent=new Intent();
         int id = item.getItemId();
         if (id == R.id.nav_arkadasBul) {
 

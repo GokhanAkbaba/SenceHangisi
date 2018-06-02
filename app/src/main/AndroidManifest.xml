@@ -10,15 +10,15 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".Controls.AppController"
         android:allowBackup="true"
-        android:largeHeap="true"
         android:icon="@drawable/question"
         android:label="Sence Hangisi"
+        android:largeHeap="true"
         android:roundIcon="@drawable/question"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -44,24 +44,28 @@
         <activity
             android:name=".Activitys.AyarlarActivity"
             android:label="Ayarlar"
-            android:parentActivityName=".Activitys.MainActivity" />
+            android:parentActivityName=".Activitys.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activitys.AyarlarKullaniciAdi"
-            android:label="Kullanıcı adını degiştir">
+            android:label="Kullanıcı adını degiştir"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activitys.AyarlarActivity" />
         </activity>
         <activity
             android:name=".Activitys.AyarlarSifre"
-            android:label="Şifreni değiştir">
+            android:label="Şifreni değiştir"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activitys.AyarlarActivity" />
         </activity>
         <activity
             android:name=".Activitys.AyarlarEposta"
-            android:label="@string/eposta_label">
+            android:label="@string/eposta_label"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activitys.AyarlarActivity" />
@@ -76,12 +80,13 @@
         <activity
             android:name=".Activitys.AnketOlustur"
             android:label=""
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-
             android:name=".Activitys.ArkadasiniBulActivity"
             android:label="@string/title_arkadaslarini_bul"
-            android:parentActivityName=".Activitys.MainActivity">
+            android:parentActivityName=".Activitys.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
@@ -89,6 +94,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activitys.MainActivity" />
@@ -96,33 +102,42 @@
         <activity
             android:name=".Activitys.TakipcilerActivity"
             android:label=""
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activitys.TakipEdilenActivity"
             android:label=""
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activitys.AyarlarAdSoyad"
-            android:label="Ad Soyad Değiştir">
+        <activity
+            android:name=".Activitys.AyarlarAdSoyad"
+            android:label="Ad Soyad Değiştir"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activitys.AyarlarActivity" />
         </activity>
         <!-- [START firebase_service] -->
-        <service
-            android:name=".Controls.FirebaseMessagingService">
+        <service android:name=".Controls.FirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <!-- [END firebase_service] -->
         <!-- [START firebase_iid_service] -->
-        <service
-            android:name=".Controls.FirebaseInstanceIDService">
+        <service android:name=".Controls.FirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
         <!-- [END firebase_iid_service] -->
+        <activity android:name=".Activitys.BildirimSonuclari"
+            android:label="Bildirimler">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activitys.AyarlarActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -55,12 +55,9 @@ public class KullaniciGirisEkrani extends Fragment{
     private UserInfo userInfo;
     @BindView(R.id.epostaGirisText) EditText epostaGirisTxt;
     @BindView(R.id.sifreGirisText) EditText sifreGirisTxt;
-    @BindView(R.id.sifreUnuttumText) TextView sifreUnuttumTxt;
     @BindView(R.id.kayitOlText) TextView kayitOlTxt;
 
-    public KullaniciGirisEkrani() {
-
-    }
+    public KullaniciGirisEkrani() {}
     public static KullaniciGirisEkrani newInstance(String param1, String param2) {
         KullaniciGirisEkrani fragment = new KullaniciGirisEkrani();
         Bundle args = new Bundle();

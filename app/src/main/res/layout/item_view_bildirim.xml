@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:background="#f1f1f1"
+    >
+<android.support.percent.PercentRelativeLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+    android:layout_height="110dp"
+           >
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/bildirim_kul_foto"
+        app:layout_heightPercent="75%"
+        app:layout_marginLeftPercent="2%"
+        app:layout_widthPercent="16%"
+        android:src="@drawable/man">
+    </de.hdodenhof.circleimageview.CircleImageView>
+
+
+                <TextView
+                    android:id="@+id/bildirim_adSoyad"
+                    android:layout_width="wrap_content"
+                    android:autoSizeTextType="uniform"
+                    android:text="Gökhan AKBABA\, "
+                    app:layout_marginLeftPercent="22%"
+                    app:layout_marginTopPercent="4%"
+                    android:textColor="@android:color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/bildirim_bilgi"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@id/bildirim_adSoyad"
+                    android:autoSizeTextType="uniform"
+                    android:text="içerik"
+                    app:layout_marginLeftPercent="22%"
+
+                    android:textColor="@android:color/black"
+                    android:textSize="17sp"
+                    />
+                <TextView
+                    android:id="@+id/bildirim_tarih"
+                    android:layout_below="@id/bildirim_bilgi"
+                    android:layout_width="wrap_content"
+                    app:layout_marginLeftPercent="60%"
+                    app:layout_marginTopPercent="29%"
+                    android:autoSizeTextType="uniform"
+                    />
+                <TextView
+                    android:id="@+id/bildirim_kulId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/search_adsoyad"
+                    android:layout_marginTop="31dp" />
+        </android.support.percent.PercentRelativeLayout>
+</LinearLayout>

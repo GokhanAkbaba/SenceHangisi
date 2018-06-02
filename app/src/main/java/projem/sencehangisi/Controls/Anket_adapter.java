@@ -50,10 +50,6 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
     public Button OySayisi1,OySayisi2,OySayisi3;
     String  cevap1="0",cevap2="0",cevap3="0";
     private static final String TAG = Anket_adapter.class.getSimpleName();
-    public Anket_adapter()
-    {
-
-    }
     public Anket_adapter(Context Context, ArrayList<AnketInfo> AnketInfoList) {
         this.mContext = Context;
         this.mAnketInfoList = AnketInfoList;

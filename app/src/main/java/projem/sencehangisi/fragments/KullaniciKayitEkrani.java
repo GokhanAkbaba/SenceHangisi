@@ -104,13 +104,18 @@ public class KullaniciKayitEkrani extends Fragment {
                     }
                     else
                     {
-                        if(kayitsifre.equals(kayitsifretekrari))
+                        if (kayitsifre.length()>5 && !kayitsifre.isEmpty())
                         {
-                            kullaniciKayidi(kayitkullaniciadi,kayiteposta,kayitkullaniciadsoyad,kayitsifre,kayitsifretekrari);
+                            if (kayitsifre.equals(kayitsifretekrari) && kayitsifretekrari.length() > 5) {
+
+                                kullaniciKayidi(kayitkullaniciadi, kayiteposta, kayitkullaniciadsoyad, kayitsifre, kayitsifretekrari);
+                            } else {
+                                kayitSifreTekrariTxt.setError("Lütfen Şifrenizi kontrol edin");
+                            }
                         }
                         else
                         {
-                            kayitSifreTekrariTxt.setError("Lütfen Şifrenizi kontrol edin");
+                            kayitSifreTxt.setError("Şifrenizin 6 karekterden fazla olması gerekir.");
                         }
                     }
                 }

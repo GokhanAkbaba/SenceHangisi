@@ -83,20 +83,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/button" />
 
-    <TextView
-        android:id="@+id/sifreUnuttumText"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:onClick="SifremiUnuttumAction"
-        android:text="Şifremi Unuttum?"
-        android:textColor="#fff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.215"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline"
-        tools:ignore="MissingConstraints,OnClick" />
+
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -134,15 +121,15 @@
         android:id="@+id/kayitOlText"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        app:layout_constraintHorizontal_weight="1"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="4dp"
         android:onClick="KullaniciKayitAction"
         android:text="Hesap Oluştur"
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.812"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline"
         tools:ignore="OnClick" />

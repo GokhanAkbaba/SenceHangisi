@@ -76,7 +76,7 @@ public class AyarlarSifre extends AppCompatActivity {
                     }
                 }
                 else{
-                    newPasswordTxt.setError("Lütfen 6 karekterden fazla olması gerekir ");
+                    newPasswordTxt.setError("Şifrenizin 6 karekterden fazla olması gerekir");
                 }
 
             }

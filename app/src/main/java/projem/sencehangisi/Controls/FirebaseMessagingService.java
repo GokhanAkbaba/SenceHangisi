@@ -48,6 +48,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                     .setSound(ses)
                     .setDefaults(Notification.DEFAULT_VIBRATE)
                     .setSmallIcon(R.drawable.question)
+                    .setBadgeIconType(NotificationCompat.BADGE_ICON_LARGE)
                     .setContentIntent(pendingIntent);
 
             NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

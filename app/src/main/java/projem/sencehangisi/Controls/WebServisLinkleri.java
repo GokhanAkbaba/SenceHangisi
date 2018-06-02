@@ -33,5 +33,6 @@ public class WebServisLinkleri
     public static String Token_URL="http://oftekfakitiraf.com/senceHangisi/bildirimRegister.php";
     public static String TakipBildirim_URL="http://oftekfakitiraf.com/senceHangisi/sendNotification.php";
     public static String GonderiBildirim_URL="http://oftekfakitiraf.com/senceHangisi/sendNotificationAnket.php";
+    public static String BildirimlerCek="http://oftekfakitiraf.com/senceHangisi/bildirimlerGet.php";
 
 }

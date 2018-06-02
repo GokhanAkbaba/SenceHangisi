@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_height="match_parent"
+android:layout_width="match_parent"
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+    tools:context="projem.sencehangisi.Activitys.BildirimSonuclari"
+tools:ignore="Orientation">
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/recycler_view_bildirim"
+    android:layout_marginTop="5dp"
+    android:layout_width="match_parent"
+    android:background="@color/beyaz"
+    android:layout_height="match_parent">
+</android.support.v7.widget.RecyclerView>
+</LinearLayout>

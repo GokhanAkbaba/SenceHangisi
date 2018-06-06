@@ -3,7 +3,9 @@ package projem.sencehangisi.fragments;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -52,6 +54,7 @@ public class AnaSayfa extends Fragment {
     boolean deger=false;
     int durum=0;
     String kul_ID,token;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,7 +62,15 @@ public class AnaSayfa extends Fragment {
         PD=new ProgressDialog(getActivity());
         PD.setCancelable(false);
         token = FirebaseInstanceId.getInstance().getToken();
+
         mRecyclerView=view.findViewById(R.id.recycler_view);
+        mSwipeRefreshLayout= (SwipeRefreshLayout)view.findViewById(R.id.swiperefresh_anaSayfa);
+
+        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
@@ -72,6 +83,18 @@ public class AnaSayfa extends Fragment {
                         AnketCek(kul_ID);
                         AnketCevapCek(kul_ID);
                     TokenGonder(kul_ID,token);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        AnketCek(kul_ID);
+                        AnketCevapCek(kul_ID);
+                    }
+                }, 2000);
+            }
+        });
                 return view;
     }
     public void AnketCek(final String kullanici_id){
@@ -85,6 +108,7 @@ public class AnaSayfa extends Fragment {
                             showDialog();
                             JSONObject jObj = new JSONObject(response);
                             JSONArray jsonArray=jObj.getJSONArray("TakipEdilenAnketler");
+                            mInfoArrayList.clear();
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject anket=jsonArray.getJSONObject(i);
                                 String anketID=anket.getString("gonderi_id");
@@ -153,6 +177,7 @@ public class AnaSayfa extends Fragment {
                             }
                             mAnket_adapter=new Anket_adapter(getActivity(),mInfoArrayList);
                             mRecyclerView.setAdapter(mAnket_adapter);
+                            mSwipeRefreshLayout.setRefreshing(false);
                             hideDialog();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -248,15 +273,13 @@ public class AnaSayfa extends Fragment {
         AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
 
     }
-    private void showDialog()
-    {
+    private void showDialog() {
         if(!PD.isShowing())
         {
             PD.show();
         }
     }
-    private void hideDialog()
-    {
+    private void hideDialog() {
         if(PD.isShowing())
         {
             PD.dismiss();

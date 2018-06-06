@@ -27,9 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -270,9 +268,9 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         String user_kapak_foto=currentItem.getUser_kapak_image();
         String btnDrm=currentItem.getBtnDrm();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("H");
+        /*SimpleDateFormat sdf = new SimpleDateFormat("H");
         String date = sdf.format(new Date());
-        int fark=Integer.parseInt(date)-Integer.parseInt(saat);
+        int fark=-1*(Integer.parseInt(date)-Integer.parseInt(saat));*/
         int oy1=currentItem.getOy1();
         int oy2=currentItem.getOy2();
         int oy3=currentItem.getOy3();
@@ -285,7 +283,7 @@ public class Anket_adapter extends RecyclerView.Adapter<Anket_adapter.AnketViewH
         holder.resim2Url.setText(anketImg2);
         holder.resim3Url.setText(anketImg3);
         holder.tarih.setText(tarih);
-        holder.saat.setText(fark+" saat önce");
+        holder.saat.setText(saat);
         holder.profilResBilgi.setText(user_img);
         holder.profilKpkBilgi.setText(user_kapak_foto);
         Picasso.with(mContext).load(user_img).fit().centerInside().into(holder.u_img);

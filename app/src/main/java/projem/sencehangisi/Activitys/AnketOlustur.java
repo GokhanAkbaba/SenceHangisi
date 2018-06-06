@@ -146,9 +146,26 @@ public class AnketOlustur extends AppCompatActivity  {
 
                 if (bitmap == null) {
                     params.put("anketFoto1", getStringImage(defaults));
-                } else {
+                }
+                else {
                     params.put("anketFoto1", getStringImage(bitmap));
+                }
+                if(bitmap2==null)
+                {
+                    params.put("anketFoto2", getStringImage2(defaults));
+
+                }
+                else
+                {
                     params.put("anketFoto2", getStringImage2(bitmap2));
+                }
+                if(bitmap3==null)
+                {
+                    params.put("anketFoto3", getStringImage3(defaults));
+
+                }
+                else
+                {
                     params.put("anketFoto3", getStringImage3(bitmap3));
                 }
                 return params;

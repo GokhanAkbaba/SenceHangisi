@@ -1,6 +1,8 @@
 package projem.sencehangisi.Activitys;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -35,12 +37,20 @@ public class BildirimSonuclari extends AppCompatActivity {
     private RequestQueue mRequestQueue;
     private RecyclerView mRecyclerView;
     private Bildirim_Adapter mBildirim_Adapter;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    UserInfo userInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bildirim_sonuclari);
-
         mRecyclerView=findViewById(R.id.recycler_view_bildirim);
+        mSwipeRefreshLayout= (SwipeRefreshLayout)findViewById(R.id.swiperefresh_bildirim);
+
+        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
@@ -48,8 +58,20 @@ public class BildirimSonuclari extends AppCompatActivity {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new ItemControls(getApplicationContext(), DividerItemDecoration.VERTICAL, 36));
         mRequestQueue= Volley.newRequestQueue(getApplicationContext());
-        UserInfo userInfo=new UserInfo(getApplicationContext());
+        userInfo=new UserInfo(getApplicationContext());
         BildirimCek(userInfo.getKeyId());
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        BildirimCek(userInfo.getKeyId());
+                    }
+                }, 2000);
+            }
+        });
+
     }
     public void BildirimCek(final String kullanici_id){
         String tag_string_req = "bildirim_cek";
@@ -61,6 +83,7 @@ public class BildirimSonuclari extends AppCompatActivity {
                         try {
                             JSONObject jObj = new JSONObject(response);
                             JSONArray jsonArray=jObj.getJSONArray("Bildirimler");
+                            mBildirimInfoArrayList.clear();
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject bildirim=jsonArray.getJSONObject(i);
                                 String bldKulID=bildirim.getString("kul_id");
@@ -72,7 +95,7 @@ public class BildirimSonuclari extends AppCompatActivity {
                             }
                             mBildirim_Adapter=new Bildirim_Adapter(getApplicationContext(),mBildirimInfoArrayList);
                             mRecyclerView.setAdapter(mBildirim_Adapter);
-
+                            mSwipeRefreshLayout.setRefreshing(false);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

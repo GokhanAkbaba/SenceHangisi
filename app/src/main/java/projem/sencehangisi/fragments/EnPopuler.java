@@ -3,7 +3,9 @@ package projem.sencehangisi.fragments;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,6 +47,7 @@ public class EnPopuler extends Fragment {
     private ArrayList<String> KulId=new ArrayList<String>();
     private UserInfo userInfo;
     private RequestQueue mRequestQueue;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     String btnDrm;
     int oy1,oy2,oy3;
     boolean deger=false;
@@ -64,6 +67,12 @@ public class EnPopuler extends Fragment {
         PD=new ProgressDialog(this.getContext());
         PD.setCancelable(false);
         mRecyclerView=view.findViewById(R.id.recycler_view_enPopuler);
+        mSwipeRefreshLayout= (SwipeRefreshLayout)view.findViewById(R.id.swiperefresh_enPopuler);
+
+        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
@@ -76,6 +85,18 @@ public class EnPopuler extends Fragment {
 
        AnketCek();
        AnketCevapCek(kul_ID);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        AnketCek();
+                        AnketCevapCek(kul_ID);
+                    }
+                }, 2000);
+            }
+        });
         return view;
 
     }
@@ -91,6 +112,7 @@ public class EnPopuler extends Fragment {
                             hideDialog();
                             JSONObject jObj = new JSONObject(response);
                             JSONArray jsonArray=jObj.getJSONArray("EnPopulerAnketler");
+                            mInfoArrayList.clear();
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject anket=jsonArray.getJSONObject(i);
                                 String anketID=anket.getString("gonderi_id");
@@ -158,6 +180,7 @@ public class EnPopuler extends Fragment {
                             }
                             mAnket_adapter=new Anket_adapter(getActivity(),mInfoArrayList);
                             mRecyclerView.setAdapter(mAnket_adapter);
+                            mSwipeRefreshLayout.setRefreshing(false);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

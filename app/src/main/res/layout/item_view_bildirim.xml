@@ -51,6 +51,7 @@
                     android:layout_width="wrap_content"
                     app:layout_marginLeftPercent="60%"
                     app:layout_marginTopPercent="29%"
+                    android:textColor="@color/DarkSeaGreen"
                     android:autoSizeTextType="uniform"
                     />
                 <TextView

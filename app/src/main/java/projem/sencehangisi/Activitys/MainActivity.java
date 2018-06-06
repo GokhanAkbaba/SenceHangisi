@@ -170,14 +170,8 @@ public class  MainActivity extends AppCompatActivity implements NavigationView.O
             startActivity(intent);
         } else if (id == R.id.nav_ayarlar) {
 
-            intent.setClass(getApplicationContext(),AyarlarActivity.class);
+            intent.setClass(getApplicationContext(), AyarlarActivity.class);
             startActivity(intent);
-
-        } else if (id == R.id.nav_bildirim) {
-
-            intent.setClass(getApplicationContext(),BildirimlerActivity.class);
-            startActivity(intent);
-
         }
         else if (id == R.id.nav_profile)
         {

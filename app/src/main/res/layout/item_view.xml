@@ -222,22 +222,22 @@
             android:id="@+id/tarih"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/saat"
             android:textColor="@android:color/darker_gray"
             android:text="tarih"
             android:autoSizeTextType="uniform"
-            android:textSize="15sp"
+            android:textSize="14sp"
             app:layout_marginTopPercent="90%"
-            app:layout_marginLeftPercent="3%"
             app:layout_marginRightPercent="2%" />
 
         <TextView
             android:id="@+id/saat"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/darker_gray"
-            android:textSize="15sp"
+            android:textSize="14sp"
             app:layout_marginTopPercent="90%"
-            app:layout_marginLeftPercent="70%"
+            app:layout_marginLeftPercent="3%"
             app:layout_marginRightPercent="2%"
             android:text="saat" />
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/SifremiUnuttumLayout"
     tools:context="projem.sencehangisi.fragments.SifremiUnuttum"
     android:background="@drawable/arka_plan">
 
@@ -39,7 +40,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="260dp"
-        android:text="Parolanızı sıfırlamak için telefon numaranızı giriniz"
+        android:text="Parolanızı sıfırlamak için kayıtlı e-posta giriniz"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="18sp"
@@ -48,17 +49,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:id="@+id/SifremiUnuttumTxt"
         android:layout_width="328dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="324dp"
-        android:drawableLeft="@drawable/profile"
+        android:drawableLeft="@drawable/mail"
         android:drawablePadding="12dp"
         android:ems="6"
-        android:hint="05xxxxxxxxx"
-        android:inputType="phone"
-        android:digits="0123456789+"
+        android:hint="E-posta"
+        android:inputType="textEmailAddress"
         android:maxLines="1"
         android:padding="20dp"
+        android:theme="@style/MyEditText"
         android:textColorHint="#fff"
         android:textCursorDrawable="@drawable/cursor_style_white"
         app:layout_constraintEnd_toEndOf="parent"

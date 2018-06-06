@@ -14,7 +14,9 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -79,10 +81,11 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
     @BindView(R.id.kapakFoto) ImageView kpkFoto;
     @BindView(R.id.fotoDegis) ImageView fotoDegis;
     @BindView(R.id.fotoDegis2) ImageView fotoDegis2;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private Anket_adapter mAnket_adapter;
     private RequestQueue mRequestQueue;
-    String foto;
+    String foto,kapakFoto;
     private ProgressDialog PD;
     private ArrayList<AnketInfo> mInfoArrayList=new ArrayList<>();
     private ArrayList<String> CvpIndis=new ArrayList<String>();
@@ -112,6 +115,12 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
         PD=new ProgressDialog(this);
         PD.setCancelable(false);
         mRecyclerView=findViewById(R.id.recycler_view_profil);
+        mSwipeRefreshLayout= (SwipeRefreshLayout)findViewById(R.id.swiperefresh_Profil);
+
+        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
@@ -155,6 +164,22 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
         AnketCek(userInfo.getKeyId());
         AnketCevapCek(userInfo.getKeyId());
         TakipEdilenCek(userInfo.getKeyId());
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        TakipEden(userInfo.getKeyId());
+                        TakipEdilen(userInfo.getKeyId());
+                        anketSayisi(userInfo.getKeyId());
+                        AnketCek(userInfo.getKeyId());
+                        AnketCevapCek(userInfo.getKeyId());
+                        TakipEdilenCek(userInfo.getKeyId());
+                    }
+                }, 3000);
+            }
+        });
         fotoDegis.setVisibility(View.INVISIBLE);
         fotoDegis2.setVisibility(View.INVISIBLE);
         prfDuzenle.setVisibility(View.INVISIBLE);
@@ -450,7 +475,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                                 String adsoyad = extras.getString("Adi");
                                 String kuladi = extras.getString("KullaniciAdi");
                                 foto = extras.getString("resim");
-                                String kapakFoto=extras.getString("kapak_foto");
+                                kapakFoto=extras.getString("kapak_foto");
                                 getNameTxt.setText(adsoyad);
                                 getUsernameTxt.setText(kuladi);
                                 AnketCek(kul_id);
@@ -694,6 +719,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                             hideDialog();
                             JSONObject jObj = new JSONObject(response);
                             JSONArray jsonArray=jObj.getJSONArray("KullanicininAnketleri");
+                            mInfoArrayList.clear();
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject anket=jsonArray.getJSONObject(i);
                                 String anketID=anket.getString("gonderi_id");
@@ -761,6 +787,7 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
                             }
                             mAnket_adapter=new Anket_adapter(KullaniciProfiliActivity.this,mInfoArrayList);
                             mRecyclerView.setAdapter(mAnket_adapter);
+                            mSwipeRefreshLayout.setRefreshing(false);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

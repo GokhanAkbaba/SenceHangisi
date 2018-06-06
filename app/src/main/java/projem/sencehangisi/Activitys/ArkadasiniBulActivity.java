@@ -142,6 +142,7 @@ public class ArkadasiniBulActivity extends AppCompatActivity implements Search_a
         i.putExtra("KullaniciAdi",contact.getKul_adi());
         i.putExtra("resim",contact.getKul_image());
         i.putExtra("kapak_foto",contact.getKapak_foto());
+        System.out.println("foto"+contact.getKapak_foto());
         startActivity(i);
     }
 

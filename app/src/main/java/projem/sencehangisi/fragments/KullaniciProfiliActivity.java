@@ -850,10 +850,8 @@ public class KullaniciProfiliActivity extends AppCompatActivity {
 
                 return params;
             }
-
         };
         AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
-
     }
     private void showDialog() {
         if(!PD.isShowing())

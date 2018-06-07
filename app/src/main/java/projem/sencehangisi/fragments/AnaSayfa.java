@@ -201,7 +201,6 @@ public class AnaSayfa extends Fragment {
     }
     public void AnketCevapCek(final String kullanici_id){
         String tag_string_req = "ankat_oyla";
-
         StringRequest stringRequest=new StringRequest(Request.Method.POST, WebServisLinkleri.AnketCevapCEK,
                 new Response.Listener<String>() {
                     @Override
@@ -236,10 +235,8 @@ public class AnaSayfa extends Fragment {
             protected Map<String, String> getParams() {
                 Map<String, String> params=new HashMap<String, String>();
                 params.put("kullanici_id", kullanici_id);
-
                 return params;
             }
-
         };
         AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
 
